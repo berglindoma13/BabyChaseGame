@@ -16,6 +16,7 @@ public class BabyMovement : MonoBehaviour {
 
 
 
+
 	public Animator anim;
 	// Use this for initialization
 	void Start () {
@@ -38,7 +39,7 @@ public class BabyMovement : MonoBehaviour {
 		float h = Input.GetAxis (horizontalJoyCtrl);
 
 		float v = Input.GetAxis (verticalJoyCtrl);
-
+		bool moving = false;
 
 		Debug.Log ("Horizontal is: " + h + " and Vertical is: " + v);
 		Debug.Log ("Horizontal is: " + h2 + " and Vertical is: " + v2);
@@ -47,14 +48,16 @@ public class BabyMovement : MonoBehaviour {
 			//torso.position += Vector3.forward / 5;
 			baby.rotation = Quaternion.Euler(new Vector3(0,360,0));
 			baby.position += Vector3.forward * SPEED;
-			anim.SetBool("Walking", true);
+			moving = true;
+			//anim.SetBool("Walking", true);
 		}
 		//else if (Input.GetKey (KeyCode.S)) {
 		else if (v < 0 || Input.GetKey (KeyCode.S)) {
 			//torso.position += Vector3.forward / 5;
 			baby.rotation = Quaternion.Euler(new Vector3(0,180,0));
 			baby.position += Vector3.back * SPEED;
-			anim.SetBool("Walking", true);
+			moving = true;
+			//anim.SetBool("Walking", true);
 		}
 
 		//if (Input.GetKey (KeyCode.A)) {
@@ -62,17 +65,22 @@ public class BabyMovement : MonoBehaviour {
 			//torso.position += Vector3.forward / 5;
 			baby.rotation = Quaternion.Euler(new Vector3(0,270,0));
 			baby.position += Vector3.left * SPEED;
-			anim.SetBool("Walking", true);
+			moving = true;
+			//anim.SetBool("Walking", true);
 		}
 		//else if (Input.GetKey (KeyCode.D)) {
 		else if (h > 0 || Input.GetKey (KeyCode.D)) {
 			//torso.position += Vector3.forward / 5;
 			baby.rotation = Quaternion.Euler(new Vector3(0,90,0));
 			baby.position += Vector3.right * SPEED;
-			anim.SetBool("Walking", true);
-		}else {
-			anim.SetBool ("Walking", false);
+			moving = true;
+			//anim.SetBool("Walking", true);
 		}
+
+		anim.SetBool ("Walking", moving);
+		/*else {
+			anim.SetBool ("Walking", false);
+		}*/
 	}
 
 	void OnCollisionEnter(Collision coll){
