@@ -6,6 +6,7 @@ public class BabyMovement : MonoBehaviour {
 
 	public Transform baby;
 	public Transform torso;
+	public float SPEED;
 
 	public Animator anim;
 	// Use this for initialization
@@ -19,9 +20,28 @@ public class BabyMovement : MonoBehaviour {
 	void FixedUpdate () {
 		if (Input.GetKey (KeyCode.W)) {
 			//torso.position += Vector3.forward / 5;
-			//baby.position += Vector3.forward / 5;
+			baby.rotation = Quaternion.Euler(new Vector3(0,0,0));
+			baby.position += Vector3.forward * SPEED;
 			anim.SetBool("Walking", true);
-		} else {
+		}
+		else if (Input.GetKey (KeyCode.A)) {
+			//torso.position += Vector3.forward / 5;
+			baby.rotation = Quaternion.Euler(new Vector3(0,270,0));
+			baby.position += Vector3.left * SPEED;
+			anim.SetBool("Walking", true);
+		}
+		else if (Input.GetKey (KeyCode.S)) {
+			//torso.position += Vector3.forward / 5;
+			baby.rotation = Quaternion.Euler(new Vector3(0,180,0));
+			baby.position += Vector3.back * SPEED;
+			anim.SetBool("Walking", true);
+		}
+		else if (Input.GetKey (KeyCode.D)) {
+			//torso.position += Vector3.forward / 5;
+			baby.rotation = Quaternion.Euler(new Vector3(0,90,0));
+			baby.position += Vector3.right * SPEED;
+			anim.SetBool("Walking", true);
+		}else {
 			anim.SetBool ("Walking", false);
 		}
 	}
