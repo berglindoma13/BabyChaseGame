@@ -28,7 +28,7 @@ public class BabyMovement : MonoBehaviour {
 		//torso = baby.FindChild ("Torso").GetComponent <Transform>();
 		anim = gameObject.GetComponent<Animator>();
 		rb = gameObject.GetComponent<Rigidbody> ();
-		SPEED = 2;
+		SPEED = 100;
 	}
 
 	void FixedUpdate () {
@@ -44,7 +44,7 @@ public class BabyMovement : MonoBehaviour {
 			//torso.position += Vector3.forward / 5;
 			baby.rotation = Quaternion.Euler(new Vector3(0,360,0));
 			//baby.position += Vector3.forward * SPEED;
-			rb.AddForce(Vector3.forward * SPEED);
+			rb.velocity = (Vector3.forward * SPEED * Time.deltaTime);
 			moving = true;
 			//anim.SetBool("Walking", true);
 		}
@@ -53,7 +53,7 @@ public class BabyMovement : MonoBehaviour {
 			//torso.position += Vector3.forward / 5;
 			baby.rotation = Quaternion.Euler(new Vector3(0,180,0));
 			//baby.position += Vector3.back * SPEED;
-			rb.AddForce(Vector3.back * SPEED);
+			rb.velocity = (Vector3.back * SPEED * Time.deltaTime);
 			moving = true;
 			//anim.SetBool("Walking", true);
 		}
@@ -63,7 +63,7 @@ public class BabyMovement : MonoBehaviour {
 			//torso.position += Vector3.forward / 5;
 			baby.rotation = Quaternion.Euler(new Vector3(0,270,0));
 			//baby.position += Vector3.left * SPEED;
-			rb.AddForce(Vector3.left * SPEED);
+			rb.velocity = (Vector3.left * SPEED * Time.deltaTime);
 			moving = true;
 			//anim.SetBool("Walking", true);
 		}
@@ -72,7 +72,7 @@ public class BabyMovement : MonoBehaviour {
 			//torso.position += Vector3.forward / 5;
 			baby.rotation = Quaternion.Euler(new Vector3(0,90,0));
 			//baby.position += Vector3.right * SPEED;
-			rb.AddForce(Vector3.right * SPEED);
+			rb.velocity = (Vector3.right * SPEED * Time.deltaTime);
 			moving = true;
 			//anim.SetBool("Walking", true);
 		}

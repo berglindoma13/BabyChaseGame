@@ -521,6 +521,7 @@ MonoBehaviour:
   baby: {fileID: 0}
   torso: {fileID: 0}
   SPEED: 0
+  rb: {fileID: 0}
   horizontalJoyCtrl: HorizontalJoy_P1
   verticalJoyCtrl: VerticalJoy_P1
   horizontalCtrl: Horizontal_P1
