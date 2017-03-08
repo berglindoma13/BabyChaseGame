@@ -185,66 +185,44 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4441560593310682, guid: 34705ceb6483d0140904aab597864370, type: 2}
+    - target: {fileID: 4445634314016682, guid: 52f84d20074e26b41bb93d1aedaf626d, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4441560593310682, guid: 34705ceb6483d0140904aab597864370, type: 2}
+    - target: {fileID: 4445634314016682, guid: 52f84d20074e26b41bb93d1aedaf626d, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 1.14
       objectReference: {fileID: 0}
-    - target: {fileID: 4441560593310682, guid: 34705ceb6483d0140904aab597864370, type: 2}
+    - target: {fileID: 4445634314016682, guid: 52f84d20074e26b41bb93d1aedaf626d, type: 2}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4441560593310682, guid: 34705ceb6483d0140904aab597864370, type: 2}
+    - target: {fileID: 4445634314016682, guid: 52f84d20074e26b41bb93d1aedaf626d, type: 2}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4441560593310682, guid: 34705ceb6483d0140904aab597864370, type: 2}
+    - target: {fileID: 4445634314016682, guid: 52f84d20074e26b41bb93d1aedaf626d, type: 2}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4441560593310682, guid: 34705ceb6483d0140904aab597864370, type: 2}
+    - target: {fileID: 4445634314016682, guid: 52f84d20074e26b41bb93d1aedaf626d, type: 2}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4441560593310682, guid: 34705ceb6483d0140904aab597864370, type: 2}
+    - target: {fileID: 4445634314016682, guid: 52f84d20074e26b41bb93d1aedaf626d, type: 2}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4441560593310682, guid: 34705ceb6483d0140904aab597864370, type: 2}
+    - target: {fileID: 4445634314016682, guid: 52f84d20074e26b41bb93d1aedaf626d, type: 2}
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 145214532542557726, guid: 34705ceb6483d0140904aab597864370,
-        type: 2}
-      propertyPath: m_ConnectedAnchor.x
-      value: -3.1666665
-      objectReference: {fileID: 0}
-    - target: {fileID: 145214532542557726, guid: 34705ceb6483d0140904aab597864370,
-        type: 2}
-      propertyPath: m_ConnectedAnchor.y
-      value: 1.0666671
-      objectReference: {fileID: 0}
-    - target: {fileID: 145839060195411356, guid: 34705ceb6483d0140904aab597864370,
-        type: 2}
-      propertyPath: m_ConnectedAnchor.x
-      value: -3.166667
-      objectReference: {fileID: 0}
-    - target: {fileID: 145839060195411356, guid: 34705ceb6483d0140904aab597864370,
-        type: 2}
-      propertyPath: m_ConnectedAnchor.y
-      value: -1.0666661
-      objectReference: {fileID: 0}
-    - target: {fileID: 1020529876563328, guid: 34705ceb6483d0140904aab597864370, type: 2}
+    - target: {fileID: 1144565795722140, guid: 52f84d20074e26b41bb93d1aedaf626d, type: 2}
       propertyPath: m_Name
       value: Baby 3
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 145839060195411356, guid: 34705ceb6483d0140904aab597864370, type: 2}
-    - {fileID: 145214532542557726, guid: 34705ceb6483d0140904aab597864370, type: 2}
-  m_ParentPrefab: {fileID: 100100000, guid: 34705ceb6483d0140904aab597864370, type: 2}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 52f84d20074e26b41bb93d1aedaf626d, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1685932110
 GameObject:
@@ -324,7 +302,7 @@ Transform:
   m_GameObject: {fileID: 1685932110}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 10, y: 1, z: 10}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
