@@ -28,7 +28,7 @@ public class BabyMovement : MonoBehaviour {
 		//torso = baby.FindChild ("Torso").GetComponent <Transform>();
 		anim = gameObject.GetComponent<Animator>();
 		rb = gameObject.GetComponent<Rigidbody> ();
-		SPEED = 100;
+		SPEED = 200;
 	}
 
 	void FixedUpdate () {
