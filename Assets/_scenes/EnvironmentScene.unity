@@ -594,7 +594,7 @@ Prefab:
     - target: {fileID: 114025547798263682, guid: 0d65b825908567748a639ad50d1e94be,
         type: 2}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 65090281707601184, guid: 0d65b825908567748a639ad50d1e94be,
         type: 2}
@@ -605,7 +605,32 @@ Prefab:
         type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
+      objectReference: {fileID: 2100000, guid: 74a5e710bfcc5bc46953c20207a98246, type: 2}
+    - target: {fileID: 114025547798263682, guid: 0d65b825908567748a639ad50d1e94be,
+        type: 2}
+      propertyPath: ToyTeamColor
+      value: 
       objectReference: {fileID: 2100000, guid: da920efb9f896744ca5cb956f3a4e577, type: 2}
+    - target: {fileID: 114025547798263682, guid: 0d65b825908567748a639ad50d1e94be,
+        type: 2}
+      propertyPath: EnemyColor
+      value: 
+      objectReference: {fileID: 2100000, guid: 9aabd80864cf3e146b536ff4350a2ca7, type: 2}
+    - target: {fileID: 114025547798263682, guid: 0d65b825908567748a639ad50d1e94be,
+        type: 2}
+      propertyPath: TOY
+      value: 
+      objectReference: {fileID: 2100000, guid: cafd31900aaa0274cb620b067de30af7, type: 2}
+    - target: {fileID: 114025547798263682, guid: 0d65b825908567748a639ad50d1e94be,
+        type: 2}
+      propertyPath: TOYHand
+      value: 
+      objectReference: {fileID: 2100000, guid: cafd31900aaa0274cb620b067de30af7, type: 2}
+    - target: {fileID: 114025547798263682, guid: 0d65b825908567748a639ad50d1e94be,
+        type: 2}
+      propertyPath: RegularHand
+      value: 
+      objectReference: {fileID: 2100000, guid: 4d45db804ec64a644b7015578613d568, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0d65b825908567748a639ad50d1e94be, type: 2}
   m_IsPrefabParent: 0
@@ -933,23 +958,48 @@ Prefab:
     - target: {fileID: 65090281707601184, guid: 0d65b825908567748a639ad50d1e94be,
         type: 2}
       propertyPath: m_IsTrigger
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 23776912667708960, guid: 0d65b825908567748a639ad50d1e94be,
         type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: da920efb9f896744ca5cb956f3a4e577, type: 2}
+      objectReference: {fileID: 2100000, guid: 74a5e710bfcc5bc46953c20207a98246, type: 2}
     - target: {fileID: 54097703193947000, guid: 0d65b825908567748a639ad50d1e94be,
         type: 2}
       propertyPath: m_UseGravity
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 54097703193947000, guid: 0d65b825908567748a639ad50d1e94be,
         type: 2}
       propertyPath: m_Mass
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 114025547798263682, guid: 0d65b825908567748a639ad50d1e94be,
+        type: 2}
+      propertyPath: ToyTeamColor
+      value: 
+      objectReference: {fileID: 2100000, guid: da920efb9f896744ca5cb956f3a4e577, type: 2}
+    - target: {fileID: 114025547798263682, guid: 0d65b825908567748a639ad50d1e94be,
+        type: 2}
+      propertyPath: EnemyColor
+      value: 
+      objectReference: {fileID: 2100000, guid: 9aabd80864cf3e146b536ff4350a2ca7, type: 2}
+    - target: {fileID: 114025547798263682, guid: 0d65b825908567748a639ad50d1e94be,
+        type: 2}
+      propertyPath: TOY
+      value: 
+      objectReference: {fileID: 2100000, guid: cafd31900aaa0274cb620b067de30af7, type: 2}
+    - target: {fileID: 114025547798263682, guid: 0d65b825908567748a639ad50d1e94be,
+        type: 2}
+      propertyPath: TOYHand
+      value: 
+      objectReference: {fileID: 2100000, guid: cafd31900aaa0274cb620b067de30af7, type: 2}
+    - target: {fileID: 114025547798263682, guid: 0d65b825908567748a639ad50d1e94be,
+        type: 2}
+      propertyPath: RegularHand
+      value: 
+      objectReference: {fileID: 2100000, guid: 4d45db804ec64a644b7015578613d568, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0d65b825908567748a639ad50d1e94be, type: 2}
   m_IsPrefabParent: 0
@@ -1150,7 +1200,32 @@ Prefab:
         type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
+      objectReference: {fileID: 2100000, guid: 74a5e710bfcc5bc46953c20207a98246, type: 2}
+    - target: {fileID: 114025547798263682, guid: 0d65b825908567748a639ad50d1e94be,
+        type: 2}
+      propertyPath: TOY
+      value: 
+      objectReference: {fileID: 2100000, guid: cafd31900aaa0274cb620b067de30af7, type: 2}
+    - target: {fileID: 114025547798263682, guid: 0d65b825908567748a639ad50d1e94be,
+        type: 2}
+      propertyPath: EnemyColor
+      value: 
       objectReference: {fileID: 2100000, guid: 9aabd80864cf3e146b536ff4350a2ca7, type: 2}
+    - target: {fileID: 114025547798263682, guid: 0d65b825908567748a639ad50d1e94be,
+        type: 2}
+      propertyPath: ToyTeamColor
+      value: 
+      objectReference: {fileID: 2100000, guid: da920efb9f896744ca5cb956f3a4e577, type: 2}
+    - target: {fileID: 114025547798263682, guid: 0d65b825908567748a639ad50d1e94be,
+        type: 2}
+      propertyPath: TOYHand
+      value: 
+      objectReference: {fileID: 2100000, guid: cafd31900aaa0274cb620b067de30af7, type: 2}
+    - target: {fileID: 114025547798263682, guid: 0d65b825908567748a639ad50d1e94be,
+        type: 2}
+      propertyPath: RegularHand
+      value: 
+      objectReference: {fileID: 2100000, guid: 4d45db804ec64a644b7015578613d568, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0d65b825908567748a639ad50d1e94be, type: 2}
   m_IsPrefabParent: 0
@@ -1221,7 +1296,7 @@ Prefab:
     - target: {fileID: 114025547798263682, guid: 0d65b825908567748a639ad50d1e94be,
         type: 2}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 65090281707601184, guid: 0d65b825908567748a639ad50d1e94be,
         type: 2}
@@ -1232,7 +1307,32 @@ Prefab:
         type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
+      objectReference: {fileID: 2100000, guid: 74a5e710bfcc5bc46953c20207a98246, type: 2}
+    - target: {fileID: 114025547798263682, guid: 0d65b825908567748a639ad50d1e94be,
+        type: 2}
+      propertyPath: ToyTeamColor
+      value: 
+      objectReference: {fileID: 2100000, guid: da920efb9f896744ca5cb956f3a4e577, type: 2}
+    - target: {fileID: 114025547798263682, guid: 0d65b825908567748a639ad50d1e94be,
+        type: 2}
+      propertyPath: EnemyColor
+      value: 
       objectReference: {fileID: 2100000, guid: 9aabd80864cf3e146b536ff4350a2ca7, type: 2}
+    - target: {fileID: 114025547798263682, guid: 0d65b825908567748a639ad50d1e94be,
+        type: 2}
+      propertyPath: TOY
+      value: 
+      objectReference: {fileID: 2100000, guid: cafd31900aaa0274cb620b067de30af7, type: 2}
+    - target: {fileID: 114025547798263682, guid: 0d65b825908567748a639ad50d1e94be,
+        type: 2}
+      propertyPath: TOYHand
+      value: 
+      objectReference: {fileID: 2100000, guid: cafd31900aaa0274cb620b067de30af7, type: 2}
+    - target: {fileID: 114025547798263682, guid: 0d65b825908567748a639ad50d1e94be,
+        type: 2}
+      propertyPath: RegularHand
+      value: 
+      objectReference: {fileID: 2100000, guid: 4d45db804ec64a644b7015578613d568, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0d65b825908567748a639ad50d1e94be, type: 2}
   m_IsPrefabParent: 0
