@@ -7,6 +7,9 @@ TagManager:
   - player
   - floor
   - obstacle
+  - Team1TOY
+  - Team1
+  - Team2
   layers:
   - Default
   - TransparentFX
