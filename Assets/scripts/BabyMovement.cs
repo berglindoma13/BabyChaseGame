@@ -38,7 +38,6 @@ public class BabyMovement : MonoBehaviour {
             Debug.Log(name);
         }
         baby = gameObject.GetComponent<Transform>();
-        //torso = baby.FindChild ("Torso").GetComponent <Transform>();
         anim = gameObject.GetComponent<Animator>();
         rb = gameObject.GetComponent<Rigidbody>();
 
@@ -69,52 +68,50 @@ public class BabyMovement : MonoBehaviour {
         bool moving = false;
         velocity = rb.angularVelocity;
 
-        if (!Frozen)
+        //if (Input.GetKey (KeyCode.W)) {
+        if (v > 0 || Input.GetKey(KeyCode.W))
         {
-            //if (Input.GetKey (KeyCode.W)) {
-            if (v > 0 || Input.GetKey(KeyCode.W))
-            {
-                //torso.position += Vector3.forward / 5;
-                baby.rotation = Quaternion.Euler(new Vector3(0, 360, 0));
-                //baby.position += Vector3.forward * SPEED;
-                rb.velocity = (Vector3.forward * SPEED * Time.deltaTime);
-                moving = true;
-                //anim.SetBool("Walking", true);
-            }
-            //else if (Input.GetKey (KeyCode.S)) {
-            else if (v < 0 || Input.GetKey(KeyCode.S))
-            {
-                //torso.position += Vector3.forward / 5;
-                baby.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
-                //baby.position += Vector3.back * SPEED;
-                rb.velocity = (Vector3.back * SPEED * Time.deltaTime);
-                moving = true;
-                //anim.SetBool("Walking", true);
-            }
-
-            //if (Input.GetKey (KeyCode.A)) {
-            if (h < 0 || Input.GetKey(KeyCode.A))
-            {
-                //torso.position += Vector3.forward / 5;
-                baby.rotation = Quaternion.Euler(new Vector3(0, 270, 0));
-                //baby.position += Vector3.left * SPEED;
-                rb.velocity = (Vector3.left * SPEED * Time.deltaTime);
-                moving = true;
-                //anim.SetBool("Walking", true);
-            }
-            //else if (Input.GetKey (KeyCode.D)) {
-            else if (h > 0 || Input.GetKey(KeyCode.D))
-            {
-                //torso.position += Vector3.forward / 5;
-                baby.rotation = Quaternion.Euler(new Vector3(0, 90, 0));
-                //baby.position += Vector3.right * SPEED;
-                rb.velocity = (Vector3.right * SPEED * Time.deltaTime);
-                moving = true;
-                //anim.SetBool("Walking", true);
-            }
-            rb.angularVelocity = Vector3.zero;
-            anim.SetBool("Walking", moving);
+            //torso.position += Vector3.forward / 5;
+            baby.rotation = Quaternion.Euler(new Vector3(0, 360, 0));
+            //baby.position += Vector3.forward * SPEED;
+            rb.velocity = (Vector3.forward * SPEED * Time.deltaTime);
+            moving = true;
+            //anim.SetBool("Walking", true);
         }
+        //else if (Input.GetKey (KeyCode.S)) {
+        else if (v < 0 || Input.GetKey(KeyCode.S))
+        {
+            //torso.position += Vector3.forward / 5;
+            baby.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+            //baby.position += Vector3.back * SPEED;
+            rb.velocity = (Vector3.back * SPEED * Time.deltaTime);
+            moving = true;
+            //anim.SetBool("Walking", true);
+        }
+
+        //if (Input.GetKey (KeyCode.A)) {
+        if (h < 0 || Input.GetKey(KeyCode.A))
+        {
+            //torso.position += Vector3.forward / 5;
+            baby.rotation = Quaternion.Euler(new Vector3(0, 270, 0));
+            //baby.position += Vector3.left * SPEED;
+            rb.velocity = (Vector3.left * SPEED * Time.deltaTime);
+            moving = true;
+            //anim.SetBool("Walking", true);
+        }
+        //else if (Input.GetKey (KeyCode.D)) {
+        else if (h > 0 || Input.GetKey(KeyCode.D))
+        {
+            //torso.position += Vector3.forward / 5;
+            baby.rotation = Quaternion.Euler(new Vector3(0, 90, 0));
+            //baby.position += Vector3.right * SPEED;
+            rb.velocity = (Vector3.right * SPEED * Time.deltaTime);
+            moving = true;
+            //anim.SetBool("Walking", true);
+        }
+        rb.angularVelocity = Vector3.zero;
+        anim.SetBool("Walking", moving);
+        
 
     }
 
@@ -176,73 +173,39 @@ public class BabyMovement : MonoBehaviour {
 	*/
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Team2" && tag == "Team1TOY")
+        if (other.tag == "Team1TOY" && tag == "Team2")
         {
-            if (!newToy)
-            {
-                rightHand.GetComponent<Renderer>().material = RegularHand;
-                gameObject.tag = "Team1";
-                other.tag = "Team2TOY";
-                StartCoroutine(FreezePlayer());
-            }
-       
-        }
-        else if (other.tag == "Team2" && tag == "Team1")
-        {
+            rightHand.GetComponent<Renderer>().material = TOYHand;
+            GameObject enemy = other.transform.Find("Torso/RightHand").gameObject;
+            enemy.GetComponent<Renderer>().material = RegularHand;
+
+            Rigidbody rb = other.GetComponent<Rigidbody>();
+            StartCoroutine(FreezePlayer(rb));
+
+            gameObject.tag = "Team2TOY";
+            other.tag = "Team1";
 
         }
         else if (other.tag == "Team2TOY" && tag == "Team1")
         {
-            if (!Frozen)
-            {
-                rightHand.GetComponent<Renderer>().material = TOYHand;
-                gameObject.tag = "Team1TOY";
-                other.tag = "Team2";
-                StartCoroutine(NewToy());
+            rightHand.GetComponent<Renderer>().material = TOYHand;
+            GameObject enemy = other.transform.Find("Torso/RightHand").gameObject;
+            enemy.GetComponent<Renderer>().material = RegularHand;
 
-            }
-
-        }
-        else if (other.tag == "Team1" && tag == "Team2TOY")
-        {
-            if (!newToy)
-            {
-                rightHand.GetComponent<Renderer>().material = RegularHand;
-                gameObject.tag = "Team2";
-                other.tag = "Team1TOY";
-                StartCoroutine(FreezePlayer());
-            }
-
-        }
-        else if (other.tag == "Team1TOY" && tag == "Team2")
-        {
-            if (!Frozen)
-            {
-                rightHand.GetComponent<Renderer>().material = TOYHand;
-                gameObject.tag = "Team2TOY";
-                other.tag = "Team1";
-                StartCoroutine(NewToy());
-            }
-
-        }
-        else if (other.tag == "Team1" && tag == "Team2")
-        {
-
+            Rigidbody rb = other.GetComponent<Rigidbody>();
+            StartCoroutine(FreezePlayer(rb));
+            
+            gameObject.tag = "Team1TOY";
+            other.tag = "Team2";
         }
 
     }
 
-    IEnumerator FreezePlayer()
+    IEnumerator FreezePlayer(Rigidbody rb)
     {
-        Frozen = true;
+        rb.constraints = RigidbodyConstraints.FreezeAll;
         yield return new WaitForSecondsRealtime(3);
-        Frozen = false;
+        rb.constraints = RigidbodyConstraints.None;
     }
 
-    IEnumerator NewToy()
-    {
-        newToy = true;
-        yield return new WaitForSecondsRealtime(3);
-        newToy = false;
-    }
 }

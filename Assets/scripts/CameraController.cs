@@ -58,7 +58,7 @@ public class CameraController : MonoBehaviour {
         Debug.Log(minX);
 
         Debug.Log("MINZ");
-        Debug.Log(minZ);*/
+        Debug.Log(minZ);/
 
         //transform.position += new Vector3 (0,0,0.2f);
         // Camera.main.fieldOfView += 10f;
