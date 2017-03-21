@@ -29,6 +29,7 @@ public class BabyMovement : MonoBehaviour {
     public Animator anim;
 
     private bool Frozen;
+    private bool newToy;
 
 
     // Use this for initialization
@@ -177,13 +178,14 @@ public class BabyMovement : MonoBehaviour {
     {
         if (other.tag == "Team2" && tag == "Team1TOY")
         {
-            //change color to team 2 and change tags, add to score
-            
-            rightHand.GetComponent<Renderer>().material = RegularHand;
-            gameObject.tag = "Team1";
-            other.tag = "Team2TOY";
-            StartCoroutine(FreezePlayer());
-            Debug.Log(this + "with tag" + tag);
+            if (!newToy)
+            {
+                rightHand.GetComponent<Renderer>().material = RegularHand;
+                gameObject.tag = "Team1";
+                other.tag = "Team2TOY";
+                StartCoroutine(FreezePlayer());
+            }
+       
         }
         else if (other.tag == "Team2" && tag == "Team1")
         {
@@ -196,17 +198,21 @@ public class BabyMovement : MonoBehaviour {
                 rightHand.GetComponent<Renderer>().material = TOYHand;
                 gameObject.tag = "Team1TOY";
                 other.tag = "Team2";
-                Debug.Log(this + "with tag" + tag);
+                StartCoroutine(NewToy());
+
             }
 
         }
         else if (other.tag == "Team1" && tag == "Team2TOY")
-        { 
-            rightHand.GetComponent<Renderer>().material = RegularHand;
-            gameObject.tag = "Team2";
-            other.tag = "Team1TOY";
-            StartCoroutine(FreezePlayer());
-            Debug.Log(this + "with tag" + tag);
+        {
+            if (!newToy)
+            {
+                rightHand.GetComponent<Renderer>().material = RegularHand;
+                gameObject.tag = "Team2";
+                other.tag = "Team1TOY";
+                StartCoroutine(FreezePlayer());
+            }
+
         }
         else if (other.tag == "Team1TOY" && tag == "Team2")
         {
@@ -215,7 +221,7 @@ public class BabyMovement : MonoBehaviour {
                 rightHand.GetComponent<Renderer>().material = TOYHand;
                 gameObject.tag = "Team2TOY";
                 other.tag = "Team1";
-                Debug.Log(this + "with tag" + tag);
+                StartCoroutine(NewToy());
             }
 
         }
@@ -231,5 +237,12 @@ public class BabyMovement : MonoBehaviour {
         Frozen = true;
         yield return new WaitForSecondsRealtime(3);
         Frozen = false;
+    }
+
+    IEnumerator NewToy()
+    {
+        newToy = true;
+        yield return new WaitForSecondsRealtime(3);
+        newToy = false;
     }
 }
