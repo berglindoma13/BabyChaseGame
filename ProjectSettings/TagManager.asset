@@ -10,6 +10,7 @@ TagManager:
   - Team1TOY
   - Team1
   - Team2
+  - Team2TOY
   layers:
   - Default
   - TransparentFX
