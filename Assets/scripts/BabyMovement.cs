@@ -30,11 +30,6 @@ public class BabyMovement : MonoBehaviour {
 
     public Animator anim;
 
-    private float timeLeft;
-    public Text timer;
-
-    public Text Winner;
-
     private bool Frozen;
     private bool newToy;
 
@@ -54,9 +49,7 @@ public class BabyMovement : MonoBehaviour {
 
         blueScore = 0;
         redScore = 0;
-
-        timeLeft = 10.0f;
-
+        
         rightHand = transform.Find("Torso/RightHand").gameObject;
         if (tag == "Team1TOY")
         {
@@ -81,17 +74,6 @@ public class BabyMovement : MonoBehaviour {
         Blue.text = blueScore.ToString();
         Red.text = redScore.ToString();
 
-
-        if (timeLeft < 0)
-        {
-            timer.text = "";
-            GameOver();
-        }
-        else
-        {
-            timeLeft -= Time.deltaTime;
-            timer.text = timeLeft.ToString();
-        }
 
         /*float h2 = Input.GetAxis(horizontalCtrl);
         float v2 = Input.GetAxis(verticalCtrl);*/
@@ -188,14 +170,6 @@ public class BabyMovement : MonoBehaviour {
 
     }
 
-    void GameOver()
-    {
-        if(rightHand.GetComponent<Renderer>().material == TOYHand)
-        {
-            Winner.text = gameObject.name;
-        }
-    }
-
   
     void OnTriggerEnter(Collider other)
     {
@@ -205,7 +179,6 @@ public class BabyMovement : MonoBehaviour {
             GameObject enemy = other.transform.Find("Torso/RightHand").gameObject;
             enemy.GetComponent<Renderer>().material = RegularHand;
 
-            Debug.Log("here");
             Rigidbody rb = other.GetComponent<Rigidbody>();
             StartCoroutine(FreezePlayer(rb));
 
