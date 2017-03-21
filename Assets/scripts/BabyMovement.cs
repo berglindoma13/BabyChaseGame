@@ -40,22 +40,28 @@ public class BabyMovement : MonoBehaviour {
 		bool moving = false;
 		velocity = rb.angularVelocity;
 
+		Vector3 movement = Vector3.zero;
 
+		//Debug.Log ("hori is: " + h + " and verti is: " + v);
 		//if (Input.GetKey (KeyCode.W)) {
 		if (v > 0 || Input.GetKey (KeyCode.W)) {
 			//torso.position += Vector3.forward / 5;
-			baby.rotation = Quaternion.Euler(new Vector3(0,360,0));
+			//baby.rotation = Quaternion.Euler(new Vector3(0,360,0));
 			//baby.position += Vector3.forward * SPEED;
-			rb.velocity = (Vector3.forward * SPEED * Time.deltaTime);
+			//rb.velocity = (Vector3.forward * SPEED * Time.deltaTime);
+			movement.z = SPEED * Time.deltaTime;
+
+
 			moving = true;
 			//anim.SetBool("Walking", true);
 		}
 		//else if (Input.GetKey (KeyCode.S)) {
 		else if (v < 0 || Input.GetKey (KeyCode.S)) {
 			//torso.position += Vector3.forward / 5;
-			baby.rotation = Quaternion.Euler(new Vector3(0,180,0));
+			//baby.rotation = Quaternion.Euler(new Vector3(0,180,0));
 			//baby.position += Vector3.back * SPEED;
-			rb.velocity = (Vector3.back * SPEED * Time.deltaTime);
+			//rb.velocity = (Vector3.back * SPEED * Time.deltaTime);
+			movement.z = -SPEED * Time.deltaTime;
 			moving = true;
 			//anim.SetBool("Walking", true);
 		}
@@ -63,21 +69,26 @@ public class BabyMovement : MonoBehaviour {
 		//if (Input.GetKey (KeyCode.A)) {
 		if (h < 0 || Input.GetKey (KeyCode.A)) {
 			//torso.position += Vector3.forward / 5;
-			baby.rotation = Quaternion.Euler(new Vector3(0,270,0));
+			//baby.rotation = Quaternion.Euler(new Vector3(0,270,0));
 			//baby.position += Vector3.left * SPEED;
-			rb.velocity = (Vector3.left * SPEED * Time.deltaTime);
+			//rb.velocity = (Vector3.left * SPEED * Time.deltaTime);
+			movement.x = -SPEED * Time.deltaTime;
 			moving = true;
 			//anim.SetBool("Walking", true);
 		}
 		//else if (Input.GetKey (KeyCode.D)) {
 		else if (h > 0 || Input.GetKey (KeyCode.D)) {
 			//torso.position += Vector3.forward / 5;
-			baby.rotation = Quaternion.Euler(new Vector3(0,90,0));
+			//baby.rotation = Quaternion.Euler(new Vector3(0,90,0));
 			//baby.position += Vector3.right * SPEED;
-			rb.velocity = (Vector3.right * SPEED * Time.deltaTime);
+			//rb.velocity = (Vector3.right * SPEED * Time.deltaTime);
+			movement.x = SPEED * Time.deltaTime;
 			moving = true;
 			//anim.SetBool("Walking", true);
 		}
+		rb.velocity = movement;
+		baby.rotation = Quaternion.LookRotation (movement);
+		//Debug.Log ("rb velocity is: " + rb.velocity + " and move is: " + movement);
         rb.angularVelocity = Vector3.zero;
         anim.SetBool ("Walking", moving);
 
