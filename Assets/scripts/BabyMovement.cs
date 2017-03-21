@@ -8,6 +8,7 @@ public class BabyMovement : MonoBehaviour {
 	public Transform torso;
 	public float SPEED;
 	public Rigidbody rb;
+	public Vector3 velocity;
 
 	public string horizontalJoyCtrl = "HorizontalJoy_P1";
 	public string verticalJoyCtrl = "VerticalJoy_P1";
@@ -37,6 +38,7 @@ public class BabyMovement : MonoBehaviour {
 		float h = Input.GetAxis (horizontalJoyCtrl);
 		float v = Input.GetAxis (verticalJoyCtrl);
 		bool moving = false;
+		velocity = rb.angularVelocity;
 
 
 		//if (Input.GetKey (KeyCode.W)) {
@@ -76,8 +78,8 @@ public class BabyMovement : MonoBehaviour {
 			moving = true;
 			//anim.SetBool("Walking", true);
 		}
-
-		anim.SetBool ("Walking", moving);
+        rb.angularVelocity = Vector3.zero;
+        anim.SetBool ("Walking", moving);
 
 	}
 
@@ -142,7 +144,6 @@ public class BabyMovement : MonoBehaviour {
         if (other.tag == "Team2")
         {
             //change color to team 2 and change tags, add to score
-            rb.velocity = Vector3.zero;
             Debug.Log("touched by other team");
         }
 
