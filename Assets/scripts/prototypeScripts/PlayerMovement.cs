@@ -25,9 +25,6 @@ public class PlayerMovement : MonoBehaviour {
 			Debug.Log("jumpssss");
 		}
 
-		float h = Input.GetAxis (horizontalCtrl);
-
-		float v = Input.GetAxis (verticalCtrl);
 
 		//Debug.Log ("Horizontal is: " + h + " and Vertical is: " + v);
 		//Debug.Log ("frame");
