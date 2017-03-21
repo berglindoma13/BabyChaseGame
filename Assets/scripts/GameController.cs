@@ -47,6 +47,8 @@ public class GameController : MonoBehaviour {
             {
                 Winner.text = "CONGRATULATIONS RED TEAM!!";
             }
+
+            Timer.text = "";
            
         }
 	}
