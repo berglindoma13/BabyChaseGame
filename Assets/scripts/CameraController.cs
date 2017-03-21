@@ -45,7 +45,7 @@ public class CameraController : MonoBehaviour {
             }
         }
 
-        Debug.Log("player positions");
+        /*Debug.Log("player positions");
         Debug.Log(player1.transform.position);
         Debug.Log(player2.transform.position);
         Debug.Log(player3.transform.position);
@@ -58,7 +58,7 @@ public class CameraController : MonoBehaviour {
         Debug.Log(minX);
 
         Debug.Log("MINZ");
-        Debug.Log(minZ);
+        Debug.Log(minZ);*/
 
         //transform.position += new Vector3 (0,0,0.2f);
         // Camera.main.fieldOfView += 10f;

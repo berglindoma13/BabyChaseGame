@@ -19,6 +19,7 @@ public class BabyCollision : MonoBehaviour {
         if(other.tag == "Team2")
         {
             //change color to team 2 and change tags, add to score
+            
             Debug.Log("touched by other team");
         }
         
