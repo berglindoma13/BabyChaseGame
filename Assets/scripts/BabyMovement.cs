@@ -31,9 +31,6 @@ public class BabyMovement : MonoBehaviour {
 
     public Animator anim;
 
-    private bool Frozen;
-    private bool newToy;
-
     public Text Blue;
     private int blueScore;
     public Text Red;
@@ -47,9 +44,6 @@ public class BabyMovement : MonoBehaviour {
         baby = gameObject.GetComponent<Transform>();
         anim = gameObject.GetComponent<Animator>();
         rb = gameObject.GetComponent<Rigidbody>();
-
-        blueScore = 0;
-        redScore = 0;
         
         rightHand = transform.Find("Torso/RightHand").gameObject;
         if (tag == "Team1TOY")
@@ -72,8 +66,13 @@ public class BabyMovement : MonoBehaviour {
 
 	void FixedUpdate () {
 
+        if(tag == "team1TOY" || tag == "Team2TOY")
+        {
+            SPEED = SPEED * 0.8f;
+        }
+
 		if(Input.GetButtonDown(buttonX)){
-			Debug.Log("x is down");
+			//Debug.Log("x is down");
 		}
 
 		/*float h2 = Input.GetAxis (horizontalCtrl);
@@ -152,12 +151,11 @@ public class BabyMovement : MonoBehaviour {
             GameObject enemy = other.transform.Find("Torso/RightHand").gameObject;
             enemy.GetComponent<Renderer>().material = RegularHand;
 
-            Rigidbody rb = other.GetComponent<Rigidbody>();
-            StartCoroutine(FreezePlayer(rb));
+            Rigidbody rbenemy = other.GetComponent<Rigidbody>();
+            StartCoroutine(FreezePlayer(rbenemy));
 
             gameObject.tag = "Team2TOY";
             other.tag = "Team1";
-            //redScore += 1;
 
         }
         else if (other.tag == "Team2TOY" && tag == "Team1")
@@ -166,21 +164,20 @@ public class BabyMovement : MonoBehaviour {
             GameObject enemy = other.transform.Find("Torso/RightHand").gameObject;
             enemy.GetComponent<Renderer>().material = RegularHand;
 
-            Rigidbody rb = other.GetComponent<Rigidbody>();
-            StartCoroutine(FreezePlayer(rb));
+            Rigidbody rbenemy = other.GetComponent<Rigidbody>();
+            StartCoroutine(FreezePlayer(rbenemy));
             
             gameObject.tag = "Team1TOY";
             other.tag = "Team2";
-            //blueScore += 1;
         }
 
     }
 
-    IEnumerator FreezePlayer(Rigidbody rb)
+    IEnumerator FreezePlayer(Rigidbody rbenemy)
     {
-        rb.constraints = RigidbodyConstraints.FreezeAll;
+        rbenemy.constraints = RigidbodyConstraints.FreezeAll;
         yield return new WaitForSecondsRealtime(3);
-        rb.constraints = RigidbodyConstraints.None;
+        rbenemy.constraints = RigidbodyConstraints.None;
     }
 
 }
