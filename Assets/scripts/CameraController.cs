@@ -56,6 +56,7 @@ public class CameraController : MonoBehaviour {
         }
 
         //BOX ((minX, minZ),(minX,maxZ),(maxX,maxZ),(maxX,minZ))
+        //Debug.Log(Camera.main.WorldToScreenPoint(new Vector3(minX, 0, minZ)) + " " + Screen.width + " " + Screen.height);
 
 
 
