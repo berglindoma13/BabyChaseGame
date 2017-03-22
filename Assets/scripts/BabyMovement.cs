@@ -66,6 +66,11 @@ public class BabyMovement : MonoBehaviour {
 
 	void FixedUpdate () {
 
+        if(tag == "team1TOY" || tag == "Team2TOY")
+        {
+            SPEED = SPEED * 0.8f;
+        }
+
 		if(Input.GetButtonDown(buttonX)){
 			//Debug.Log("x is down");
 		}

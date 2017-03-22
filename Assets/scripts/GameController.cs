@@ -7,6 +7,9 @@ using UnityEngine.SceneManagement;
 public class GameController : MonoBehaviour {
     private float timeLeft;
 
+    public Text roundText;
+    private int roundNumber;
+
     public GameObject baby1;
     public GameObject baby2;
     public GameObject baby3;
@@ -17,9 +20,8 @@ public class GameController : MonoBehaviour {
 
     private string[] randomRoles;
 
-
-    // Use this for initialization
     void Start () {
+        //RANDOMIZE TEAMS
         randomRoles = new string[4];
         randomRoles[0] = "Team1TOY";
         randomRoles[1] = "Team1";
@@ -32,7 +34,11 @@ public class GameController : MonoBehaviour {
         baby3.tag = randomRoles[2];
         baby4.tag = randomRoles[3];
 
+        //INITIALIZING
         timeLeft = 60.0f;
+        roundNumber = 1;
+        roundText.text = "Round: " + roundNumber.ToString();
+
 	}
 	
     private void randomizeArray(string[] roles)
@@ -46,19 +52,21 @@ public class GameController : MonoBehaviour {
         }
     }
 
-	// Update is called once per frame
 	void FixedUpdate () {
+
+        //RESET GAME
         if (Input.GetKey(KeyCode.R))
         {
-            //RESET GAME
             GameReset();
         }
+
+        //QUIT GAME
         if (Input.GetKey(KeyCode.Q))
         {
-            //QUIT GAME
             QuitGame(); 
         }
         
+        //WILL BE CHANGED
         timeLeft -= Time.deltaTime;
         Timer.text = timeLeft.ToString();
         if(timeLeft < 0)
