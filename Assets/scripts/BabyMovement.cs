@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class BabyMovement : MonoBehaviour {
 
@@ -22,25 +24,33 @@ public class BabyMovement : MonoBehaviour {
 
     public string horizontalJoyCtrl = "HorizontalJoy_P1";
     public string verticalJoyCtrl = "VerticalJoy_P1";
+	public string buttonX = "Fire1_P1";
 
-    public string horizontalCtrl = "Horizontal_P1";
-    public string verticalCtrl = "Vertical_P1";
+   /* public string horizontalCtrl = "Horizontal_P1";
+    public string verticalCtrl = "Vertical_P1";*/
 
     public Animator anim;
 
     private bool Frozen;
+    private bool newToy;
 
-
+    public Text Blue;
+    private int blueScore;
+    public Text Red;
+    private int redScore;
+  
     // Use this for initialization
     void Start() {
         foreach (string name in Input.GetJoystickNames()) {
-            Debug.Log(name);
+            //Debug.Log(name);
         }
         baby = gameObject.GetComponent<Transform>();
-        //torso = baby.FindChild ("Torso").GetComponent <Transform>();
         anim = gameObject.GetComponent<Animator>();
         rb = gameObject.GetComponent<Rigidbody>();
 
+        blueScore = 0;
+        redScore = 0;
+        
         rightHand = transform.Find("Torso/RightHand").gameObject;
         if (tag == "Team1TOY")
         {
@@ -57,122 +67,120 @@ public class BabyMovement : MonoBehaviour {
             diaper.GetComponent<Renderer>().material = EnemyColor;
         }
 
-        SPEED = 200;
+        SPEED = 230;
     }
 
-    void FixedUpdate() {
-        /*float h2 = Input.GetAxis(horizontalCtrl);
-        float v2 = Input.GetAxis(verticalCtrl);*/
-        float h = Input.GetAxis(horizontalJoyCtrl);
-        float v = Input.GetAxis(verticalJoyCtrl);
-        bool moving = false;
-        velocity = rb.angularVelocity;
+	void FixedUpdate () {
+
+		if(Input.GetButtonDown(buttonX)){
+			Debug.Log("x is down");
+		}
+
+		/*float h2 = Input.GetAxis (horizontalCtrl);
+		float v2 = Input.GetAxis (verticalCtrl);*/
+		float h = Input.GetAxis (horizontalJoyCtrl);
+		float v = Input.GetAxis (verticalJoyCtrl);
+		bool moving = false;
+		velocity = rb.angularVelocity;
+
 		Vector3 movement = Vector3.zero;
 
+		//Debug.Log ("hori is: " + h + " and verti is: " + v);
+		//if (Input.GetKey (KeyCode.W)) {
+		if (v > 0 || Input.GetKey (KeyCode.W)) {
+			//torso.position += Vector3.forward / 5;
+			//baby.rotation = Quaternion.Euler(new Vector3(0,360,0));
+			//baby.position += Vector3.forward * SPEED;
+			//rb.velocity = (Vector3.forward * SPEED * Time.deltaTime);
+			movement.z = SPEED * Time.deltaTime;
 
-        if (!Frozen)
-        {
-            //if (Input.GetKey (KeyCode.W)) {
-            if (v > 0 || Input.GetKey(KeyCode.W))
-            {
-				movement.z = SPEED * Time.deltaTime;
-                moving = true;
-                //anim.SetBool("Walking", true);
-            }
-            //else if (Input.GetKey (KeyCode.S)) {
-            else if (v < 0 || Input.GetKey(KeyCode.S))
-            {
-				movement.z = -SPEED * Time.deltaTime;
-                moving = true;
-                //anim.SetBool("Walking", true);
-            }
 
-            //if (Input.GetKey (KeyCode.A)) {
-            if (h < 0 || Input.GetKey(KeyCode.A))
-            {
-				movement.x = -SPEED * Time.deltaTime;
-                moving = true;
-                //anim.SetBool("Walking", true);
-            }
-            //else if (Input.GetKey (KeyCode.D)) {
-            else if (h > 0 || Input.GetKey(KeyCode.D))
-            {
-				movement.x = SPEED * Time.deltaTime;
-                moving = true;
-                //anim.SetBool("Walking", true);
-            }
+			moving = true;
+			//anim.SetBool("Walking", true);
+		}
+		//else if (Input.GetKey (KeyCode.S)) {
+		else if (v < 0 || Input.GetKey (KeyCode.S)) {
+			//torso.position += Vector3.forward / 5;
+			//baby.rotation = Quaternion.Euler(new Vector3(0,180,0));
+			//baby.position += Vector3.back * SPEED;
+			//rb.velocity = (Vector3.back * SPEED * Time.deltaTime);
+			movement.z = -SPEED * Time.deltaTime;
+			moving = true;
+			//anim.SetBool("Walking", true);
+		}
 
-			//skítamix
-			if(movement.x != 0 && movement.z != 0){
-				movement.x = movement.x/2;
-				movement.y = movement.y/2;
-			}
-			rb.velocity = movement;
-			baby.rotation = Quaternion.LookRotation (movement);
-            rb.angularVelocity = Vector3.zero;
-            anim.SetBool("Walking", moving);
-        }
+		//if (Input.GetKey (KeyCode.A)) {
+		if (h < 0 || Input.GetKey (KeyCode.A)) {
+			//torso.position += Vector3.forward / 5;
+			//baby.rotation = Quaternion.Euler(new Vector3(0,270,0));
+			//baby.position += Vector3.left * SPEED;
+			//rb.velocity = (Vector3.left * SPEED * Time.deltaTime);
+			movement.x = -SPEED * Time.deltaTime;
+			moving = true;
+			//anim.SetBool("Walking", true);
+		}
+		//else if (Input.GetKey (KeyCode.D)) {
+		else if (h > 0 || Input.GetKey (KeyCode.D)) {
+			//torso.position += Vector3.forward / 5;
+			//baby.rotation = Quaternion.Euler(new Vector3(0,90,0));
+			//baby.position += Vector3.right * SPEED;
+			//rb.velocity = (Vector3.right * SPEED * Time.deltaTime);
+			movement.x = SPEED * Time.deltaTime;
+			moving = true;
+			//anim.SetBool("Walking", true);
+		}
 
-    }
+		if (movement.x != 0 && movement.z != 0) {
+			movement.x = movement.x / 2;
+			movement.z = movement.z / 2;
+		}
+
+		rb.velocity = movement;
+		baby.rotation = Quaternion.LookRotation (movement);
+		//Debug.Log ("rb velocity is: " + rb.velocity + " and move is: " + movement);
+		rb.angularVelocity = Vector3.zero;
+		anim.SetBool ("Walking", moving);
+
+	}
 
   
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Team2" && tag == "Team1TOY")
+        if (other.tag == "Team1TOY" && tag == "Team2")
         {
-            //change color to team 2 and change tags, add to score
-            
-            rightHand.GetComponent<Renderer>().material = RegularHand;
-            gameObject.tag = "Team1";
-            other.tag = "Team2TOY";
-            StartCoroutine(FreezePlayer());
-            Debug.Log(this + "with tag" + tag);
-        }
-        else if (other.tag == "Team2" && tag == "Team1")
-        {
+            rightHand.GetComponent<Renderer>().material = TOYHand;
+            GameObject enemy = other.transform.Find("Torso/RightHand").gameObject;
+            enemy.GetComponent<Renderer>().material = RegularHand;
+
+            Rigidbody rb = other.GetComponent<Rigidbody>();
+            StartCoroutine(FreezePlayer(rb));
+
+            gameObject.tag = "Team2TOY";
+            other.tag = "Team1";
+            //redScore += 1;
 
         }
         else if (other.tag == "Team2TOY" && tag == "Team1")
         {
-            if (!Frozen)
-            {
-                rightHand.GetComponent<Renderer>().material = TOYHand;
-                gameObject.tag = "Team1TOY";
-                other.tag = "Team2";
-                Debug.Log(this + "with tag" + tag);
-            }
+            rightHand.GetComponent<Renderer>().material = TOYHand;
+            GameObject enemy = other.transform.Find("Torso/RightHand").gameObject;
+            enemy.GetComponent<Renderer>().material = RegularHand;
 
-        }
-        else if (other.tag == "Team1" && tag == "Team2TOY")
-        { 
-            rightHand.GetComponent<Renderer>().material = RegularHand;
-            gameObject.tag = "Team2";
-            other.tag = "Team1TOY";
-            StartCoroutine(FreezePlayer());
-            Debug.Log(this + "with tag" + tag);
-        }
-        else if (other.tag == "Team1TOY" && tag == "Team2")
-        {
-            if (!Frozen)
-            {
-                rightHand.GetComponent<Renderer>().material = TOYHand;
-                gameObject.tag = "Team2TOY";
-                other.tag = "Team1";
-                Debug.Log(this + "with tag" + tag);
-            }
-
-        }
-        else if (other.tag == "Team1" && tag == "Team2")
-        {
-
+            Rigidbody rb = other.GetComponent<Rigidbody>();
+            StartCoroutine(FreezePlayer(rb));
+            
+            gameObject.tag = "Team1TOY";
+            other.tag = "Team2";
+            //blueScore += 1;
         }
 
     }
 
-    IEnumerator FreezePlayer()
+    IEnumerator FreezePlayer(Rigidbody rb)
     {
-        Frozen = true;
+        rb.constraints = RigidbodyConstraints.FreezeAll;
         yield return new WaitForSecondsRealtime(3);
-        Frozen = false;
+        rb.constraints = RigidbodyConstraints.None;
     }
+
 }
