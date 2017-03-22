@@ -33,6 +33,8 @@ public class CameraController : MonoBehaviour {
 	void Update () {
         float minX = Players[0].transform.position.x;
         float minZ = Players[0].transform.position.z;
+        float maxX = Players[0].transform.position.x;
+        float maxZ = Players[0].transform.position.z;
         for(int i = 1; i < 4; i++)
         {
             if(Players[i].transform.position.x < minX)
@@ -43,7 +45,19 @@ public class CameraController : MonoBehaviour {
             {
                 minZ = Players[i].transform.position.z;
             }
+            if(Players[i].transform.position.x > maxX)
+            {
+                maxX = Players[i].transform.position.x;
+            }
+            if(Players[i].transform.position.z > maxZ)
+            {
+                maxZ = Players[i].transform.position.z;
+            }
         }
+
+        //BOX ((minX, minZ),(minX,maxZ),(maxX,maxZ),(maxX,minZ))
+
+
 
         /*Debug.Log("player positions");
         Debug.Log(player1.transform.position);
@@ -58,10 +72,10 @@ public class CameraController : MonoBehaviour {
         Debug.Log(minX);
 
         Debug.Log("MINZ");
-        Debug.Log(minZ);
+        Debug.Log(minZ);*/
 
         //transform.position += new Vector3 (0,0,0.2f);
         // Camera.main.fieldOfView += 10f;
-        */
+        
     }
 }

@@ -179,8 +179,8 @@ public class BabyMovement : MonoBehaviour {
             GameObject enemy = other.transform.Find("Torso/RightHand").gameObject;
             enemy.GetComponent<Renderer>().material = RegularHand;
 
-            Rigidbody rb = other.GetComponent<Rigidbody>();
-            StartCoroutine(FreezePlayer(rb));
+            Rigidbody rbenemy = other.GetComponent<Rigidbody>();
+            StartCoroutine(FreezePlayer(rbenemy));
 
             gameObject.tag = "Team2TOY";
             other.tag = "Team1";
@@ -193,8 +193,8 @@ public class BabyMovement : MonoBehaviour {
             GameObject enemy = other.transform.Find("Torso/RightHand").gameObject;
             enemy.GetComponent<Renderer>().material = RegularHand;
 
-            Rigidbody rb = other.GetComponent<Rigidbody>();
-            StartCoroutine(FreezePlayer(rb));
+            Rigidbody rbenemy = other.GetComponent<Rigidbody>();
+            StartCoroutine(FreezePlayer(rbenemy));
             
             gameObject.tag = "Team1TOY";
             other.tag = "Team2";
@@ -203,11 +203,11 @@ public class BabyMovement : MonoBehaviour {
 
     }
 
-    IEnumerator FreezePlayer(Rigidbody rb)
+    IEnumerator FreezePlayer(Rigidbody rbenemy)
     {
-        rb.constraints = RigidbodyConstraints.FreezeAll;
+        rbenemy.constraints = RigidbodyConstraints.FreezeAll;
         yield return new WaitForSecondsRealtime(3);
-        rb.constraints = RigidbodyConstraints.None;
+        rbenemy.constraints = RigidbodyConstraints.None;
     }
 
 }

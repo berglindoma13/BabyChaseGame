@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
     private float timeLeft;
@@ -22,10 +23,22 @@ public class GameController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
+        if (Input.GetKey(KeyCode.R))
+        {
+            //RESET GAME
+            GameReset();
+        }
+        if (Input.GetKey(KeyCode.Q))
+        {
+            //QUIT GAME
+            QuitGame(); 
+        }
+        
         timeLeft -= Time.deltaTime;
         Timer.text = timeLeft.ToString();
         if(timeLeft < 0)
         {
+            //SWITCH AND USE TAGS INSTEAD OF COLOR
             GameObject b1 = baby1.transform.Find("Torso/RightHand").gameObject;
             GameObject b2 = baby2.transform.Find("Torso/RightHand").gameObject;
             GameObject b3 = baby3.transform.Find("Torso/RightHand").gameObject;
@@ -52,4 +65,15 @@ public class GameController : MonoBehaviour {
            
         }
 	}
+
+    void GameReset()
+    {
+        //RESET POINTS
+        timeLeft = 60.0f;
+    }
+
+    void QuitGame()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
 }
