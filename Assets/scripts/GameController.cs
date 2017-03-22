@@ -15,12 +15,37 @@ public class GameController : MonoBehaviour {
     public Text Winner;
     public Text Timer;
 
+    private string[] randomRoles;
+
 
     // Use this for initialization
     void Start () {
+        randomRoles = new string[4];
+        randomRoles[0] = "Team1TOY";
+        randomRoles[1] = "Team1";
+        randomRoles[2] = "Team2";
+        randomRoles[3] = "Team2";
+
+        randomizeArray(randomRoles);
+        baby1.tag = randomRoles[0];
+        baby2.tag = randomRoles[1];
+        baby3.tag = randomRoles[2];
+        baby4.tag = randomRoles[3];
+
         timeLeft = 60.0f;
 	}
 	
+    private void randomizeArray(string[] roles)
+    {
+        for(int i = roles.Length - 1; i > 0 ; i--)
+        {
+            var r = Random.Range(0, i);
+            var tmp = roles[i];
+            roles[i] = roles[r];
+            roles[r] = tmp;
+        }
+    }
+
 	// Update is called once per frame
 	void FixedUpdate () {
         if (Input.GetKey(KeyCode.R))

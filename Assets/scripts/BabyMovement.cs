@@ -31,9 +31,6 @@ public class BabyMovement : MonoBehaviour {
 
     public Animator anim;
 
-    private bool Frozen;
-    private bool newToy;
-
     public Text Blue;
     private int blueScore;
     public Text Red;
@@ -47,9 +44,6 @@ public class BabyMovement : MonoBehaviour {
         baby = gameObject.GetComponent<Transform>();
         anim = gameObject.GetComponent<Animator>();
         rb = gameObject.GetComponent<Rigidbody>();
-
-        blueScore = 0;
-        redScore = 0;
         
         rightHand = transform.Find("Torso/RightHand").gameObject;
         if (tag == "Team1TOY")
@@ -73,7 +67,7 @@ public class BabyMovement : MonoBehaviour {
 	void FixedUpdate () {
 
 		if(Input.GetButtonDown(buttonX)){
-			Debug.Log("x is down");
+			//Debug.Log("x is down");
 		}
 
 		/*float h2 = Input.GetAxis (horizontalCtrl);
@@ -157,7 +151,6 @@ public class BabyMovement : MonoBehaviour {
 
             gameObject.tag = "Team2TOY";
             other.tag = "Team1";
-            //redScore += 1;
 
         }
         else if (other.tag == "Team2TOY" && tag == "Team1")
@@ -171,7 +164,6 @@ public class BabyMovement : MonoBehaviour {
             
             gameObject.tag = "Team1TOY";
             other.tag = "Team2";
-            //blueScore += 1;
         }
 
     }
