@@ -61,7 +61,7 @@ public class GameController : MonoBehaviour {
         }
 
         //QUIT GAME
-        if (Input.GetKey(KeyCode.Q))
+        if (Input.GetKey(KeyCode.Escape))
         {
             QuitGame(); 
         }
@@ -102,11 +102,17 @@ public class GameController : MonoBehaviour {
     void GameReset()
     {
         //RESET POINTS
+		SceneManager.LoadScene("EnvironmentScene");
         timeLeft = 60.0f;
     }
 
     void QuitGame()
     {
-        SceneManager.LoadScene("MainMenu");
+		if (SceneManager.GetActiveScene ().name.Equals ("EnvironmentScene")) {
+			SceneManager.LoadScene ("MainMenu");
+		} else {
+			Application.Quit ();
+		}
+        
     }
 }

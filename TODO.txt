@@ -6,8 +6,7 @@ Make a toy instead of coloring hand
 more accurate movements
 sound effects
 reset button and reset funcitioning
-exit button and exit functioning ( go to menu)
-exit button on menu to quit game
+
 
 IMPORTANT
 Camera fix
@@ -25,3 +24,5 @@ DONE
 //Fix chairs so babies cant climb it
 //Random who is defending and who is attacking
 //Randomize who is in each team - but keep same teams each round
+//exit button and exit functioning ( go to menu)
+//exit button on menu to quit game
