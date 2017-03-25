@@ -198,7 +198,7 @@ InputManager:
     axis: 1
     joyNum: 4
   - serializedVersion: 3
-    m_Name: Fire1_P1
+    m_Name: rBumper_P1
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 

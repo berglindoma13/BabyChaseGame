@@ -24,7 +24,7 @@ public class BabyMovement : MonoBehaviour {
 
     public string horizontalJoyCtrl = "HorizontalJoy_P1";
     public string verticalJoyCtrl = "VerticalJoy_P1";
-	public string buttonX = "Fire1_P1";
+	public string buttonX = "rBumper_P1";
 
    /* public string horizontalCtrl = "Horizontal_P1";
     public string verticalCtrl = "Vertical_P1";*/
@@ -72,7 +72,7 @@ public class BabyMovement : MonoBehaviour {
         }
 
 		if(Input.GetButtonDown(buttonX)){
-			//Debug.Log("x is down");
+			Debug.Log("x is down");
 		}
 
 		/*float h2 = Input.GetAxis (horizontalCtrl);
