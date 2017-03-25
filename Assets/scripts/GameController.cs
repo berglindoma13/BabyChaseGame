@@ -5,10 +5,12 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
+    private float ROUND_TIME = 10f;
+
     private float timeLeft;
 
-    public Text roundText;
     private int roundNumber;
+	public Canvas UISideSwitcher;
 
     public GameObject baby1;
     public GameObject baby2;
@@ -18,9 +20,25 @@ public class GameController : MonoBehaviour {
     public Text Winner;
     public Text Timer;
 
+    public Text RedPoints;
+    private float redpoints;
+    public Text BluePoints;
+    private float bluepoints;
+
+    //0 = blue is defender
+    //1 = red is defender
+    private int TieDefender;
+
     private string[] randomRoles;
 
+    private Vector3[] originPos;
+
+    private bool stoptimer;
+
     void Start () {
+        bluepoints = 0;
+        redpoints = 0;
+
         //RANDOMIZE TEAMS
         randomRoles = new string[4];
         randomRoles[0] = "Team1TOY";
@@ -35,9 +53,17 @@ public class GameController : MonoBehaviour {
         baby4.tag = randomRoles[3];
 
         //INITIALIZING
-        timeLeft = 60.0f;
+        timeLeft = ROUND_TIME;
         roundNumber = 1;
-        roundText.text = "Round: " + roundNumber.ToString();
+        originPos = new Vector3[4];
+        originPos[0] = baby1.transform.position;
+        originPos[1] = baby2.transform.position;
+        originPos[2] = baby3.transform.position;
+        originPos[3] = baby4.transform.position;
+
+        UISideSwitcher.enabled = false;
+        Winner.enabled = false;
+        stoptimer = false;
 
 	}
 	
@@ -53,60 +79,170 @@ public class GameController : MonoBehaviour {
     }
 
 	void FixedUpdate () {
+        BluePoints.text = bluepoints.ToString();
+        RedPoints.text = redpoints.ToString();
 
         //RESET GAME
         if (Input.GetKey(KeyCode.R))
         {
-            GameReset();
+			SceneManager.LoadScene ("EnvironmentScene");
         }
 
         //QUIT GAME
-        if (Input.GetKey(KeyCode.Q))
+        if (Input.GetKey(KeyCode.Escape))
         {
             QuitGame(); 
         }
-        
-        //WILL BE CHANGED
-        timeLeft -= Time.deltaTime;
-        Timer.text = timeLeft.ToString();
-        if(timeLeft < 0)
+
+        if (!stoptimer)
         {
-            //SWITCH AND USE TAGS INSTEAD OF COLOR
-            GameObject b1 = baby1.transform.Find("Torso/RightHand").gameObject;
-            GameObject b2 = baby2.transform.Find("Torso/RightHand").gameObject;
-            GameObject b3 = baby3.transform.Find("Torso/RightHand").gameObject;
-            GameObject b4 = baby4.transform.Find("Torso/RightHand").gameObject;
+           timeLeft -= Time.deltaTime;
+        }
+        Timer.text = timeLeft.ToString("F0");
+        if (timeLeft < 0)
+        {
+            if(roundNumber == 1)
+            {
+                StartCoroutine(GameReset());
+                roundNumber += 1;
+                Winner.text = "Congratulations Blue Team";
+                Winner.enabled = true;
+                bluepoints += 1;
+            }
+            else if(roundNumber == 2)
+            {
+                redpoints += 1;
+                Winner.text = "Congratulations Red Team";
+                Winner.enabled = true;
+                EndOfGameRoutine();
+            }
+            else if(roundNumber == 3)
+            {
 
-            if (b1.GetComponent<Renderer>().material.name == "TOY (Instance)")
-            {
-                Winner.text = "CONGRATULATIONS BLUE TEAM!!";
             }
-            else if (b2.GetComponent<Renderer>().material.name == "TOY (Instance)")
-            {
-                Winner.text = "CONGRATULATIONS BLUE TEAM!!";
-            }
-            else if (b3.GetComponent<Renderer>().material.name == "TOY (Instance)")
-            {
-                Winner.text = "CONGRATULATIONS RED TEAM!!";
-            }
-            else if (b4.GetComponent<Renderer>().material.name == "TOY (Instance)")
-            {
-                Winner.text = "CONGRATULATIONS RED TEAM!!";
-            }
-
-            Timer.text = "";
-           
         }
 	}
 
-    void GameReset()
+
+    IEnumerator GameReset()
     {
-        //RESET POINTS
-        timeLeft = 60.0f;
+        changeTags();
+        stoptimer = true;
+        timeLeft = ROUND_TIME;
+        Debug.Log ("STARTING 5 SEC WAIT");
+        //RESET POINTS 
+        yield return new WaitForSeconds(5);
+		Debug.Log ("Switching sides and wait for 3 sec");
+        Winner.enabled = false;
+        UISideSwitcher.enabled = true;
+		yield return new WaitForSeconds (3);
+		Debug.Log ("reset scene");
+
+        baby1.transform.position = originPos[0];
+        baby2.transform.position = originPos[1];
+        baby3.transform.position = originPos[2];
+        baby4.transform.position = originPos[3];
+        
+        UISideSwitcher.enabled = false;
+        stoptimer = false;
+
+    }
+
+    public void AttackingTeamWon()
+    {
+        if (roundNumber == 1)
+        {
+            Winner.text = "Congratulations Red Team";
+            Winner.enabled = true;
+            StartCoroutine(GameReset());
+            roundNumber += 1;
+            redpoints += 1;
+        }
+        else if (roundNumber == 2)
+        {
+            bluepoints += 1;
+            Winner.text = "Congratulations Blue Team";
+            Winner.enabled = true;
+            EndOfGameRoutine();
+        }
+    }
+
+    void EndOfGameRoutine()
+    {
+        if(bluepoints > redpoints)
+        {
+            Winner.text = "Blue Team IS THE BEST";
+        }
+        if(redpoints > bluepoints)
+        {
+            Winner.text = "Red Team IS THE BEST";
+        }
+        if (bluepoints == redpoints)
+        {
+            Winner.text = "Both teams won one game, so it's a TIE! Get ready for a tiebreaker";
+            Winner.enabled = true;
+            TieBraker();
+            
+        }
+    }
+
+    void TieBraker()
+    {
+        roundNumber += 1;
+        int defender = Random.Range(0, 1);
+        if(defender == 0)
+        {
+            TieDefender = 0;
+            changeTags();
+        }
+        else
+        {
+            TieDefender = 1;
+        }
+        StartCoroutine(GameReset());
     }
 
     void QuitGame()
     {
-        SceneManager.LoadScene("MainMenu");
+		if (SceneManager.GetActiveScene ().name.Equals ("EnvironmentScene")) {
+			SceneManager.LoadScene ("MainMenu");
+		} else {
+			Application.Quit ();
+		}
+        
+    }
+
+    void changeTags()
+    {
+        if (baby1.tag == "Team1Toy")
+        {
+            baby1.tag = "Team1";
+        }
+        else if (baby2.tag == "Team1Toy")
+        {
+            baby2.tag = "Team1";
+        }
+        else if (baby3.tag == "Team1Toy")
+        {
+            baby3.tag = "Team1";
+        }
+        else if (baby4.tag == "Team1Toy")
+        {
+            baby4.tag = "Team1";
+        }
+
+        if(baby1.tag == "Team2")
+        {
+            baby1.tag = "Team2TOY";
+        }
+        else if (baby2.tag == "Team2")
+        {
+            baby2.tag = "Team2TOY";
+        }
+        else if(baby3.tag == "Team2")
+        {
+            baby3.tag = "Team2TOY";
+        }
+
     }
 }
