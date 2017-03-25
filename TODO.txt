@@ -1,6 +1,5 @@
 VERY IMPORTANT
 Mechanics for teammate 
-Extra stuff on map
 fix bugs
 Make a toy instead of coloring hand
 more accurate movements
@@ -26,3 +25,4 @@ DONE
 //Randomize who is in each team - but keep same teams each round
 //exit button and exit functioning ( go to menu)
 //exit button on menu to quit game
+//Extra stuff on map
