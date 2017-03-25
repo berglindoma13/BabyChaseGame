@@ -14,4 +14,13 @@ public class MenuController : MonoBehaviour {
     {
         Application.Quit();
     }
+
+	void Update () {
+		if (Input.GetKeyDown (KeyCode.Escape)) {
+			Application.Quit ();
+		}
+		if (Input.GetKeyDown (KeyCode.Space)) {
+			SceneManager.LoadScene ("EnvironmentScene");
+		}
+	}
 }
