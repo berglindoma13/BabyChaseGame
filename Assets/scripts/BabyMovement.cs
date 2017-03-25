@@ -9,6 +9,7 @@ public class BabyMovement : MonoBehaviour {
     public Transform baby;
     public Transform torso;
     public float SPEED;
+	public float Stamina = 100;
     public Rigidbody rb;
     public Vector3 velocity;
 
@@ -22,12 +23,19 @@ public class BabyMovement : MonoBehaviour {
     private GameObject diaper;
     private Material diaperMat;
 
-    public string horizontalJoyCtrl = "HorizontalJoy_P1";
-    public string verticalJoyCtrl = "VerticalJoy_P1";
-	public string buttonX = "rBumper_P1";
 
-   /* public string horizontalCtrl = "Horizontal_P1";
-    public string verticalCtrl = "Vertical_P1";*/
+	/* INPUT VARIABLES */
+    public string horizontalJoyCtrl;
+    public string verticalJoyCtrl;
+	public string triangleBtn;
+	public string circleBtn;
+	public string crossBtn;
+	public string squareBtn;
+	public string rBumper;
+	public string lbumper;
+	public string startBtn;
+
+
 
     public Animator anim;
 
@@ -70,20 +78,31 @@ public class BabyMovement : MonoBehaviour {
         {
             SPEED = SPEED * 0.8f;
         }
+		Debug.Log (Input.GetButton(crossBtn));
 
-		if(Input.GetButtonDown(buttonX)){
-			Debug.Log("x is down");
-		}
 
-		/*float h2 = Input.GetAxis (horizontalCtrl);
-		float v2 = Input.GetAxis (verticalCtrl);*/
 		float h = Input.GetAxis (horizontalJoyCtrl);
 		float v = Input.GetAxis (verticalJoyCtrl);
 		bool moving = false;
 		velocity = rb.angularVelocity;
 
-		Vector3 movement = Vector3.zero;
+		//Debug.Log ();
+		if (h != 0 || v != 0) {
+			//Vector3 debug = new Vector3(baby.eulerAngles.x,Mathf.Atan2(h,v) * 180/Mathf.PI,baby.eulerAngles.z);	
+			baby.eulerAngles = new Vector3(baby.eulerAngles.x,Mathf.Atan2(h,v) * 180/Mathf.PI,baby.eulerAngles.z);	
+			Debug.Log(baby.forward);
+			rb.velocity = baby.forward * speed() * Time.fixedDeltaTime;
+			moving = true;
+		} 
+		/*else {
+			directionVector = baby.rotation.eulerAngles;
+		}*/
 
+
+					
+		//Vector3 directionVector = new Vector3(Input.GetAxis(horizontalJoyCtrl),
+		//Vector3 movement = Vector3.zero;
+		/*
 		//Debug.Log ("hori is: " + h + " and verti is: " + v);
 		//if (Input.GetKey (KeyCode.W)) {
 		if (v > 0 || Input.GetKey (KeyCode.W)) {
@@ -133,10 +152,11 @@ public class BabyMovement : MonoBehaviour {
 			movement.x = movement.x / 2;
 			movement.z = movement.z / 2;
 		}
-
-		rb.velocity = movement;
-		baby.rotation = Quaternion.LookRotation (movement);
+		*/
+		//rb.velocity = movement;
+		//baby.rotation = Quaternion.LookRotation (directionVector);
 		//Debug.Log ("rb velocity is: " + rb.velocity + " and move is: " + movement);
+
 		rb.angularVelocity = Vector3.zero;
 		anim.SetBool ("Walking", moving);
 
@@ -179,5 +199,23 @@ public class BabyMovement : MonoBehaviour {
         yield return new WaitForSecondsRealtime(3);
         rbenemy.constraints = RigidbodyConstraints.None;
     }
+
+	float speed(){
+		if (Input.GetButton (rBumper) && hasStamina()) {
+			depleteStamina ();	
+			return SPEED * 1.5f;
+		} 
+		else {
+			return SPEED;
+		}
+	}
+	void depleteStamina(){
+		if (hasStamina ()) {
+			Stamina -= 0.5f;
+		}
+	}
+	bool hasStamina(){
+		return Stamina != 0;
+	}
 
 }

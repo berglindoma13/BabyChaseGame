@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 54097703193947000}
   m_Layer: 0
   m_Name: Baby 4
-  m_TagString: Untagged
+  m_TagString: Team1TOY
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -260,7 +260,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1436369773660832}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.1, z: 0}
+  m_LocalPosition: {x: 10.5, y: 1.1, z: -13.09}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4240629253800918}
@@ -540,13 +540,13 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1436369773660832}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 100
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 84
   m_CollisionDetection: 0
 --- !u!65 &65090281707601184
 BoxCollider:
@@ -591,12 +591,25 @@ MonoBehaviour:
   baby: {fileID: 0}
   torso: {fileID: 0}
   SPEED: 0
+  Stamina: 100
   rb: {fileID: 0}
+  velocity: {x: 0, y: 0, z: 0}
+  EnemyColor: {fileID: 2100000, guid: 9aabd80864cf3e146b536ff4350a2ca7, type: 2}
+  ToyTeamColor: {fileID: 2100000, guid: da920efb9f896744ca5cb956f3a4e577, type: 2}
+  TOYHand: {fileID: 2100000, guid: cafd31900aaa0274cb620b067de30af7, type: 2}
+  RegularHand: {fileID: 2100000, guid: 4d45db804ec64a644b7015578613d568, type: 2}
   horizontalJoyCtrl: HorizontalJoy_P1
   verticalJoyCtrl: VerticalJoy_P1
-  horizontalCtrl: Horizontal_P1
-  verticalCtrl: Vertical_P1
+  triangleBtn: Triangle_P1
+  circleBtn: Circle_P1
+  crossBtn: Cross_P1
+  squareBtn: Square_P1
+  rBumper: rBumper_P1
+  lbumper: lBumper_P1
+  startBtn: Start
   anim: {fileID: 0}
+  Blue: {fileID: 0}
+  Red: {fileID: 0}
 --- !u!135 &135698473142936734
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -617,7 +630,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 1509924794636800}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
