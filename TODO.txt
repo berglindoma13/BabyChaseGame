@@ -1,10 +1,8 @@
 VERY IMPORTANT
 Mechanics for teammate 
 fix bugs
-Make a toy instead of coloring hand
 more accurate movements
 sound effects
-reset button and reset funcitioning
 
 
 IMPORTANT
@@ -26,3 +24,5 @@ DONE
 //exit button and exit functioning ( go to menu)
 //exit button on menu to quit game
 //Extra stuff on map
+//Make a toy instead of coloring hand
+//reset button and reset funcitioning

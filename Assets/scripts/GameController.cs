@@ -9,6 +9,7 @@ public class GameController : MonoBehaviour {
 
     public Text roundText;
     private int roundNumber;
+	public Canvas UISideSwitcher;
 
     public GameObject baby1;
     public GameObject baby2;
@@ -35,9 +36,11 @@ public class GameController : MonoBehaviour {
         baby4.tag = randomRoles[3];
 
         //INITIALIZING
-        timeLeft = 60.0f;
+        timeLeft = 20.0f;
         roundNumber = 1;
         roundText.text = "Round: " + roundNumber.ToString();
+
+		UISideSwitcher.enabled = false;
 
 	}
 	
@@ -54,10 +57,11 @@ public class GameController : MonoBehaviour {
 
 	void FixedUpdate () {
 
+
         //RESET GAME
         if (Input.GetKey(KeyCode.R))
         {
-            GameReset();
+			SceneManager.LoadScene ("EnvironmentScene");
         }
 
         //QUIT GAME
@@ -71,6 +75,7 @@ public class GameController : MonoBehaviour {
         Timer.text = timeLeft.ToString();
         if(timeLeft < 0)
         {
+			Debug.Log ("TIME < 0");
             //SWITCH AND USE TAGS INSTEAD OF COLOR
             GameObject b1 = baby1.transform.Find("Torso/RightHand").gameObject;
             GameObject b2 = baby2.transform.Find("Torso/RightHand").gameObject;
@@ -95,15 +100,22 @@ public class GameController : MonoBehaviour {
             }
 
             Timer.text = "";
-           
+			StartCoroutine(GameReset());
         }
 	}
 
-    void GameReset()
+
+	IEnumerator GameReset()
     {
+		Debug.Log ("STARTING 5 SEC WAIT");
         //RESET POINTS
+		yield return new WaitForSeconds(5);
+		Debug.Log ("Switching sides and wait for 3 sec");
+		UISideSwitcher.enabled = true;
+		yield return new WaitForSeconds (3);
+		Debug.Log ("reset scene");
 		SceneManager.LoadScene("EnvironmentScene");
-        timeLeft = 60.0f;
+        //timeLeft = 60.0f;
     }
 
     void QuitGame()
