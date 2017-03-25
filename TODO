@@ -1,19 +1,27 @@
-Camera fix
-//Animation for falling
+VERY IMPORTANT
 Mechanics for teammate 
-Slower guy with toy
 Extra stuff on map
-//Fix chairs so babies cant climb it
 fix bugs
-Menu stuff
-//reset button
-//exit button
-in game UI
 Make a toy instead of coloring hand
 more accurate movements
+sound effects
+reset button and reset funcitioning
+exit button and exit functioning ( go to menu)
+exit button on menu to quit game
+
+IMPORTANT
+Camera fix
+in game UI
 make rounds, switching defending and attacking
+When babies fall they need to stay down for a certain amount of time, but if teammate comforts the time is shorter
+ 
+ONLY IF THERE IS TIME
+Make an indicator above players, who is who
+Menu stuff
+
+DONE
+//Animation for falling
+//Slower guy with toy
+//Fix chairs so babies cant climb it
 //Random who is defending and who is attacking
 //Randomize who is in each team - but keep same teams each round
-Make an indicator above players, who is who
-When babies fall they need to stay down for a certain amount of time, but if teammate comforts the time is shorter
-sound effects 
