@@ -14,6 +14,7 @@ public class BabyMovement : MonoBehaviour {
     public Rigidbody rb;
     public Vector3 velocity;
 	public AudioSource cry;
+    public AudioSource push;
 
     public Material EnemyColor;
     public Material ToyTeamColor;
@@ -103,7 +104,8 @@ public class BabyMovement : MonoBehaviour {
 			} 
 			//Debug.Log ("in between log");
 			if (Input.GetButtonDown (crossBtn)) {
-		//		Debug.Log ("trying to punch by pressing x");
+				Debug.Log ("trying to punch by pressing x");
+                push.Play();
 				if (!anim.GetCurrentAnimatorStateInfo (0).IsName ("Push")) {
 					anim.SetTrigger ("TestPush");
 				}
@@ -258,7 +260,7 @@ public class BabyMovement : MonoBehaviour {
 		
 		//Debug.Log (this.transform.position + " was pos  and here is forward: " + this.transform.forward);
 		Vector3 forwardPoint = this.transform.position + this.transform.forward * 2;
-		Debug.Log (forwardPoint);
+		//Debug.Log (forwardPoint);
 		collidersInRadius = Physics.OverlapSphere (forwardPoint, findRadiusSize);
 		foreach(Collider col in collidersInRadius){
 			if (col.gameObject.tag == "Team1TOY" && this.gameObject.tag == "Team2") {
