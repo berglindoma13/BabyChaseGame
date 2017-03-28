@@ -54,10 +54,9 @@ public class BabyMovement : MonoBehaviour {
 		normal,//never used
 		crying,
 		grabbing,
-		jumping//maybe?
-
+		jumping,//maybe?
+        comforting
 	}
-
 
     // Use this for initialization
     void Start() {
@@ -116,6 +115,11 @@ public class BabyMovement : MonoBehaviour {
 		//		Debug.Log ("logging keypresses");
 				startCrying ();
 			}
+
+            if (Input.GetButtonDown(triangleBtn))
+            {
+                    startComforting();
+            }
 
 
 			break;
@@ -204,6 +208,21 @@ public class BabyMovement : MonoBehaviour {
 	bool hasStamina(){
 		return Stamina != 0;
 	}
+
+    void startComforting()
+    {
+        currentState = PlayerState.comforting;
+        anim.SetBool("Walking", false);
+        anim.SetBool("Comfort", true);
+        StartCoroutine(comfortingState());
+    }
+
+    IEnumerator comfortingState()
+    {
+        yield return new WaitForSeconds(2f);
+        currentState = PlayerState.normal;
+        anim.SetBool("Comfort", false);
+    }
 
 	void startCrying(){
 		currentState = PlayerState.crying;
