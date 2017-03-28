@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
-    private float ROUND_TIME = 10f;
+    private float ROUND_TIME = 20f;
 
     private float timeLeft;
 

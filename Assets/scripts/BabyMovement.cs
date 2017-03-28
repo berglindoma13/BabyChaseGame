@@ -13,6 +13,7 @@ public class BabyMovement : MonoBehaviour {
 	private float Stamina = 100;
     public Rigidbody rb;
     public Vector3 velocity;
+	public AudioSource cry;
 
     public Material EnemyColor;
     public Material ToyTeamColor;
@@ -127,9 +128,13 @@ public class BabyMovement : MonoBehaviour {
   
     void OnCollisionEnter(Collision other)
     {
+		Debug.Log (other.gameObject.GetComponent<Animator> ().GetBool ("TestPush"));
 		if (other.collider.tag == "Hand")
         {
-            startCrying();
+			if (other.gameObject.GetComponent<Animator> ().GetBool ("TestPush")) {
+				startCrying();
+			}
+            
             //DO THE 3 SECOND THING BEFORE CALLING FUNCTION
             //gameController.AttackingTeamWon();
         }
@@ -189,15 +194,18 @@ public class BabyMovement : MonoBehaviour {
 		Debug.Log ("set walking to false and crying to true");
 		anim.SetBool ("Walking", false);
 		anim.SetBool ("Crying", true);
+		cry.timeSamples = 2;
+		cry.Play ();
 		StartCoroutine ("cryingState");
 	}
 
 	IEnumerator cryingState() {
 
-		yield return new WaitForSeconds(2f);
+		yield return new WaitForSeconds(3f);
 		Debug.Log ("yield changed currentstate");
 		currentState = PlayerState.normal;
 		anim.SetBool ("Crying", false);
+		cry.Stop ();
 	}
 
 }
