@@ -129,9 +129,9 @@ public class BabyMovement : MonoBehaviour {
     {
 		if (other.collider.tag == "Hand")
         {
-			
+            startCrying();
             //DO THE 3 SECOND THING BEFORE CALLING FUNCTION
-            gameController.AttackingTeamWon();
+            //gameController.AttackingTeamWon();
         }
 
 
