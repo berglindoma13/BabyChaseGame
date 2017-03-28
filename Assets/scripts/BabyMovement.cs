@@ -110,28 +110,19 @@ public class BabyMovement : MonoBehaviour {
     {
 		if (other.collider.tag == "Team1TOY" && tag == "Team2")
         {
-            rightHand.GetComponent<Renderer>().material = TOYHand;
-            GameObject enemy = other.transform.Find("Torso/RightHand").gameObject;
-            enemy.GetComponent<Renderer>().material = RegularHand;
-
 			Rigidbody rbenemy = other.collider.GetComponent<Rigidbody>();
             StartCoroutine(FreezePlayer(rbenemy));
-
-            gameObject.tag = "Team2TOY";
-            other.collider.tag = "Team1";
+            //DO THE 3 SECOND THING BEFORE CALLING FUNCTION
+            GameController.AttackingTeamWon();
 
         }
         else if (other.collider.tag == "Team2TOY" && tag == "Team1")
         {
-            rightHand.GetComponent<Renderer>().material = TOYHand;
-            GameObject enemy = other.transform.Find("Torso/RightHand").gameObject;
-            enemy.GetComponent<Renderer>().material = RegularHand;
-
+            //DO THE 3 SECOND THING BEFORE CALLING FUNCTION
+            GameController.AttackingTeamWon();
             Rigidbody rbenemy = other.collider.GetComponent<Rigidbody>();
             StartCoroutine(FreezePlayer(rbenemy));
             
-            gameObject.tag = "Team1TOY";
-            other.collider.tag = "Team2";
         }
 
     }

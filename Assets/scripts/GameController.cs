@@ -5,37 +5,41 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
-    private float ROUND_TIME = 10f;
+    private static float ROUND_TIME = 10f;
 
-    private float timeLeft;
+    private static float timeLeft;
 
-    private int roundNumber;
-	public Canvas UISideSwitcher;
+    private static int roundNumber;
+	public static Canvas UISideSwitcher;
 
-    public GameObject baby1;
-    public GameObject baby2;
-    public GameObject baby3;
-    public GameObject baby4;
+    public static GameObject baby1;
+    public static GameObject baby2;
+    public static GameObject baby3;
+    public static GameObject baby4;
 
-    public Text Winner;
+    public static Text Winner;
     public Text Timer;
 
     public Text RedPoints;
-    private float redpoints;
+    private static float redpoints;
     public Text BluePoints;
-    private float bluepoints;
+    private static float bluepoints;
 
     //0 = blue is defender
     //1 = red is defender
-    private int TieDefender;
+    private static int TieDefender;
 
     private string[] randomRoles;
 
-    private Vector3[] originPos;
+    private static Vector3[] originPos;
 
-    private bool stoptimer;
+    private static bool stoptimer;
+
+    private static GameController instance;
 
     void Start () {
+        instance = this;
+
         bluepoints = 0;
         redpoints = 0;
 
@@ -104,7 +108,7 @@ public class GameController : MonoBehaviour {
         {
             if(roundNumber == 1)
             {
-                StartCoroutine(GameReset());
+                StartCoroutine(GameReset(false));
                 roundNumber += 1;
                 Winner.text = "Congratulations Blue Team";
                 Winner.enabled = true;
@@ -119,19 +123,35 @@ public class GameController : MonoBehaviour {
             }
             else if(roundNumber == 3)
             {
-
+                if(TieDefender == 0)
+                {
+                    Winner.text = "Congratulations Blue Team";
+                    Winner.enabled = true;
+                    bluepoints += 1;
+                    EndOfGameRoutine();
+                }
+                else if(TieDefender == 1)
+                {
+                    Winner.text = "Congratulations Red Team";
+                    Winner.enabled = true;
+                    redpoints += 1;
+                    EndOfGameRoutine();
+                }
             }
         }
 	}
 
 
-    IEnumerator GameReset()
+    static IEnumerator GameReset(bool tie)
     {
 		stoptimer = true;
 		timeLeft = ROUND_TIME;
 		//RESET POINTS 
 		yield return new WaitForSeconds(5);
-		changeTags();
+        if (!tie)
+        {
+            changeTags();
+        }
 		Winner.enabled = false;
 		UISideSwitcher.enabled = true;
 		yield return new WaitForSeconds (3);
@@ -161,13 +181,13 @@ public class GameController : MonoBehaviour {
 
 	}
 
-    public void AttackingTeamWon()
+    public static void AttackingTeamWon()
     {
         if (roundNumber == 1)
         {
             Winner.text = "Congratulations Red Team";
             Winner.enabled = true;
-            StartCoroutine(GameReset());
+            instance.StartCoroutine(GameReset(false));
             roundNumber += 1;
             redpoints += 1;
         }
@@ -178,9 +198,26 @@ public class GameController : MonoBehaviour {
             Winner.enabled = true;
             EndOfGameRoutine();
         }
+        else if(roundNumber == 3)
+        {
+            if (TieDefender == 0)
+            {
+                Winner.text = "Congratulations Red Team";
+                Winner.enabled = true;
+                redpoints += 1;
+                EndOfGameRoutine();
+            }
+            else if (TieDefender == 1)
+            {
+                Winner.text = "Congratulations Blue Team";
+                Winner.enabled = true;
+                bluepoints += 1;
+                EndOfGameRoutine();
+            }
+        }
     }
 
-    void EndOfGameRoutine()
+    static void EndOfGameRoutine()
     {
         if(bluepoints > redpoints)
         {
@@ -199,9 +236,8 @@ public class GameController : MonoBehaviour {
         }
     }
 
-    void TieBraker()
-    {
-		
+    static void TieBraker()
+    {	
         roundNumber += 1;
         int defender = Random.Range(0, 1);
         if(defender == 0)
@@ -241,7 +277,7 @@ public class GameController : MonoBehaviour {
         {
             TieDefender = 1;
         }
-        StartCoroutine(GameReset());
+        instance.StartCoroutine(GameReset(true));
     }
 
     void QuitGame()
@@ -254,7 +290,7 @@ public class GameController : MonoBehaviour {
         
     }
 
-    void changeTags()
+    static void changeTags()
     {
         if (baby1.tag == "Team1TOY")
         {
