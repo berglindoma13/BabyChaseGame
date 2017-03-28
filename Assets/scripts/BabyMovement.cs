@@ -75,79 +75,17 @@ public class BabyMovement : MonoBehaviour {
 		bool moving = false;
 		velocity = rb.angularVelocity;
 
-		//Debug.Log ();
 		if (h != 0 || v != 0) {
-			//Vector3 debug = new Vector3(baby.eulerAngles.x,Mathf.Atan2(h,v) * 180/Mathf.PI,baby.eulerAngles.z);	
 			baby.eulerAngles = new Vector3(baby.eulerAngles.x,Mathf.Atan2(h,v) * 180/Mathf.PI,baby.eulerAngles.z);	
-			//Debug.Log(baby.forward);
 			rb.velocity = baby.forward * speed() * Time.fixedDeltaTime;
 			moving = true;
 		} 
-		/*else {
-			directionVector = baby.rotation.eulerAngles;
-		}*/
+
 
 		if (Input.GetButton (crossBtn)) {
+			Debug.Log ("pressed push button");
 			anim.SetBool ("Push", true);
 		}
-
-					
-		//Vector3 directionVector = new Vector3(Input.GetAxis(horizontalJoyCtrl),
-		//Vector3 movement = Vector3.zero;
-		/*
-		//Debug.Log ("hori is: " + h + " and verti is: " + v);
-		//if (Input.GetKey (KeyCode.W)) {
-		if (v > 0 || Input.GetKey (KeyCode.W)) {
-			//torso.position += Vector3.forward / 5;
-			//baby.rotation = Quaternion.Euler(new Vector3(0,360,0));
-			//baby.position += Vector3.forward * SPEED;
-			//rb.velocity = (Vector3.forward * SPEED * Time.deltaTime);
-			movement.z = SPEED * Time.deltaTime;
-
-
-			moving = true;
-			//anim.SetBool("Walking", true);
-		}
-		//else if (Input.GetKey (KeyCode.S)) {
-		else if (v < 0 || Input.GetKey (KeyCode.S)) {
-			//torso.position += Vector3.forward / 5;
-			//baby.rotation = Quaternion.Euler(new Vector3(0,180,0));
-			//baby.position += Vector3.back * SPEED;
-			//rb.velocity = (Vector3.back * SPEED * Time.deltaTime);
-			movement.z = -SPEED * Time.deltaTime;
-			moving = true;
-			//anim.SetBool("Walking", true);
-		}
-
-		//if (Input.GetKey (KeyCode.A)) {
-		if (h < 0 || Input.GetKey (KeyCode.A)) {
-			//torso.position += Vector3.forward / 5;
-			//baby.rotation = Quaternion.Euler(new Vector3(0,270,0));
-			//baby.position += Vector3.left * SPEED;
-			//rb.velocity = (Vector3.left * SPEED * Time.deltaTime);
-			movement.x = -SPEED * Time.deltaTime;
-			moving = true;
-			//anim.SetBool("Walking", true);
-		}
-		//else if (Input.GetKey (KeyCode.D)) {
-		else if (h > 0 || Input.GetKey (KeyCode.D)) {
-			//torso.position += Vector3.forward / 5;
-			//baby.rotation = Quaternion.Euler(new Vector3(0,90,0));
-			//baby.position += Vector3.right * SPEED;
-			//rb.velocity = (Vector3.right * SPEED * Time.deltaTime);
-			movement.x = SPEED * Time.deltaTime;
-			moving = true;
-			//anim.SetBool("Walking", true);
-		}
-
-		if (movement.x != 0 && movement.z != 0) {
-			movement.x = movement.x / 2;
-			movement.z = movement.z / 2;
-		}
-		*/
-		//rb.velocity = movement;
-		//baby.rotation = Quaternion.LookRotation (directionVector);
-		//Debug.Log ("rb velocity is: " + rb.velocity + " and move is: " + movement);
 
 		rb.angularVelocity = Vector3.zero;
 		anim.SetBool ("Walking", moving);
@@ -216,6 +154,7 @@ public class BabyMovement : MonoBehaviour {
 	float speed(){
 		if (Input.GetButton (rBumper) && hasStamina()) {
 			depleteStamina ();	
+			Debug.Log ("sprinting");
 			return SPEED * 1.5f;
 		} 
 		else {
