@@ -42,13 +42,10 @@ public class BabyMovement : MonoBehaviour {
     private Animator anim;
 	private GameObject toy;
 
-<<<<<<< HEAD
     private float cryingTime = 5f;
-=======
+
 	private Collider[] collidersInRadius;
 	public float findRadiusSize = 1f;
->>>>>>> 3b67ad044bf754ce9390b0103a0dab6621f08ac7
-
 	public PlayerState currentState = PlayerState.normal;
 
 	//player states
