@@ -48,7 +48,7 @@ public class BabyMovement : MonoBehaviour {
 
 
 
-	private PlayerState currentState = PlayerState.normal;
+	public PlayerState currentState = PlayerState.normal;
 
 	//player states
 	public enum PlayerState{
@@ -83,31 +83,41 @@ public class BabyMovement : MonoBehaviour {
             SPEED = SPEED * 0.8f;
         }
 		//Debug.Log (Input.GetButton(crossBtn));
-
+		//Debug.Log(currentState);
 		switch (currentState) {
 		case PlayerState.normal:
-			
+			Debug.Log ("normal state!");
 			float h = Input.GetAxis (horizontalJoyCtrl);
 			float v = Input.GetAxis (verticalJoyCtrl);
 			bool moving = false;
 			velocity = rb.angularVelocity;
-
+			Debug.Log (h + " and " + v);
 			if (h != 0 || v != 0) {
 				baby.eulerAngles = new Vector3 (baby.eulerAngles.x, Mathf.Atan2 (h, v) * 180 / Mathf.PI, baby.eulerAngles.z);	
 				rb.velocity = baby.forward * speed () * Time.fixedDeltaTime;
 				moving = true;
+				Debug.Log ("running movement code");
 			} 
+			Debug.Log ("in between log");
 			if (Input.GetButtonDown (crossBtn)) {
+		//		Debug.Log ("trying to punch by pressing x");
 				if (!anim.GetCurrentAnimatorStateInfo (0).IsName ("Push")) {
 					anim.SetTrigger ("TestPush");
 				}
 			}
-
 			rb.angularVelocity = Vector3.zero;
 			anim.SetBool ("Walking", moving);
+
+			if (Input.GetButtonDown (circleBtn)) {
+		//		Debug.Log ("logging keypresses");
+				startCrying ();
+			}
+
+
 			break;
 		case PlayerState.crying:
 			//cant do anything?
+			Debug.Log("crying state!!");
 			break;
 		case PlayerState.grabbing:
 			//cant move? idno
@@ -191,6 +201,22 @@ public class BabyMovement : MonoBehaviour {
 	}
 	bool hasStamina(){
 		return Stamina != 0;
+	}
+
+	void startCrying(){
+		currentState = PlayerState.crying;
+		Debug.Log ("set walking to false and crying to true");
+		anim.SetBool ("Walking", false);
+		anim.SetBool ("Crying", true);
+		StartCoroutine ("cryingState");
+	}
+
+	IEnumerator cryingState() {
+
+		yield return new WaitForSeconds(2f);
+		Debug.Log ("yield changed currentstate");
+		currentState = PlayerState.normal;
+		anim.SetBool ("Crying", false);
 	}
 
 }
