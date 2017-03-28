@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 
 public class BabyMovement : MonoBehaviour {
+    public GameController gameController;
 
     public Transform baby;
     public Transform torso;
@@ -18,6 +19,7 @@ public class BabyMovement : MonoBehaviour {
     public Material TOYHand;
     public Material RegularHand;
 
+    private GameObject leftHand;
     private GameObject rightHand;
     private Material rightHandMat;
     private GameObject diaper;
@@ -69,6 +71,10 @@ public class BabyMovement : MonoBehaviour {
         anim = gameObject.GetComponent<Animator>();
         rb = gameObject.GetComponent<Rigidbody>();
 
+        rightHand = transform.Find("Torso/RightHand").gameObject;
+        Physics.IgnoreCollision(rightHand.GetComponent<Collider>(), GetComponent<Collider>());
+        leftHand = transform.Find("Torso/LeftHand").gameObject;
+        Physics.IgnoreCollision(leftHand.GetComponent<Collider>(), GetComponent<Collider>());
 
         SPEED = 230;
     }
@@ -120,19 +126,17 @@ public class BabyMovement : MonoBehaviour {
     {
 		if (other.collider.tag == "Team1TOY" && tag == "Team2")
         {
-			Rigidbody rbenemy = other.collider.GetComponent<Rigidbody>();
-            StartCoroutine(FreezePlayer(rbenemy));
+			//Rigidbody rbenemy = other.collider.GetComponent<Rigidbody>();
+            //StartCoroutine(FreezePlayer(rbenemy));
             //DO THE 3 SECOND THING BEFORE CALLING FUNCTION
-            GameController.AttackingTeamWon();
-
+            gameController.AttackingTeamWon();
         }
         else if (other.collider.tag == "Team2TOY" && tag == "Team1")
         {
             //DO THE 3 SECOND THING BEFORE CALLING FUNCTION
-            GameController.AttackingTeamWon();
-            Rigidbody rbenemy = other.collider.GetComponent<Rigidbody>();
-            StartCoroutine(FreezePlayer(rbenemy));
-            
+            gameController.AttackingTeamWon();
+            //Rigidbody rbenemy = other.collider.GetComponent<Rigidbody>();
+            //StartCoroutine(FreezePlayer(rbenemy));
         }
 
     }

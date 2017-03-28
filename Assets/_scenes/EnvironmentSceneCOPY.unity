@@ -295,7 +295,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 528793742}
   m_LocalRotation: {x: 0.19776078, y: -0.007082568, z: -0.0016237954, w: 0.9802234}
-  m_LocalPosition: {x: -14.496, y: 22.092, z: -57.514}
+  m_LocalPosition: {x: -14.496, y: 24.2, z: -66.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2084767142}
@@ -414,6 +414,21 @@ Prefab:
         type: 2}
       propertyPath: m_Pivot.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224004843408274650, guid: 835625a1c9cadee4fa4507d5ea39ca8f,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -61.99
+      objectReference: {fileID: 0}
+    - target: {fileID: 114693759755917342, guid: 835625a1c9cadee4fa4507d5ea39ca8f,
+        type: 2}
+      propertyPath: m_Text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114693759755917342, guid: 835625a1c9cadee4fa4507d5ea39ca8f,
+        type: 2}
+      propertyPath: m_FontData.m_FontSize
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 835625a1c9cadee4fa4507d5ea39ca8f, type: 2}
@@ -616,6 +631,11 @@ Prefab:
       propertyPath: lbumper
       value: lBumper_P2
       objectReference: {fileID: 0}
+    - target: {fileID: 114025547798263682, guid: 0d65b825908567748a639ad50d1e94be,
+        type: 2}
+      propertyPath: gameController
+      value: 
+      objectReference: {fileID: 1325626622}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0d65b825908567748a639ad50d1e94be, type: 2}
   m_IsPrefabParent: 0
@@ -841,6 +861,21 @@ Prefab:
       propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 136497094987923842, guid: 0d65b825908567748a639ad50d1e94be,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 136970609429773766, guid: 0d65b825908567748a639ad50d1e94be,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114025547798263682, guid: 0d65b825908567748a639ad50d1e94be,
+        type: 2}
+      propertyPath: gameController
+      value: 
+      objectReference: {fileID: 1325626622}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0d65b825908567748a639ad50d1e94be, type: 2}
   m_IsPrefabParent: 0
@@ -1104,6 +1139,11 @@ Prefab:
       propertyPath: lbumper
       value: lBumper_P3
       objectReference: {fileID: 0}
+    - target: {fileID: 114025547798263682, guid: 0d65b825908567748a639ad50d1e94be,
+        type: 2}
+      propertyPath: gameController
+      value: 
+      objectReference: {fileID: 1325626622}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0d65b825908567748a639ad50d1e94be, type: 2}
   m_IsPrefabParent: 0
@@ -1300,6 +1340,11 @@ Prefab:
       propertyPath: triangleBtn
       value: Triangle_P4
       objectReference: {fileID: 0}
+    - target: {fileID: 114025547798263682, guid: 0d65b825908567748a639ad50d1e94be,
+        type: 2}
+      propertyPath: gameController
+      value: 
+      objectReference: {fileID: 1325626622}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0d65b825908567748a639ad50d1e94be, type: 2}
   m_IsPrefabParent: 0

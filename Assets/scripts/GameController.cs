@@ -5,37 +5,37 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
-    private static float ROUND_TIME = 10f;
+    private float ROUND_TIME = 10f;
 
-    private static float timeLeft;
+    private float timeLeft;
 
-    private static int roundNumber;
-	public static Canvas UISideSwitcher;
+    private int roundNumber;
+	public Canvas UISideSwitcher;
 
-    public static GameObject baby1;
-    public static GameObject baby2;
-    public static GameObject baby3;
-    public static GameObject baby4;
+    public GameObject baby1;
+    public GameObject baby2;
+    public GameObject baby3;
+    public GameObject baby4;
 
-    public static Text Winner;
+    public Text Winner;
     public Text Timer;
 
     public Text RedPoints;
-    private static float redpoints;
+    private float redpoints;
     public Text BluePoints;
-    private static float bluepoints;
+    private float bluepoints;
 
     //0 = blue is defender
     //1 = red is defender
-    private static int TieDefender;
+    private int TieDefender;
 
     private string[] randomRoles;
 
-    private static Vector3[] originPos;
+    private Vector3[] originPos;
 
-    private static bool stoptimer;
+    private bool stoptimer;
 
-    private static GameController instance;
+    private GameController instance;
 
     void Start () {
         instance = this;
@@ -56,8 +56,11 @@ public class GameController : MonoBehaviour {
         baby3.tag = randomRoles[2];
         baby4.tag = randomRoles[3];
 
+
         //INITIALIZING
+   
         timeLeft = ROUND_TIME;
+        Debug.Log(timeLeft.ToString());
         roundNumber = 1;
         originPos = new Vector3[4];
         originPos[0] = baby1.transform.position;
@@ -142,7 +145,7 @@ public class GameController : MonoBehaviour {
 	}
 
 
-    static IEnumerator GameReset(bool tie)
+    IEnumerator GameReset(bool tie)
     {
 		stoptimer = true;
 		timeLeft = ROUND_TIME;
@@ -181,7 +184,7 @@ public class GameController : MonoBehaviour {
 
 	}
 
-    public static void AttackingTeamWon()
+    public void AttackingTeamWon()
     {
         if (roundNumber == 1)
         {
@@ -217,7 +220,7 @@ public class GameController : MonoBehaviour {
         }
     }
 
-    static void EndOfGameRoutine()
+    void EndOfGameRoutine()
     {
         if(bluepoints > redpoints)
         {
@@ -236,7 +239,7 @@ public class GameController : MonoBehaviour {
         }
     }
 
-    static void TieBraker()
+    void TieBraker()
     {	
         roundNumber += 1;
         int defender = Random.Range(0, 1);
@@ -290,7 +293,7 @@ public class GameController : MonoBehaviour {
         
     }
 
-    static void changeTags()
+    void changeTags()
     {
         if (baby1.tag == "Team1TOY")
         {

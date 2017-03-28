@@ -101,7 +101,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1674596869413576
 GameObject:
   m_ObjectHideFlags: 1
@@ -324,7 +324,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1436369773660832}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.5, y: 3.04, z: -13.09}
+  m_LocalPosition: {x: -43.1, y: 3.04, z: -6.35}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 4240629253800918}
@@ -344,7 +344,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 4d45db804ec64a644b7015578613d568, type: 2}
+  - {fileID: 2100000, guid: 0d50bdbd19fb03b48b321dc52acc8256, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -375,7 +375,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 4d45db804ec64a644b7015578613d568, type: 2}
+  - {fileID: 2100000, guid: 0d50bdbd19fb03b48b321dc52acc8256, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -406,7 +406,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 4d45db804ec64a644b7015578613d568, type: 2}
+  - {fileID: 2100000, guid: 0d50bdbd19fb03b48b321dc52acc8256, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -499,7 +499,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 4d45db804ec64a644b7015578613d568, type: 2}
+  - {fileID: 2100000, guid: 0d50bdbd19fb03b48b321dc52acc8256, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -530,7 +530,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 4d45db804ec64a644b7015578613d568, type: 2}
+  - {fileID: 2100000, guid: 0d50bdbd19fb03b48b321dc52acc8256, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -592,7 +592,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 4d45db804ec64a644b7015578613d568, type: 2}
+  - {fileID: 2100000, guid: 0d50bdbd19fb03b48b321dc52acc8256, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -695,7 +695,7 @@ BoxCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1436369773660832}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1.31, y: 2, z: 0.6}
@@ -740,6 +740,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7155eade46c8cee459c286e516e2fd59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameController: {fileID: 0}
   baby: {fileID: 0}
   torso: {fileID: 0}
   SPEED: 0
@@ -759,6 +760,7 @@ MonoBehaviour:
   rBumper: rBumper_P1
   lbumper: lBumper_P1
   startBtn: Start
+  pushing: 0
   anim: {fileID: 0}
   Blue: {fileID: 0}
   Red: {fileID: 0}
@@ -821,7 +823,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 1694318669850316}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
@@ -860,7 +862,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 1674596869413576}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
