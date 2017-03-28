@@ -42,7 +42,12 @@ public class BabyMovement : MonoBehaviour {
     private Animator anim;
 	private GameObject toy;
 
+<<<<<<< HEAD
     private float cryingTime = 5f;
+=======
+	private Collider[] collidersInRadius;
+	public float findRadiusSize = 1f;
+>>>>>>> 3b67ad044bf754ce9390b0103a0dab6621f08ac7
 
 	public PlayerState currentState = PlayerState.normal;
 
@@ -84,21 +89,22 @@ public class BabyMovement : MonoBehaviour {
         }
 		//Debug.Log (Input.GetButton(crossBtn));
 		//Debug.Log(currentState);
+		findCryingToyCarrier();
 		switch (currentState) {
 		case PlayerState.normal:
-			Debug.Log ("normal state!");
+			//Debug.Log ("normal state!");
 			float h = Input.GetAxis (horizontalJoyCtrl);
 			float v = Input.GetAxis (verticalJoyCtrl);
 			bool moving = false;
 			velocity = rb.angularVelocity;
-			Debug.Log (h + " and " + v);
+			//Debug.Log (h + " and " + v);
 			if (h != 0 || v != 0) {
 				baby.eulerAngles = new Vector3 (baby.eulerAngles.x, Mathf.Atan2 (h, v) * 180 / Mathf.PI, baby.eulerAngles.z);	
 				rb.velocity = baby.forward * speed () * Time.fixedDeltaTime;
 				moving = true;
-				Debug.Log ("running movement code");
+			//	Debug.Log ("running movement code");
 			} 
-			Debug.Log ("in between log");
+			//Debug.Log ("in between log");
 			if (Input.GetButtonDown (crossBtn)) {
 		//		Debug.Log ("trying to punch by pressing x");
 				if (!anim.GetCurrentAnimatorStateInfo (0).IsName ("Push")) {
@@ -117,7 +123,7 @@ public class BabyMovement : MonoBehaviour {
 			break;
 		case PlayerState.crying:
 			//cant do anything?
-			Debug.Log("crying state!!");
+			//Debug.Log("crying state!!");
 			break;
 		case PlayerState.grabbing:
 			//cant move? idno
@@ -128,18 +134,20 @@ public class BabyMovement : MonoBehaviour {
   
     void OnCollisionEnter(Collision other)
     {
-		Debug.Log (other.gameObject.GetComponent<Animator> ().GetBool ("TestPush"));
-		if (other.collider.tag == "Hand")
-        {
-			if (other.gameObject.GetComponent<Animator> ().GetBool ("TestPush")) {
-				startCrying();
-			}
+		if (currentState != PlayerState.crying) {
+			if (other.collider.tag == "Hand") {	
+				//Debug.Log (other.gameObject.GetComponentInParent<GameObject> ().GetComponentInParent<GameObject> ().tag);
+				//Debug.Log (other.gameObject.GetComponent<Animator> ().GetCurrentAnimatorStateInfo (0).IsName ("Push"));
+				if (other.gameObject.GetComponent<Animator> ().GetCurrentAnimatorStateInfo (0).IsName ("Push")) {
+				
+					startCrying ();
+				}
             
-            //DO THE 3 SECOND THING BEFORE CALLING FUNCTION
-            //gameController.AttackingTeamWon();
-        }
+				//DO THE 3 SECOND THING BEFORE CALLING FUNCTION
+				//gameController.AttackingTeamWon();
+			}
 
-
+		}
     }
 
 	void checkTag()
@@ -206,10 +214,33 @@ public class BabyMovement : MonoBehaviour {
             yield return new WaitForFixedUpdate();
         }
 		//yield return new WaitForSeconds(3f);
-		Debug.Log ("yield changed currentstate");
+		Debug.Log("yield changed currentstate");
 		currentState = PlayerState.normal;
 		anim.SetBool ("Crying", false);
 		cry.Stop ();
+	}
+
+	void findCryingToyCarrier(){
+		
+		//Debug.Log (this.transform.position + " was pos  and here is forward: " + this.transform.forward);
+		Vector3 forwardPoint = this.transform.position + this.transform.forward * 2;
+		Debug.Log (forwardPoint);
+		collidersInRadius = Physics.OverlapSphere (forwardPoint, findRadiusSize);
+		foreach(Collider col in collidersInRadius){
+			if (col.gameObject.tag == "Team1TOY" && this.gameObject.tag == "Team2") {
+				if (col.gameObject.GetComponent<BabyMovement> ().currentState == PlayerState.crying) {
+					Debug.Log("you can grap the toy");
+					//gameController.AttackingTeamWon ();
+				}
+			}
+			else if (col.gameObject.tag == "Team2TOY" && this.gameObject.tag == "Team1") {
+				if (col.gameObject.GetComponent<BabyMovement> ().currentState == PlayerState.crying) {
+					Debug.Log("you can grap the toy");
+				}
+			}
+		}
+
+
 	}
 
 }
