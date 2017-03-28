@@ -43,6 +43,7 @@ public class BabyMovement : MonoBehaviour {
 	private GameObject toy;
 
     private float cryingTime = 5f;
+    private bool comforted = false;
 
 	private Collider[] collidersInRadius;
 	public float findRadiusSize = 1f;
@@ -133,18 +134,28 @@ public class BabyMovement : MonoBehaviour {
     {
 		if (currentState != PlayerState.crying) {
 			if (other.collider.tag == "Hand") {	
-				//Debug.Log (other.gameObject.GetComponentInParent<GameObject> ().GetComponentInParent<GameObject> ().tag);
-				//Debug.Log (other.gameObject.GetComponent<Animator> ().GetCurrentAnimatorStateInfo (0).IsName ("Push"));
-				if (other.gameObject.GetComponent<Animator> ().GetCurrentAnimatorStateInfo (0).IsName ("Push")) {
+				if (other.gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo (0).IsName ("Push")) {
 				
 					startCrying ();
 				}
-            
-				//DO THE 3 SECOND THING BEFORE CALLING FUNCTION
-				//gameController.AttackingTeamWon();
 			}
+            else if(other.collider.tag == "Team2" && (tag == "Team2" || tag == "Team2TOY"))
+            {
+                if (other.gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Comfort"))
+                {
+                    comforted = true;
+                }
 
-		}
+            }
+            else if (other.collider.tag == "Team1" && (tag == "Team1" || tag == "Team1TOY"))
+            {
+                if (other.gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Comfort"))
+                {
+                    comforted = true;
+                }
+            }
+
+        }
     }
 
 	void checkTag()
@@ -207,7 +218,14 @@ public class BabyMovement : MonoBehaviour {
 	IEnumerator cryingState() {
         while(cryingTime > 0)
         {
-            cryingTime -= Time.deltaTime;
+            if (comforted)
+            {
+                cryingTime -= Time.deltaTime * 1.4f;
+            }
+            else
+            {
+                cryingTime -= Time.deltaTime;
+            }
             yield return new WaitForFixedUpdate();
         }
 		//yield return new WaitForSeconds(3f);
