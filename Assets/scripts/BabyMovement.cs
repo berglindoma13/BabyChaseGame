@@ -9,15 +9,13 @@ public class BabyMovement : MonoBehaviour {
 
     public Transform baby;
     public Transform torso;
-    public float SPEED;
-	public float Stamina = 100;
+    private float SPEED;
+	private float Stamina = 100;
     public Rigidbody rb;
     public Vector3 velocity;
 
     public Material EnemyColor;
     public Material ToyTeamColor;
-    public Material TOYHand;
-    public Material RegularHand;
 
     private GameObject leftHand;
     private GameObject rightHand;
@@ -40,12 +38,7 @@ public class BabyMovement : MonoBehaviour {
 	//dirty dirty flags
 	public bool pushing = false;
 
-    public Animator anim;
-
-    public Text Blue;
-    private int blueScore;
-    public Text Red;
-    private int redScore;
+    private Animator anim;
 	private GameObject toy;
 
 
@@ -124,20 +117,13 @@ public class BabyMovement : MonoBehaviour {
   
     void OnCollisionEnter(Collision other)
     {
-		if (other.collider.tag == "Team1TOY" && tag == "Team2")
+		if (other.collider.tag == "Hand")
         {
-			//Rigidbody rbenemy = other.collider.GetComponent<Rigidbody>();
-            //StartCoroutine(FreezePlayer(rbenemy));
+			
             //DO THE 3 SECOND THING BEFORE CALLING FUNCTION
             gameController.AttackingTeamWon();
         }
-        else if (other.collider.tag == "Team2TOY" && tag == "Team1")
-        {
-            //DO THE 3 SECOND THING BEFORE CALLING FUNCTION
-            gameController.AttackingTeamWon();
-            //Rigidbody rbenemy = other.collider.GetComponent<Rigidbody>();
-            //StartCoroutine(FreezePlayer(rbenemy));
-        }
+
 
     }
 
