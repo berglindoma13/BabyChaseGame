@@ -35,7 +35,11 @@ public class GameController : MonoBehaviour {
 
     private bool stoptimer;
 
+    private GameController instance;
+
     void Start () {
+        instance = this;
+
         bluepoints = 0;
         redpoints = 0;
 
@@ -52,8 +56,11 @@ public class GameController : MonoBehaviour {
         baby3.tag = randomRoles[2];
         baby4.tag = randomRoles[3];
 
+
         //INITIALIZING
+   
         timeLeft = ROUND_TIME;
+        Debug.Log(timeLeft.ToString());
         roundNumber = 1;
         originPos = new Vector3[4];
         originPos[0] = baby1.transform.position;
@@ -104,7 +111,7 @@ public class GameController : MonoBehaviour {
         {
             if(roundNumber == 1)
             {
-                StartCoroutine(GameReset());
+                StartCoroutine(GameReset(false));
                 roundNumber += 1;
                 Winner.text = "Congratulations Blue Team";
                 Winner.enabled = true;
@@ -119,19 +126,35 @@ public class GameController : MonoBehaviour {
             }
             else if(roundNumber == 3)
             {
-
+                if(TieDefender == 0)
+                {
+                    Winner.text = "Congratulations Blue Team";
+                    Winner.enabled = true;
+                    bluepoints += 1;
+                    EndOfGameRoutine();
+                }
+                else if(TieDefender == 1)
+                {
+                    Winner.text = "Congratulations Red Team";
+                    Winner.enabled = true;
+                    redpoints += 1;
+                    EndOfGameRoutine();
+                }
             }
         }
 	}
 
 
-    IEnumerator GameReset()
+    IEnumerator GameReset(bool tie)
     {
 		stoptimer = true;
 		timeLeft = ROUND_TIME;
 		//RESET POINTS 
 		yield return new WaitForSeconds(5);
-		changeTags();
+        if (!tie)
+        {
+            changeTags();
+        }
 		Winner.enabled = false;
 		UISideSwitcher.enabled = true;
 		yield return new WaitForSeconds (3);
@@ -167,7 +190,7 @@ public class GameController : MonoBehaviour {
         {
             Winner.text = "Congratulations Red Team";
             Winner.enabled = true;
-            StartCoroutine(GameReset());
+            instance.StartCoroutine(GameReset(false));
             roundNumber += 1;
             redpoints += 1;
         }
@@ -177,6 +200,23 @@ public class GameController : MonoBehaviour {
             Winner.text = "Congratulations Blue Team";
             Winner.enabled = true;
             EndOfGameRoutine();
+        }
+        else if(roundNumber == 3)
+        {
+            if (TieDefender == 0)
+            {
+                Winner.text = "Congratulations Red Team";
+                Winner.enabled = true;
+                redpoints += 1;
+                EndOfGameRoutine();
+            }
+            else if (TieDefender == 1)
+            {
+                Winner.text = "Congratulations Blue Team";
+                Winner.enabled = true;
+                bluepoints += 1;
+                EndOfGameRoutine();
+            }
         }
     }
 
@@ -200,8 +240,7 @@ public class GameController : MonoBehaviour {
     }
 
     void TieBraker()
-    {
-		
+    {	
         roundNumber += 1;
         int defender = Random.Range(0, 1);
         if(defender == 0)
@@ -241,7 +280,7 @@ public class GameController : MonoBehaviour {
         {
             TieDefender = 1;
         }
-        StartCoroutine(GameReset());
+        instance.StartCoroutine(GameReset(true));
     }
 
     void QuitGame()
