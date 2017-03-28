@@ -13,6 +13,7 @@ public class BabyMovement : MonoBehaviour {
 	private float Stamina = 100;
     public Rigidbody rb;
     public Vector3 velocity;
+	public AudioSource cry;
 
     public Material EnemyColor;
     public Material ToyTeamColor;
@@ -197,21 +198,24 @@ public class BabyMovement : MonoBehaviour {
 		Debug.Log ("set walking to false and crying to true");
 		anim.SetBool ("Walking", false);
 		anim.SetBool ("Crying", true);
+		cry.timeSamples = 2;
+		cry.Play ();
 		StartCoroutine ("cryingState");
 	}
 
-	IEnumerator cryingState() {
-		yield return new WaitForSeconds(2f);
-		Debug.Log ("yield changed currentstate");
+	IEnumerator cryingState(){ 
+		yield return new WaitForSeconds(3f);
+		Debug.Log("yield changed currentstate");
 		currentState = PlayerState.normal;
 		anim.SetBool ("Crying", false);
+		cry.Stop ();
 	}
 
 	void findCryingToyCarrier(){
 		
 		//Debug.Log (this.transform.position + " was pos  and here is forward: " + this.transform.forward);
 		Vector3 forwardPoint = this.transform.position + this.transform.forward * 2;
-		//Debug.Log (forwardPoint);
+		Debug.Log (forwardPoint);
 		collidersInRadius = Physics.OverlapSphere (forwardPoint, findRadiusSize);
 		foreach(Collider col in collidersInRadius){
 			if (col.gameObject.tag == "Team1TOY" && this.gameObject.tag == "Team2") {
