@@ -128,9 +128,12 @@ public class BabyMovement : MonoBehaviour {
     void OnCollisionEnter(Collision other)
     {
 		Debug.Log (other.gameObject.GetComponent<Animator> ().GetBool ("TestPush"));
-		if (other.collider.tag == "Hand" && other.gameObject.GetComponent<Animator>().GetBool("TestPush"))
+		if (other.collider.tag == "Hand")
         {
-            startCrying();
+			if (other.gameObject.GetComponent<Animator> ().GetBool ("TestPush")) {
+				startCrying();
+			}
+            
             //DO THE 3 SECOND THING BEFORE CALLING FUNCTION
             //gameController.AttackingTeamWon();
         }
