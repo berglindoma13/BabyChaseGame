@@ -42,7 +42,7 @@ public class BabyMovement : MonoBehaviour {
     private Animator anim;
 	private GameObject toy;
 
-
+    private float cryingTime = 5f;
 
 	public PlayerState currentState = PlayerState.normal;
 
@@ -200,8 +200,12 @@ public class BabyMovement : MonoBehaviour {
 	}
 
 	IEnumerator cryingState() {
-
-		yield return new WaitForSeconds(3f);
+        while(cryingTime > 0)
+        {
+            cryingTime -= Time.deltaTime;
+            yield return new WaitForFixedUpdate();
+        }
+		//yield return new WaitForSeconds(3f);
 		Debug.Log ("yield changed currentstate");
 		currentState = PlayerState.normal;
 		anim.SetBool ("Crying", false);
