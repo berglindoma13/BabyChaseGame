@@ -35,7 +35,8 @@ public class BabyMovement : MonoBehaviour {
 	public string lbumper;
 	public string startBtn;
 
-
+	//dirty dirty flags
+	public bool pushing = false;
 
     public Animator anim;
 
@@ -48,7 +49,7 @@ public class BabyMovement : MonoBehaviour {
     // Use this for initialization
     void Start() {
         foreach (string name in Input.GetJoystickNames()) {
-            Debug.Log(name);
+            //Debug.Log(name);
         }
         baby = gameObject.GetComponent<Transform>();
         anim = gameObject.GetComponent<Animator>();
@@ -82,9 +83,21 @@ public class BabyMovement : MonoBehaviour {
 		} 
 
 
-		if (Input.GetButton (crossBtn)) {
-			Debug.Log ("pressed push button");
-			anim.SetBool ("Push", true);
+		if (Input.GetButtonDown(crossBtn)) {
+			//Debug.Log ("pressed push button");
+			/*if (anim.GetCurrentAnimatorStateInfo(0).IsName ("Push")) {
+				Debug.Log ("already in animation");
+			}*/
+			if (!anim.GetCurrentAnimatorStateInfo (0).IsName ("Push")) {
+				//pushing = true;
+				//Debug.Log ("triggered animation");
+				anim.SetTrigger ("TestPush");
+				//anim.SetBool ("Push", pushing);
+			} //else {
+				//pushing = false;
+				//anim.SetBool ("Push", pushing); //performance hit??
+			//}
+				//anim.SetBool ("Push", true);
 		}
 
 		rb.angularVelocity = Vector3.zero;

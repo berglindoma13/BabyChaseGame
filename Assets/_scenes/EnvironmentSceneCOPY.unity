@@ -586,6 +586,36 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114025547798263682, guid: 0d65b825908567748a639ad50d1e94be,
+        type: 2}
+      propertyPath: triangleBtn
+      value: Triangle_P2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114025547798263682, guid: 0d65b825908567748a639ad50d1e94be,
+        type: 2}
+      propertyPath: circleBtn
+      value: Circle_P2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114025547798263682, guid: 0d65b825908567748a639ad50d1e94be,
+        type: 2}
+      propertyPath: crossBtn
+      value: Cross_P2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114025547798263682, guid: 0d65b825908567748a639ad50d1e94be,
+        type: 2}
+      propertyPath: squareBtn
+      value: Square_P2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114025547798263682, guid: 0d65b825908567748a639ad50d1e94be,
+        type: 2}
+      propertyPath: rBumper
+      value: rBumper_P2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114025547798263682, guid: 0d65b825908567748a639ad50d1e94be,
+        type: 2}
+      propertyPath: lbumper
+      value: lBumper_P2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0d65b825908567748a639ad50d1e94be, type: 2}
   m_IsPrefabParent: 0
@@ -653,7 +683,7 @@ AudioSource:
   m_Volume: 0.444
   m_Pitch: 1
   Loop: 1
-  Mute: 0
+  Mute: 1
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
@@ -1039,6 +1069,36 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 0d50bdbd19fb03b48b321dc52acc8256, type: 2}
+    - target: {fileID: 114025547798263682, guid: 0d65b825908567748a639ad50d1e94be,
+        type: 2}
+      propertyPath: triangleBtn
+      value: Triangle_P3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114025547798263682, guid: 0d65b825908567748a639ad50d1e94be,
+        type: 2}
+      propertyPath: circleBtn
+      value: Circle_P3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114025547798263682, guid: 0d65b825908567748a639ad50d1e94be,
+        type: 2}
+      propertyPath: crossBtn
+      value: Cross_P3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114025547798263682, guid: 0d65b825908567748a639ad50d1e94be,
+        type: 2}
+      propertyPath: squareBtn
+      value: Square_P3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114025547798263682, guid: 0d65b825908567748a639ad50d1e94be,
+        type: 2}
+      propertyPath: rBumper
+      value: rBumper_P3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114025547798263682, guid: 0d65b825908567748a639ad50d1e94be,
+        type: 2}
+      propertyPath: lbumper
+      value: lBumper_P3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0d65b825908567748a639ad50d1e94be, type: 2}
   m_IsPrefabParent: 0
@@ -1204,6 +1264,36 @@ Prefab:
     - target: {fileID: 1545715688911314, guid: 0d65b825908567748a639ad50d1e94be, type: 2}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114025547798263682, guid: 0d65b825908567748a639ad50d1e94be,
+        type: 2}
+      propertyPath: lbumper
+      value: lBumper_P4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114025547798263682, guid: 0d65b825908567748a639ad50d1e94be,
+        type: 2}
+      propertyPath: rBumper
+      value: rBumper_P4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114025547798263682, guid: 0d65b825908567748a639ad50d1e94be,
+        type: 2}
+      propertyPath: squareBtn
+      value: Square_P4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114025547798263682, guid: 0d65b825908567748a639ad50d1e94be,
+        type: 2}
+      propertyPath: crossBtn
+      value: Cross_P4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114025547798263682, guid: 0d65b825908567748a639ad50d1e94be,
+        type: 2}
+      propertyPath: circleBtn
+      value: Circle_P4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114025547798263682, guid: 0d65b825908567748a639ad50d1e94be,
+        type: 2}
+      propertyPath: triangleBtn
+      value: Triangle_P4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0d65b825908567748a639ad50d1e94be, type: 2}
