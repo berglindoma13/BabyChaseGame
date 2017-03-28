@@ -61,9 +61,10 @@ public class GameController : MonoBehaviour {
         originPos[2] = baby3.transform.position;
         originPos[3] = baby4.transform.position;
 
-        UISideSwitcher.enabled = false;
+		StartCoroutine (AssignTeams ());
+
         Winner.enabled = false;
-        stoptimer = false;
+        
 
 	}
 	
@@ -126,27 +127,39 @@ public class GameController : MonoBehaviour {
 
     IEnumerator GameReset()
     {
-        changeTags();
-        stoptimer = true;
-        timeLeft = ROUND_TIME;
-        Debug.Log ("STARTING 5 SEC WAIT");
-        //RESET POINTS 
-        yield return new WaitForSeconds(5);
-		Debug.Log ("Switching sides and wait for 3 sec");
-        Winner.enabled = false;
-        UISideSwitcher.enabled = true;
+		stoptimer = true;
+		timeLeft = ROUND_TIME;
+		//RESET POINTS 
+		yield return new WaitForSeconds(5);
+		changeTags();
+		Winner.enabled = false;
+		UISideSwitcher.enabled = true;
 		yield return new WaitForSeconds (3);
-		Debug.Log ("reset scene");
 
-        baby1.transform.position = originPos[0];
-        baby2.transform.position = originPos[1];
-        baby3.transform.position = originPos[2];
-        baby4.transform.position = originPos[3];
+		baby1.transform.position = originPos[0];
+		baby2.transform.position = originPos[1];
+		baby3.transform.position = originPos[2];
+		baby4.transform.position = originPos[3];
+
+		UISideSwitcher.enabled = false;
+		stoptimer = false;
         
-        UISideSwitcher.enabled = false;
-        stoptimer = false;
 
     }
+
+	IEnumerator AssignTeams()
+	{
+		stoptimer = true;
+		timeLeft = ROUND_TIME;
+		UISideSwitcher.GetComponentInChildren<Text> ().text = "Assigning teams";
+		UISideSwitcher.enabled = true;
+		yield return new WaitForSeconds (3);
+		UISideSwitcher.enabled = false;
+		UISideSwitcher.GetComponentInChildren<Text> ().text = "Switching sides";
+		stoptimer = false;
+
+
+	}
 
     public void AttackingTeamWon()
     {
@@ -188,12 +201,41 @@ public class GameController : MonoBehaviour {
 
     void TieBraker()
     {
+		
         roundNumber += 1;
         int defender = Random.Range(0, 1);
         if(defender == 0)
         {
             TieDefender = 0;
-            changeTags();
+			if (baby1.tag == "Team2TOY")
+			{
+				baby1.tag = "Team2";
+			}
+			else if (baby2.tag == "Team2TOY")
+			{
+				baby2.tag = "Team2";
+			}
+			else if (baby3.tag == "Team2TOY")
+			{
+				baby3.tag = "Team2";
+			}
+			else if (baby4.tag == "Team2TOY")
+			{
+				baby4.tag = "Team2";
+			}
+
+			if(baby1.tag == "Team1")
+			{
+				baby1.tag = "Team1TOY";
+			}
+			else if (baby2.tag == "Team1")
+			{
+				baby2.tag = "Team1TOY";
+			}
+			else if(baby3.tag == "Team1")
+			{
+				baby3.tag = "Team1TOY";
+			}
         }
         else
         {
@@ -214,19 +256,19 @@ public class GameController : MonoBehaviour {
 
     void changeTags()
     {
-        if (baby1.tag == "Team1Toy")
+        if (baby1.tag == "Team1TOY")
         {
             baby1.tag = "Team1";
         }
-        else if (baby2.tag == "Team1Toy")
+		else if (baby2.tag == "Team1TOY")
         {
             baby2.tag = "Team1";
         }
-        else if (baby3.tag == "Team1Toy")
+		else if (baby3.tag == "Team1TOY")
         {
             baby3.tag = "Team1";
         }
-        else if (baby4.tag == "Team1Toy")
+		else if (baby4.tag == "Team1TOY")
         {
             baby4.tag = "Team1";
         }

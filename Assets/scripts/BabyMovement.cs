@@ -43,42 +43,31 @@ public class BabyMovement : MonoBehaviour {
     private int blueScore;
     public Text Red;
     private int redScore;
+	private GameObject toy;
   
     // Use this for initialization
     void Start() {
         foreach (string name in Input.GetJoystickNames()) {
-            //Debug.Log(name);
+            Debug.Log(name);
         }
         baby = gameObject.GetComponent<Transform>();
         anim = gameObject.GetComponent<Animator>();
         rb = gameObject.GetComponent<Rigidbody>();
-        
-        rightHand = transform.Find("Torso/RightHand").gameObject;
-        if (tag == "Team1TOY")
-        {
-            rightHand.GetComponent<Renderer>().material = TOYHand;
-        }
 
-        diaper = transform.Find("Torso/Diaper").gameObject;
-        if (tag == "Team1TOY" || tag == "Team1")
-        {
-            diaper.GetComponent<Renderer>().material = ToyTeamColor;
-        }
-        else if (tag == "Team2")
-        {
-            diaper.GetComponent<Renderer>().material = EnemyColor;
-        }
 
         SPEED = 230;
     }
 
+
 	void FixedUpdate () {
+
+		checkTag ();
 
         if(tag == "team1TOY" || tag == "Team2TOY")
         {
             SPEED = SPEED * 0.8f;
         }
-		Debug.Log (Input.GetButton(crossBtn));
+		//Debug.Log (Input.GetButton(crossBtn));
 
 
 		float h = Input.GetAxis (horizontalJoyCtrl);
@@ -90,7 +79,7 @@ public class BabyMovement : MonoBehaviour {
 		if (h != 0 || v != 0) {
 			//Vector3 debug = new Vector3(baby.eulerAngles.x,Mathf.Atan2(h,v) * 180/Mathf.PI,baby.eulerAngles.z);	
 			baby.eulerAngles = new Vector3(baby.eulerAngles.x,Mathf.Atan2(h,v) * 180/Mathf.PI,baby.eulerAngles.z);	
-			Debug.Log(baby.forward);
+			//Debug.Log(baby.forward);
 			rb.velocity = baby.forward * speed() * Time.fixedDeltaTime;
 			moving = true;
 		} 
@@ -98,6 +87,9 @@ public class BabyMovement : MonoBehaviour {
 			directionVector = baby.rotation.eulerAngles;
 		}*/
 
+		if (Input.GetButton (crossBtn)) {
+			anim.SetBool ("Push", true);
+		}
 
 					
 		//Vector3 directionVector = new Vector3(Input.GetAxis(horizontalJoyCtrl),
@@ -163,35 +155,56 @@ public class BabyMovement : MonoBehaviour {
 	}
 
   
-    void OnTriggerEnter(Collider other)
+    void OnCollisionEnter(Collision other)
     {
-        if (other.tag == "Team1TOY" && tag == "Team2")
+		if (other.collider.tag == "Team1TOY" && tag == "Team2")
         {
             rightHand.GetComponent<Renderer>().material = TOYHand;
             GameObject enemy = other.transform.Find("Torso/RightHand").gameObject;
             enemy.GetComponent<Renderer>().material = RegularHand;
 
-            Rigidbody rbenemy = other.GetComponent<Rigidbody>();
+			Rigidbody rbenemy = other.collider.GetComponent<Rigidbody>();
             StartCoroutine(FreezePlayer(rbenemy));
 
             gameObject.tag = "Team2TOY";
-            other.tag = "Team1";
+            other.collider.tag = "Team1";
 
         }
-        else if (other.tag == "Team2TOY" && tag == "Team1")
+        else if (other.collider.tag == "Team2TOY" && tag == "Team1")
         {
             rightHand.GetComponent<Renderer>().material = TOYHand;
             GameObject enemy = other.transform.Find("Torso/RightHand").gameObject;
             enemy.GetComponent<Renderer>().material = RegularHand;
 
-            Rigidbody rbenemy = other.GetComponent<Rigidbody>();
+            Rigidbody rbenemy = other.collider.GetComponent<Rigidbody>();
             StartCoroutine(FreezePlayer(rbenemy));
             
             gameObject.tag = "Team1TOY";
-            other.tag = "Team2";
+            other.collider.tag = "Team2";
         }
 
     }
+
+	void checkTag()
+	{
+		rightHand = transform.Find("Torso/RightHand").gameObject;
+		toy = rightHand.transform.Find ("Toy").gameObject;
+		if (tag == "Team1TOY" || tag == "Team2TOY") {
+			toy.SetActive (true);
+		} else {
+			toy.SetActive (false);
+		}
+
+		diaper = transform.Find("Torso/Diaper").gameObject;
+		if (tag == "Team1TOY" || tag == "Team1")
+		{
+			diaper.GetComponent<Renderer>().material = ToyTeamColor;
+		}
+		else if (tag == "Team2")
+		{
+			diaper.GetComponent<Renderer>().material = EnemyColor;
+		}
+	}
 
     IEnumerator FreezePlayer(Rigidbody rbenemy)
     {
