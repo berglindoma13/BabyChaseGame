@@ -45,7 +45,21 @@ public class BabyMovement : MonoBehaviour {
     public Text Red;
     private int redScore;
 	private GameObject toy;
-  
+
+
+
+	private PlayerState currentState = PlayerState.normal;
+
+	//player states
+	public enum PlayerState{
+		normal,//never used
+		crying,
+		grabbing,
+		jumping//maybe?
+
+	}
+
+
     // Use this for initialization
     void Start() {
         foreach (string name in Input.GetJoystickNames()) {
@@ -70,39 +84,35 @@ public class BabyMovement : MonoBehaviour {
         }
 		//Debug.Log (Input.GetButton(crossBtn));
 
+		switch (currentState) {
+		case PlayerState.normal:
+			
+			float h = Input.GetAxis (horizontalJoyCtrl);
+			float v = Input.GetAxis (verticalJoyCtrl);
+			bool moving = false;
+			velocity = rb.angularVelocity;
 
-		float h = Input.GetAxis (horizontalJoyCtrl);
-		float v = Input.GetAxis (verticalJoyCtrl);
-		bool moving = false;
-		velocity = rb.angularVelocity;
+			if (h != 0 || v != 0) {
+				baby.eulerAngles = new Vector3 (baby.eulerAngles.x, Mathf.Atan2 (h, v) * 180 / Mathf.PI, baby.eulerAngles.z);	
+				rb.velocity = baby.forward * speed () * Time.fixedDeltaTime;
+				moving = true;
+			} 
+			if (Input.GetButtonDown (crossBtn)) {
+				if (!anim.GetCurrentAnimatorStateInfo (0).IsName ("Push")) {
+					anim.SetTrigger ("TestPush");
+				}
+			}
 
-		if (h != 0 || v != 0) {
-			baby.eulerAngles = new Vector3(baby.eulerAngles.x,Mathf.Atan2(h,v) * 180/Mathf.PI,baby.eulerAngles.z);	
-			rb.velocity = baby.forward * speed() * Time.fixedDeltaTime;
-			moving = true;
-		} 
-
-
-		if (Input.GetButtonDown(crossBtn)) {
-			//Debug.Log ("pressed push button");
-			/*if (anim.GetCurrentAnimatorStateInfo(0).IsName ("Push")) {
-				Debug.Log ("already in animation");
-			}*/
-			if (!anim.GetCurrentAnimatorStateInfo (0).IsName ("Push")) {
-				//pushing = true;
-				//Debug.Log ("triggered animation");
-				anim.SetTrigger ("TestPush");
-				//anim.SetBool ("Push", pushing);
-			} //else {
-				//pushing = false;
-				//anim.SetBool ("Push", pushing); //performance hit??
-			//}
-				//anim.SetBool ("Push", true);
+			rb.angularVelocity = Vector3.zero;
+			anim.SetBool ("Walking", moving);
+			break;
+		case PlayerState.crying:
+			//cant do anything?
+			break;
+		case PlayerState.grabbing:
+			//cant move? idno
+			break;
 		}
-
-		rb.angularVelocity = Vector3.zero;
-		anim.SetBool ("Walking", moving);
-
 	}
 
   
