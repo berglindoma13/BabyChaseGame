@@ -305,9 +305,10 @@ public class BabyMovement : MonoBehaviour {
 
 		bool toyIsGrabbable = cryingToyCarrierFound ();
 		if (toyIsGrabbable && Input.GetButton(circleBtn)) {
-			
+			anim.SetBool ("Walking", false);
 			anim.SetBool ("GrabToy", false);
 			anim.SetBool ("Grabbing", true);
+
 			Debug.Log ("grabbing is true");
 			currentState = PlayerState.grabbing;
 			//start grabbing
