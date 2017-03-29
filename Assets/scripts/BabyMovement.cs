@@ -39,6 +39,8 @@ public class BabyMovement : MonoBehaviour {
 	//dirty dirty flags
 	public bool pushing = false;
 
+
+	//public Animator canvasAnim;
     private Animator anim;
 	private GameObject toy;
 
@@ -87,7 +89,7 @@ public class BabyMovement : MonoBehaviour {
         }
 		//Debug.Log (Input.GetButton(crossBtn));
 		//Debug.Log(currentState);
-		findCryingToyCarrier();
+
 		switch (currentState) {
 		case PlayerState.normal:
 			//Debug.Log ("normal state!");
@@ -116,6 +118,8 @@ public class BabyMovement : MonoBehaviour {
 		//		Debug.Log ("logging keypresses");
 				startCrying ();
 			}
+			findCryingToyCarrier();
+			//if is holding a button down and channeling
 
 
 			break;
@@ -135,7 +139,6 @@ public class BabyMovement : MonoBehaviour {
 		if (currentState != PlayerState.crying) {
 			if (other.collider.tag == "Hand") {	
 				if (other.gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo (0).IsName ("Push")) {
-				
 					startCrying ();
 				}
 			}
@@ -228,6 +231,7 @@ public class BabyMovement : MonoBehaviour {
             }
             yield return new WaitForFixedUpdate();
         }
+		cryingTime = 5f;
 		//yield return new WaitForSeconds(3f);
 		Debug.Log("yield changed currentstate");
 		currentState = PlayerState.normal;
@@ -236,24 +240,29 @@ public class BabyMovement : MonoBehaviour {
 	}
 
 	void findCryingToyCarrier(){
-		
+		bool displayIcon = false;
+		//anim.SetBool ("GrabToy", true);
 		//Debug.Log (this.transform.position + " was pos  and here is forward: " + this.transform.forward);
 		Vector3 forwardPoint = this.transform.position + this.transform.forward * 2;
-		Debug.Log (forwardPoint);
+		//Debug.Log (forwardPoint);
 		collidersInRadius = Physics.OverlapSphere (forwardPoint, findRadiusSize);
 		foreach(Collider col in collidersInRadius){
 			if (col.gameObject.tag == "Team1TOY" && this.gameObject.tag == "Team2") {
 				if (col.gameObject.GetComponent<BabyMovement> ().currentState == PlayerState.crying) {
-					Debug.Log("you can grap the toy");
+					displayIcon = true;
+					Debug.Log ("you can grab the toy");
 					//gameController.AttackingTeamWon ();
 				}
-			}
-			else if (col.gameObject.tag == "Team2TOY" && this.gameObject.tag == "Team1") {
+			} else if (col.gameObject.tag == "Team2TOY" && this.gameObject.tag == "Team1") {
 				if (col.gameObject.GetComponent<BabyMovement> ().currentState == PlayerState.crying) {
-					Debug.Log("you can grap the toy");
+					displayIcon = true;
+					anim.SetBool ("GrabToy", true);
+					Debug.Log ("you can grab the toy");
 				}
 			}
 		}
+		Debug.Log ("display icon was: " + displayIcon);
+		anim.SetBool ("GrabToy", displayIcon);
 
 
 	}
