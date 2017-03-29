@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
-    private float ROUND_TIME = 15f;
+    private float ROUND_TIME = 30f;
 
     private float timeLeft;
 
@@ -191,7 +191,8 @@ public class GameController : MonoBehaviour {
 	{
 		stoptimer = true;
 		timeLeft = ROUND_TIME;
-		UISideSwitcher.GetComponentInChildren<Text> ().text = "Assigning teams";
+        StartCoroutine(FreezePlayers());
+        UISideSwitcher.GetComponentInChildren<Text> ().text = "Assigning teams";
 		UISideSwitcher.enabled = true;
 		yield return new WaitForSeconds (3);
 		UISideSwitcher.enabled = false;
@@ -241,6 +242,7 @@ public class GameController : MonoBehaviour {
     {
         stoptimer = true;
         timeLeft = ROUND_TIME;
+        StartCoroutine(FreezePlayers());
 
         if (bluepoints > redpoints)
         {

@@ -11,11 +11,6 @@ public class CameraController : MonoBehaviour {
 
     private GameObject[] Players;
 
-    private float mapSizeX;
-    private float mapSizeZ;
-
-    private float distanceRectangleX;
-    private float distanceRectangleZ;
 
     // Use this for initialization
     void Start () {
@@ -25,8 +20,6 @@ public class CameraController : MonoBehaviour {
         Players[2] = player3;
         Players[3] = player4;
 
-        mapSizeX = 10;
-        mapSizeZ = 10;
 	}
 	
 	// Update is called once per frame

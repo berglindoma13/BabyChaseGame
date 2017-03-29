@@ -109,7 +109,8 @@ public class BabyMovement : MonoBehaviour {
 
 		switch (currentState) {
 		case PlayerState.normal:
-                grabbing = false;
+            grabbing = false;
+            rb.constraints = RigidbodyConstraints.None;
 			//Debug.Log ("normal state!");
 			float h = Input.GetAxis (horizontalJoyCtrl);
 			float v = Input.GetAxis (verticalJoyCtrl);
@@ -138,20 +139,16 @@ public class BabyMovement : MonoBehaviour {
 				startCrying ();
 			}
 
-
-
 			checkForDisplayIcon ();
-
 
             if (Input.GetButtonDown(triangleBtn))
             {
                     startComforting();
             }
 
-
 			break;
 		case PlayerState.crying:
-            Debug.Log("Crying time" + cryingTime.ToString());
+            FreezePlayer();
             if (comforted)
             {
                 //Debug.Log("being comforted");
@@ -184,6 +181,12 @@ public class BabyMovement : MonoBehaviour {
 			break;
 		}
 	}
+
+    IEnumerator FreezePlayer()
+    {
+        rb.constraints = RigidbodyConstraints.FreezeAll;
+        yield return new WaitForFixedUpdate();
+    }
   
     public void handCollisionDetection(BabyMovement otherBaby)
     {
@@ -191,15 +194,20 @@ public class BabyMovement : MonoBehaviour {
 		if (this == otherBaby) {
 			return;
 		}
-		if (currentState != PlayerState.crying) {
-			startCrying ();
-		}
-        if(currentState == PlayerState.crying && otherBaby.GetComponentInParent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Comfort"))
+        else if (currentState != PlayerState.crying)
+        {
+            startCrying();
+        }
+
+    }
+
+    public void comfortingCollisionDetection(BabyMovement otherBaby)
+    {
+        if (currentState == PlayerState.crying)
         {
             comforted = true;
         }
-			
-	}
+    }
 
 	/*void OnCollisionEnter(Collision other)
 	{
