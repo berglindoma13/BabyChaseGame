@@ -102,12 +102,12 @@ public class BabyMovement : MonoBehaviour {
 				baby.eulerAngles = new Vector3 (baby.eulerAngles.x, Mathf.Atan2 (h, v) * 180 / Mathf.PI, baby.eulerAngles.z);	
 				rb.velocity = baby.forward * speed () * Time.fixedDeltaTime;
 				moving = true;
-			//	Debug.Log ("running movement code");
+				//	Debug.Log ("running movement code");
 			} 
 			//Debug.Log ("in between log");
 			if (Input.GetButtonDown (crossBtn)) {
 				Debug.Log ("trying to punch by pressing x");
-                push.Play();
+				push.Play ();
 				if (!anim.GetCurrentAnimatorStateInfo (0).IsName ("Push")) {
 					anim.SetTrigger ("TestPush");
 				}
@@ -115,12 +115,15 @@ public class BabyMovement : MonoBehaviour {
 			rb.angularVelocity = Vector3.zero;
 			anim.SetBool ("Walking", moving);
 
-			if (Input.GetButtonDown (circleBtn)) {
-		//		Debug.Log ("logging keypresses");
+			if (Input.GetButtonDown (squareBtn)) {
+				//		Debug.Log ("logging keypresses");
 				startCrying ();
 			}
-			findCryingToyCarrier();
-			//if is holding a button down and channeling
+
+
+
+			checkForDisplayIcon ();
+
 
             if (Input.GetButtonDown(triangleBtn))
             {
@@ -138,34 +141,41 @@ public class BabyMovement : MonoBehaviour {
 			break;
 		}
 	}
-
   
-    void OnCollisionEnter(Collision other)
+    public void handCollisionDetection(BabyMovement pushingBaby)
     {
+		if (this == pushingBaby) {
+			return;
+		}
 		if (currentState != PlayerState.crying) {
-			if (other.collider.tag == "Hand") {	
-				if (other.gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo (0).IsName ("Push")) {
-					startCrying ();
-				}
+			Debug.Log ("pushingBaby" + pushingBaby);
+			Debug.Log ("animator" + pushingBaby.GetComponent<Animator> ());
+			Debug.Log ("animatorStateInfo" + pushingBaby.GetComponent<Animator> ().GetCurrentAnimatorStateInfo (0).IsName("Push"));
+			if (pushingBaby.GetComponent<Animator>().GetCurrentAnimatorStateInfo (0).IsName ("Push")) {
+				startCrying ();
 			}
-            else if(other.collider.tag == "Team2" && (tag == "Team2" || tag == "Team2TOY"))
-            {
-                if (other.gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Comfort"))
-                {
-                    comforted = true;
-                }
+		}
+			
+	}
 
-            }
-            else if (other.collider.tag == "Team1" && (tag == "Team1" || tag == "Team1TOY"))
-            {
-                if (other.gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Comfort"))
-                {
-                    comforted = true;
-                }
-            }
+	void OnCollisionEnter(Collision other)
+	{
+		if(other.gameObject.GetComponent<Collider>().tag == "Team2" && (tag == "Team2" || tag == "Team2TOY"))
+		{
+			if (other.gameObject.GetComponentInParent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Comfort"))
+			{
+				comforted = true;
+			}
 
-        }
-    }
+		}
+		else if (other.gameObject.GetComponent<Collider>().tag == "Team1" && (tag == "Team1" || tag == "Team1TOY"))
+		{
+			if (other.gameObject.GetComponentInParent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Comfort"))
+			{
+				comforted = true;
+			}
+		}
+	}
 
 	void checkTag()
 	{
@@ -260,30 +270,39 @@ public class BabyMovement : MonoBehaviour {
 		cry.Stop ();
 	}
 
-	void findCryingToyCarrier(){
+	bool cryingToyCarrierFound(){
 		bool displayIcon = false;
-		//anim.SetBool ("GrabToy", true);
-		//Debug.Log (this.transform.position + " was pos  and here is forward: " + this.transform.forward);
 		Vector3 forwardPoint = this.transform.position + this.transform.forward * 2;
-		//Debug.Log (forwardPoint);
 		collidersInRadius = Physics.OverlapSphere (forwardPoint, findRadiusSize);
 		foreach(Collider col in collidersInRadius){
 			if (col.gameObject.tag == "Team1TOY" && this.gameObject.tag == "Team2") {
 				if (col.gameObject.GetComponent<BabyMovement> ().currentState == PlayerState.crying) {
-					displayIcon = true;
-					Debug.Log ("you can grab the toy");
+					return true;
 					//gameController.AttackingTeamWon ();
 				}
 			} else if (col.gameObject.tag == "Team2TOY" && this.gameObject.tag == "Team1") {
 				if (col.gameObject.GetComponent<BabyMovement> ().currentState == PlayerState.crying) {
-					displayIcon = true;
-					anim.SetBool ("GrabToy", true);
-					Debug.Log ("you can grab the toy");
+					return true;
 				}
 			}
 		}
-		Debug.Log ("display icon was: " + displayIcon);
-		anim.SetBool ("GrabToy", displayIcon);
+		return false;
+	}
+
+	void checkForDisplayIcon(){
+
+		bool toyIsGrabbable = cryingToyCarrierFound ();
+		if (toyIsGrabbable && Input.GetButton(circleBtn)) {
+			anim.SetBool ("GrabToy", false);
+			//start grabbing
+		} 
+		else if (toyIsGrabbable && !Input.GetButton(circleBtn)) {
+			anim.SetBool ("GrabToy", true);
+		} 
+		else if (!toyIsGrabbable) {
+			anim.SetBool ("GrabToy", false);
+		}
+		//if is holding a button down and channeling
 
 
 	}
