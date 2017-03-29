@@ -42,7 +42,7 @@ public class BabyMovement : MonoBehaviour {
 
 
 	//public Animator canvasAnim;
-    private Animator anim;
+    public Animator anim;
 	private GameObject toy;
 
     private float cryingTime = 5f;
@@ -165,12 +165,7 @@ public class BabyMovement : MonoBehaviour {
 			return;
 		}
 		if (currentState != PlayerState.crying) {
-			Debug.Log ("pushingBaby" + pushingBaby);
-			Debug.Log ("animator" + pushingBaby.GetComponent<Animator> ());
-			Debug.Log ("animatorStateInfo" + pushingBaby.GetComponent<Animator> ().GetCurrentAnimatorStateInfo (0).IsName("Push"));
-			if (pushingBaby.GetComponent<Animator>().GetCurrentAnimatorStateInfo (0).IsName ("Push")) {
-				startCrying ();
-			}
+			startCrying ();
 		}
 			
 	}
@@ -261,7 +256,7 @@ public class BabyMovement : MonoBehaviour {
 		Debug.Log ("set walking to false and crying to true");
 		anim.SetBool ("Walking", false);
 		anim.SetBool ("Crying", true);
-		cry.timeSamples = 2;
+		cry.time = 2;
 		cry.Play ();
 		StartCoroutine ("cryingState");
 	}
