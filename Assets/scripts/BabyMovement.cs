@@ -14,6 +14,7 @@ public class BabyMovement : MonoBehaviour {
     public Rigidbody rb;
     public Vector3 velocity;
 	public AudioSource cry;
+    public AudioSource push;
 
     public Material EnemyColor;
     public Material ToyTeamColor;
@@ -56,10 +57,9 @@ public class BabyMovement : MonoBehaviour {
 		normal,//never used
 		crying,
 		grabbing,
-		jumping//maybe?
-
+		jumping,//maybe?
+        comforting
 	}
-
 
     // Use this for initialization
     void Start() {
@@ -106,7 +106,8 @@ public class BabyMovement : MonoBehaviour {
 			} 
 			//Debug.Log ("in between log");
 			if (Input.GetButtonDown (crossBtn)) {
-		//		Debug.Log ("trying to punch by pressing x");
+				Debug.Log ("trying to punch by pressing x");
+                push.Play();
 				if (!anim.GetCurrentAnimatorStateInfo (0).IsName ("Push")) {
 					anim.SetTrigger ("TestPush");
 				}
@@ -120,6 +121,11 @@ public class BabyMovement : MonoBehaviour {
 			}
 			findCryingToyCarrier();
 			//if is holding a button down and channeling
+
+            if (Input.GetButtonDown(triangleBtn))
+            {
+                    startComforting();
+            }
 
 
 			break;
@@ -207,6 +213,21 @@ public class BabyMovement : MonoBehaviour {
 	bool hasStamina(){
 		return Stamina != 0;
 	}
+
+    void startComforting()
+    {
+        currentState = PlayerState.comforting;
+        anim.SetBool("Walking", false);
+        anim.SetBool("Comfort", true);
+        StartCoroutine(comfortingState());
+    }
+
+    IEnumerator comfortingState()
+    {
+        yield return new WaitForSeconds(2f);
+        currentState = PlayerState.normal;
+        anim.SetBool("Comfort", false);
+    }
 
 	void startCrying(){
 		currentState = PlayerState.crying;
