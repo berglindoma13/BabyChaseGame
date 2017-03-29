@@ -46,7 +46,7 @@ public class BabyMovement : MonoBehaviour {
 	private GameObject toy;
 
     private float cryingTime = 5f;
-	public float grabTime = 3f;
+	public float grabTime = 0f;
     private bool comforted = false;
 
 	private Collider[] collidersInRadius;
@@ -141,19 +141,19 @@ public class BabyMovement : MonoBehaviour {
 			//cant move? idno
 			//Debug.Log("am grabbing");
 			if (Input.GetButton (circleBtn)) {
-				if (grabTime < 0) {
+				if (grabTime > 3f) {
 					//win
 					//Debug.Log("you won!!");
 				}
-				grabTime -= Time.fixedDeltaTime;
-				//Debug.Log (grabTime);
+				grabTime += Time.fixedDeltaTime;
+				Debug.Log (grabTime);
 			} 
 			else {
 				Debug.Log ("grabbing is false");
 				currentState = PlayerState.normal;
 				anim.SetBool ("Grabbing", false);
 
-				grabTime = 3f;
+				grabTime = 0f;
 			}
 			break;
 		}
