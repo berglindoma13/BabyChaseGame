@@ -136,20 +136,22 @@ public class BabyMovement : MonoBehaviour {
 		case PlayerState.crying:
 			//cant do anything?
 			//Debug.Log("crying state!!");
+
+			//interrupt grabbing and stuffffffff
 			break;
 		case PlayerState.grabbing:
 			//cant move? idno
 			//Debug.Log("am grabbing");
 			if (Input.GetButton (circleBtn)) {
 				if (grabTime > 3f) {
-					//win
-					//Debug.Log("you won!!");
+					Debug.Log ("calling attackingteam won!!!");
+					gameController.AttackingTeamWon ();
 				}
 				grabTime += Time.fixedDeltaTime;
-				Debug.Log (grabTime);
+				//Debug.Log (grabTime);
 			} 
 			else {
-				Debug.Log ("grabbing is false");
+				//Debug.Log ("grabbing is false");
 				currentState = PlayerState.normal;
 				anim.SetBool ("Grabbing", false);
 
@@ -283,7 +285,6 @@ public class BabyMovement : MonoBehaviour {
 	}
 
 	bool cryingToyCarrierFound(){
-		bool displayIcon = false;
 		Vector3 forwardPoint = this.transform.position + this.transform.forward * 2;
 		collidersInRadius = Physics.OverlapSphere (forwardPoint, findRadiusSize);
 		foreach(Collider col in collidersInRadius){
