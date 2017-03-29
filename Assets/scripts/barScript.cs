@@ -21,12 +21,8 @@ public class barScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		float convertedAmount;
-
-		convertedAmount = fillAmountConvert (baby.grabTime, 0, 3);
-		bar.fillAmount = 0;
-		//Debug.Log (bar.fillAmount);
-		bar.fillAmount = Mathf.Lerp (bar.fillAmount, convertedAmount, Time.deltaTime * lerpSpeed);
+		//Debug.Log (baby.grabTime);
+		bar.fillAmount = baby.grabTime / 3.0f;
 	}
 
 
