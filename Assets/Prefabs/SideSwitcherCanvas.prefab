@@ -56,7 +56,6 @@ GameObject:
   - component: {fileID: 223856249988080066}
   - component: {fileID: 114897397309163284}
   - component: {fileID: 114606523019288442}
-  - component: {fileID: 114235514405163258}
   m_Layer: 5
   m_Name: SideSwitcherCanvas
   m_TagString: Untagged
@@ -64,25 +63,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &114235514405163258
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1728704804810550}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbfe22acc4a9a224491b4e971c9bfeaf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  roundText: {fileID: 0}
-  UISideSwitcher: {fileID: 223856249988080066}
-  baby1: {fileID: 0}
-  baby2: {fileID: 0}
-  baby3: {fileID: 0}
-  baby4: {fileID: 0}
-  Winner: {fileID: 0}
-  Timer: {fileID: 0}
 --- !u!114 &114351373205505210
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -104,16 +84,16 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 64
+    m_FontSize: 65
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 0
     m_MaxSize: 72
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: Switching sides
 --- !u!114 &114451134448644564
@@ -128,7 +108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.069168665, g: 0, b: 0.9117647, a: 0.817}
+  m_Color: {r: 0.103257366, g: 0.10207612, b: 0.11764705, a: 0.817}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -238,7 +218,7 @@ RectTransform:
   m_GameObject: {fileID: 1109969920232044}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.2, z: 1}
+  m_LocalScale: {x: 1.0128493, y: 0.89, z: 1}
   m_Children:
   - {fileID: 224988989942373556}
   m_Father: {fileID: 224021272783192100}
@@ -257,7 +237,7 @@ RectTransform:
   m_GameObject: {fileID: 1666833626520362}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 4, z: 1}
+  m_LocalScale: {x: 0.7221389, y: 2.3643987, z: 1}
   m_Children: []
   m_Father: {fileID: 224372283758693030}
   m_RootOrder: 0

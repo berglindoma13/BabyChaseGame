@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
-    private float ROUND_TIME = 20f;
+    private float ROUND_TIME = 10f;
 
     private float timeLeft;
 
@@ -35,10 +35,7 @@ public class GameController : MonoBehaviour {
 
     private bool stoptimer;
 
-    private GameController instance;
-
     void Start () {
-        instance = this;
 
         bluepoints = 0;
         redpoints = 0;
@@ -60,7 +57,6 @@ public class GameController : MonoBehaviour {
         //INITIALIZING
    
         timeLeft = ROUND_TIME;
-        Debug.Log(timeLeft.ToString());
         roundNumber = 1;
         originPos = new Vector3[4];
         originPos[0] = baby1.transform.position;
@@ -190,7 +186,7 @@ public class GameController : MonoBehaviour {
         {
             Winner.text = "Congratulations Red Team";
             Winner.enabled = true;
-            instance.StartCoroutine(GameReset(false));
+            StartCoroutine(GameReset(false));
             roundNumber += 1;
             redpoints += 1;
         }
@@ -232,7 +228,7 @@ public class GameController : MonoBehaviour {
         }
         if (bluepoints == redpoints)
         {
-            Winner.text = "Both teams won one game, so it's a TIE! Get ready for a tiebreaker";
+            Winner.text = "Both teams won one game, so it's a TIE! \n Get ready for a tiebreaker";
             Winner.enabled = true;
             TieBraker();
             
@@ -280,7 +276,8 @@ public class GameController : MonoBehaviour {
         {
             TieDefender = 1;
         }
-        instance.StartCoroutine(GameReset(true));
+        UISideSwitcher.GetComponentInChildren<Text>().text = "Maybe switching, maybe not, \n who knows!";
+        StartCoroutine(GameReset(true));
     }
 
     void QuitGame()
