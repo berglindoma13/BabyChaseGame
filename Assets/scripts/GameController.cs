@@ -145,6 +145,7 @@ public class GameController : MonoBehaviour {
     {
 		stoptimer = true;
 		timeLeft = ROUND_TIME;
+        StartCoroutine(FreezePlayers());
 		//RESET POINTS 
 		yield return new WaitForSeconds(5);
         if (!tie)
@@ -166,7 +167,27 @@ public class GameController : MonoBehaviour {
 
     }
 
-	IEnumerator AssignTeams()
+    IEnumerator FreezePlayers()
+    {
+        
+        Rigidbody baby1rig = baby1.gameObject.GetComponent<Rigidbody>();
+        Rigidbody baby2rig = baby2.gameObject.GetComponent<Rigidbody>();
+        Rigidbody baby3rig = baby3.gameObject.GetComponent<Rigidbody>();
+        Rigidbody baby4rig = baby4.gameObject.GetComponent<Rigidbody>();
+
+        baby1rig.constraints = RigidbodyConstraints.FreezeAll;
+        baby2rig.constraints = RigidbodyConstraints.FreezeAll;
+        baby3rig.constraints = RigidbodyConstraints.FreezeAll;
+        baby4rig.constraints = RigidbodyConstraints.FreezeAll;
+        yield return new WaitForSeconds(3f);
+        baby1rig.constraints = RigidbodyConstraints.None;
+        baby2rig.constraints = RigidbodyConstraints.None;
+        baby3rig.constraints = RigidbodyConstraints.None;
+        baby4rig.constraints = RigidbodyConstraints.None;
+
+    }
+
+    IEnumerator AssignTeams()
 	{
 		stoptimer = true;
 		timeLeft = ROUND_TIME;
@@ -182,7 +203,6 @@ public class GameController : MonoBehaviour {
 
     public void AttackingTeamWon()
     {
-        Debug.Log("Attacking team won" + " in round number " + roundNumber.ToString());
         if (roundNumber == 1)
         {
             Winner.text = "Congratulations Red Team";
