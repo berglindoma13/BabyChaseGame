@@ -72,10 +72,6 @@ public class BabyMovement : MonoBehaviour {
         anim = gameObject.GetComponent<Animator>();
         rb = gameObject.GetComponent<Rigidbody>();
 
-        rightHand = transform.Find("Torso/RightHand").gameObject;
-        Physics.IgnoreCollision(rightHand.GetComponent<Collider>(), GetComponent<Collider>());
-        leftHand = transform.Find("Torso/LeftHand").gameObject;
-        Physics.IgnoreCollision(leftHand.GetComponent<Collider>(), GetComponent<Collider>());
 
         SPEED = 230;
     }
@@ -110,7 +106,6 @@ public class BabyMovement : MonoBehaviour {
 		switch (currentState) {
 		case PlayerState.normal:
             grabbing = false;
-            rb.constraints = RigidbodyConstraints.None;
 			//Debug.Log ("normal state!");
 			float h = Input.GetAxis (horizontalJoyCtrl);
 			float v = Input.GetAxis (verticalJoyCtrl);
@@ -148,7 +143,7 @@ public class BabyMovement : MonoBehaviour {
 
 			break;
 		case PlayerState.crying:
-            FreezePlayer();
+            //FreezePlayer();
             if (comforted)
             {
                 //Debug.Log("being comforted");
@@ -185,7 +180,11 @@ public class BabyMovement : MonoBehaviour {
     IEnumerator FreezePlayer()
     {
         rb.constraints = RigidbodyConstraints.FreezeAll;
-        yield return new WaitForFixedUpdate();
+        yield return new WaitForSeconds(3f);
+        rb.constraints = RigidbodyConstraints.None;
+        rb.constraints = RigidbodyConstraints.FreezePositionY;
+        rb.constraints = RigidbodyConstraints.FreezeRotationX;
+        rb.constraints = RigidbodyConstraints.FreezeRotationZ;
     }
   
     public void handCollisionDetection(BabyMovement otherBaby)
@@ -201,7 +200,7 @@ public class BabyMovement : MonoBehaviour {
 
     }
 
-    public void comfortingCollisionDetection(BabyMovement otherBaby)
+    public void comfortingCollisionDetection()
     {
         if (currentState == PlayerState.crying)
         {
@@ -209,24 +208,6 @@ public class BabyMovement : MonoBehaviour {
         }
     }
 
-	/*void OnCollisionEnter(Collision other)
-	{
-		if(other.gameObject.GetComponent<Collider>().tag == "Team2" && (tag == "Team2" || tag == "Team2TOY"))
-		{
-			if (other.gameObject.GetComponentInParent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Comfort"))
-			{
-				comforted = true;
-			}
-
-		}
-		else if (other.gameObject.GetComponent<Collider>().tag == "Team1" && (tag == "Team1" || tag == "Team1TOY"))
-		{
-			if (other.gameObject.GetComponentInParent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Comfort"))
-			{
-				comforted = true;
-			}
-		}
-	}*/
 
 	void checkTag()
 	{
@@ -248,13 +229,6 @@ public class BabyMovement : MonoBehaviour {
 			diaper.GetComponent<Renderer>().material = EnemyColor;
 		}
 	}
-
-    IEnumerator FreezePlayer(Rigidbody rbenemy)
-    {
-        rbenemy.constraints = RigidbodyConstraints.FreezeAll;
-        yield return new WaitForSecondsRealtime(3);
-        rbenemy.constraints = RigidbodyConstraints.None;
-    }
 
 	float speed(){
 		if (Input.GetButton (rBumper) && hasStamina()) {

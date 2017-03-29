@@ -20,7 +20,7 @@ public class handScript : MonoBehaviour {
 		}
         else if(otherBaby != null && baby.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Comfort"))
         {
-            otherBaby.comfortingCollisionDetection(baby);
+            otherBaby.comfortingCollisionDetection();
         }
 
 	}
