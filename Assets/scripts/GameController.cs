@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
-    private float ROUND_TIME = 10f;
+    private float ROUND_TIME = 5f;
 
     private float timeLeft;
 
@@ -89,7 +89,7 @@ public class GameController : MonoBehaviour {
         //RESET GAME
         if (Input.GetKey(KeyCode.R))
         {
-			SceneManager.LoadScene ("EnvironmentScene");
+			SceneManager.LoadScene ("BerglindScene");
         }
 
         //QUIT GAME
@@ -218,13 +218,16 @@ public class GameController : MonoBehaviour {
 
     void EndOfGameRoutine()
     {
-        if(bluepoints > redpoints)
+        stoptimer = true;
+        timeLeft = ROUND_TIME;
+
+        if (bluepoints > redpoints)
         {
-            Winner.text = "Blue Team IS THE BEST";
+            StartCoroutine(routeToMenu(true));
         }
         if(redpoints > bluepoints)
         {
-            Winner.text = "Red Team IS THE BEST";
+            StartCoroutine(routeToMenu(false));
         }
         if (bluepoints == redpoints)
         {
@@ -233,6 +236,22 @@ public class GameController : MonoBehaviour {
             TieBraker();
             
         }
+    }
+
+    IEnumerator routeToMenu(bool blue)
+    {
+        if (blue)
+        {
+            UISideSwitcher.GetComponentInChildren<Text>().text = "Blue Team \n has won the game!\n Congratulations!!";
+            UISideSwitcher.enabled = true;
+        }
+        else
+        {
+            UISideSwitcher.GetComponentInChildren<Text>().text = "Red Team \n has won the game!\n Congratulations!!";
+            UISideSwitcher.enabled = true;
+        }
+        yield return new WaitForSeconds(5f);
+        SceneManager.LoadScene("MainMenu");
     }
 
     void TieBraker()
@@ -276,13 +295,13 @@ public class GameController : MonoBehaviour {
         {
             TieDefender = 1;
         }
-        UISideSwitcher.GetComponentInChildren<Text>().text = "Maybe switching, maybe not, \n who knows!";
+        UISideSwitcher.GetComponentInChildren<Text>().text = "Maybe switching,\n maybe not,\n who knows!";
         StartCoroutine(GameReset(true));
     }
 
     void QuitGame()
     {
-		if (SceneManager.GetActiveScene ().name.Equals ("EnvironmentScene")) {
+		if (SceneManager.GetActiveScene ().name.Equals ("BerglindScene")) {
 			SceneManager.LoadScene ("MainMenu");
 		} else {
 			Application.Quit ();
