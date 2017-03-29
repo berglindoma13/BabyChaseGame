@@ -14,12 +14,14 @@ public class handScript : MonoBehaviour {
 	// Update is called once per frame
 	void OnTriggerStay(Collider coll)
 	{
-		
-		//Debug.Log (coll.tag);
 		var otherBaby = coll.GetComponentInParent<BabyMovement> ();
 		if (otherBaby != null && baby.GetComponent<Animator>().GetCurrentAnimatorStateInfo(1).IsName("Push")) {
 			otherBaby.handCollisionDetection (baby);
 		}
+        else if(otherBaby != null && baby.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Comfort"))
+        {
+            otherBaby.handCollisionDetection(baby);
+        }
 
 	}
 }

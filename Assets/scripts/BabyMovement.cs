@@ -45,7 +45,7 @@ public class BabyMovement : MonoBehaviour {
     public Animator anim;
 	private GameObject toy;
 
-    private float cryingTime = 5f;
+    private float cryingTime = 6f;
 	public float grabTime = 0f;
     public bool grabbing = false;
     private bool comforted = false;
@@ -82,7 +82,7 @@ public class BabyMovement : MonoBehaviour {
 
 
 	void FixedUpdate () {
-        if (Input.GetButtonDown(circleBtn))
+        /*if (Input.GetButtonDown(circleBtn))
         {
             Debug.Log("circle button");
         }
@@ -94,6 +94,10 @@ public class BabyMovement : MonoBehaviour {
         {
             Debug.Log("square button");
         }
+        if (Input.GetButtonDown(startBtn))
+        {
+            Debug.Log("start button");
+        }*/
         checkTag ();
 
         if(tag == "team1TOY" || tag == "Team2TOY")
@@ -120,7 +124,7 @@ public class BabyMovement : MonoBehaviour {
 			} 
 			//Debug.Log ("in between log");
 			if (Input.GetButtonDown (crossBtn)) {
-				Debug.Log ("trying to punch by pressing x");
+				//Debug.Log ("trying to punch by pressing x");
 				push.Play ();
 				if (!anim.GetCurrentAnimatorStateInfo (0).IsName ("Push")) {
 					anim.SetTrigger ("TestPush");
@@ -147,17 +151,23 @@ public class BabyMovement : MonoBehaviour {
 
 			break;
 		case PlayerState.crying:
-			//cant do anything?
-			//Debug.Log("crying state!!");
+            Debug.Log("Crying time" + cryingTime.ToString());
+            if (comforted)
+            {
+                //Debug.Log("being comforted");
+                cryingTime -= (Time.deltaTime * 2f);
+            }
+            else
+            {
+                cryingTime -= Time.deltaTime;
+            }
 
-			//interrupt grabbing and stuffffffff
-			break;
+            break;
 		case PlayerState.grabbing:
 			//cant move? idno
 			//Debug.Log("am grabbing");
 			if (Input.GetButton (circleBtn)) {
 				if (grabTime > 3f && !grabbing) {
-					Debug.Log ("calling attackingteam won!!!");
 					gameController.AttackingTeamWon();
                     grabbing = true;
 				}
@@ -175,18 +185,23 @@ public class BabyMovement : MonoBehaviour {
 		}
 	}
   
-    public void handCollisionDetection(BabyMovement pushingBaby)
+    public void handCollisionDetection(BabyMovement otherBaby)
     {
-		if (this == pushingBaby) {
+        
+		if (this == otherBaby) {
 			return;
 		}
 		if (currentState != PlayerState.crying) {
 			startCrying ();
 		}
+        if(currentState == PlayerState.crying && otherBaby.GetComponentInParent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Comfort"))
+        {
+            comforted = true;
+        }
 			
 	}
 
-	void OnCollisionEnter(Collision other)
+	/*void OnCollisionEnter(Collision other)
 	{
 		if(other.gameObject.GetComponent<Collider>().tag == "Team2" && (tag == "Team2" || tag == "Team2TOY"))
 		{
@@ -203,7 +218,7 @@ public class BabyMovement : MonoBehaviour {
 				comforted = true;
 			}
 		}
-	}
+	}*/
 
 	void checkTag()
 	{
@@ -261,7 +276,7 @@ public class BabyMovement : MonoBehaviour {
     }
 
     IEnumerator comfortingState()
-    {
+    {   
         yield return new WaitForSeconds(2f);
         currentState = PlayerState.normal;
         anim.SetBool("Comfort", false);
@@ -269,7 +284,6 @@ public class BabyMovement : MonoBehaviour {
 
 	void startCrying(){
 		currentState = PlayerState.crying;
-		Debug.Log ("set walking to false and crying to true");
 		anim.SetBool ("Walking", false);
 		anim.SetBool ("Crying", true);
 		cry.time = 2;
@@ -278,23 +292,12 @@ public class BabyMovement : MonoBehaviour {
 	}
 
 	IEnumerator cryingState() {
-        while(cryingTime > 0)
-        {
-            if (comforted)
-            {
-                cryingTime -= Time.deltaTime * 1.4f;
-            }
-            else
-            {
-                cryingTime -= Time.deltaTime;
-            }
-            yield return new WaitForFixedUpdate();
-        }
-		cryingTime = 5f;
-		//yield return new WaitForSeconds(3f);
-		Debug.Log("yield changed currentstate");
+        yield return new WaitWhile(() => cryingTime > 0);
+        Debug.Log("done waiting");
 		currentState = PlayerState.normal;
-		anim.SetBool ("Crying", false);
+        cryingTime = 6f;    
+        anim.SetBool ("Crying", false);
+        comforted = false;
 		cry.Stop ();
 	}
 
@@ -324,7 +327,7 @@ public class BabyMovement : MonoBehaviour {
 			anim.SetBool ("GrabToy", false);
 			anim.SetBool ("Grabbing", true);
 
-			Debug.Log ("grabbing is true");
+			//Debug.Log ("grabbing is true");
 			currentState = PlayerState.grabbing;
 			//start grabbing
 		} 
