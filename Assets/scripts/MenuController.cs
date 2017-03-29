@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class MenuController : MonoBehaviour {
 
+    public Canvas MainMenu;
+    public Canvas AboutGameMenu;
+
 	public void LoadScene(string name)
     {
         SceneManager.LoadScene(name);   
@@ -13,6 +16,18 @@ public class MenuController : MonoBehaviour {
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void AboutGame()
+    {
+        MainMenu.gameObject.SetActive(false);
+        AboutGameMenu.gameObject.SetActive(true);
+    }
+
+    public void Return()
+    {
+        MainMenu.gameObject.SetActive(true);
+        AboutGameMenu.gameObject.SetActive(false);
     }
 
 	void Update () {
