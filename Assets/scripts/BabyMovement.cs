@@ -47,6 +47,7 @@ public class BabyMovement : MonoBehaviour {
 
     private float cryingTime = 5f;
 	public float grabTime = 0f;
+    public bool grabbing = false;
     private bool comforted = false;
 
 	private Collider[] collidersInRadius;
@@ -81,8 +82,19 @@ public class BabyMovement : MonoBehaviour {
 
 
 	void FixedUpdate () {
-
-		checkTag ();
+        if (Input.GetButtonDown(circleBtn))
+        {
+            Debug.Log("circle button");
+        }
+        if (Input.GetButtonDown(triangleBtn))
+        {
+            Debug.Log("triangle button");
+        }
+        if (Input.GetButtonDown(squareBtn))
+        {
+            Debug.Log("square button");
+        }
+        checkTag ();
 
         if(tag == "team1TOY" || tag == "Team2TOY")
         {
@@ -93,6 +105,7 @@ public class BabyMovement : MonoBehaviour {
 
 		switch (currentState) {
 		case PlayerState.normal:
+                grabbing = false;
 			//Debug.Log ("normal state!");
 			float h = Input.GetAxis (horizontalJoyCtrl);
 			float v = Input.GetAxis (verticalJoyCtrl);
@@ -143,9 +156,10 @@ public class BabyMovement : MonoBehaviour {
 			//cant move? idno
 			//Debug.Log("am grabbing");
 			if (Input.GetButton (circleBtn)) {
-				if (grabTime > 3f) {
+				if (grabTime > 3f && !grabbing) {
 					Debug.Log ("calling attackingteam won!!!");
-					gameController.AttackingTeamWon ();
+					gameController.AttackingTeamWon();
+                    grabbing = true;
 				}
 				grabTime += Time.fixedDeltaTime;
 				//Debug.Log (grabTime);
@@ -222,7 +236,7 @@ public class BabyMovement : MonoBehaviour {
 	float speed(){
 		if (Input.GetButton (rBumper) && hasStamina()) {
 			depleteStamina ();	
-			Debug.Log ("sprinting");
+			//Debug.Log ("sprinting");
 			return SPEED * 1.5f;
 		} 
 		else {

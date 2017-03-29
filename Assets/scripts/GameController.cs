@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
-    private float ROUND_TIME = 5f;
+    private float ROUND_TIME = 15f;
 
     private float timeLeft;
 
@@ -182,6 +182,7 @@ public class GameController : MonoBehaviour {
 
     public void AttackingTeamWon()
     {
+        Debug.Log("Attacking team won" + " in round number " + roundNumber.ToString());
         if (roundNumber == 1)
         {
             Winner.text = "Congratulations Red Team";

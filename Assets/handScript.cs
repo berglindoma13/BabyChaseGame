@@ -15,7 +15,7 @@ public class handScript : MonoBehaviour {
 	void OnTriggerStay(Collider coll)
 	{
 		
-		Debug.Log (coll.tag);
+		//Debug.Log (coll.tag);
 		var otherBaby = coll.GetComponentInParent<BabyMovement> ();
 		if (otherBaby != null && baby.GetComponent<Animator>().GetCurrentAnimatorStateInfo(1).IsName("Push")) {
 			otherBaby.handCollisionDetection (baby);

@@ -276,6 +276,51 @@ Prefab:
       propertyPath: gameController
       value: 
       objectReference: {fileID: 1630802795}
+    - target: {fileID: 114062427266157418, guid: 02a4851d6892a604bacf97c4d9c75421,
+        type: 2}
+      propertyPath: horizontalJoyCtrl
+      value: HorizontalJoy_P4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114062427266157418, guid: 02a4851d6892a604bacf97c4d9c75421,
+        type: 2}
+      propertyPath: verticalJoyCtrl
+      value: VerticalJoy_P4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114062427266157418, guid: 02a4851d6892a604bacf97c4d9c75421,
+        type: 2}
+      propertyPath: triangleBtn
+      value: Triangle_P4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114062427266157418, guid: 02a4851d6892a604bacf97c4d9c75421,
+        type: 2}
+      propertyPath: circleBtn
+      value: Circle_P4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114062427266157418, guid: 02a4851d6892a604bacf97c4d9c75421,
+        type: 2}
+      propertyPath: crossBtn
+      value: Cross_P4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114062427266157418, guid: 02a4851d6892a604bacf97c4d9c75421,
+        type: 2}
+      propertyPath: squareBtn
+      value: Square_P4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114062427266157418, guid: 02a4851d6892a604bacf97c4d9c75421,
+        type: 2}
+      propertyPath: rBumper
+      value: rBumper_P4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114062427266157418, guid: 02a4851d6892a604bacf97c4d9c75421,
+        type: 2}
+      propertyPath: lbumper
+      value: lBumper_P4
+      objectReference: {fileID: 0}
+    - target: {fileID: 82427105275258500, guid: 02a4851d6892a604bacf97c4d9c75421,
+        type: 2}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 02a4851d6892a604bacf97c4d9c75421, type: 2}
   m_IsPrefabParent: 0
@@ -332,6 +377,51 @@ Prefab:
       propertyPath: gameController
       value: 
       objectReference: {fileID: 1630802795}
+    - target: {fileID: 114062427266157418, guid: 02a4851d6892a604bacf97c4d9c75421,
+        type: 2}
+      propertyPath: horizontalJoyCtrl
+      value: HorizontalJoy_P2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114062427266157418, guid: 02a4851d6892a604bacf97c4d9c75421,
+        type: 2}
+      propertyPath: verticalJoyCtrl
+      value: VerticalJoy_P2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114062427266157418, guid: 02a4851d6892a604bacf97c4d9c75421,
+        type: 2}
+      propertyPath: triangleBtn
+      value: Triangle_P2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114062427266157418, guid: 02a4851d6892a604bacf97c4d9c75421,
+        type: 2}
+      propertyPath: circleBtn
+      value: Circle_P2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114062427266157418, guid: 02a4851d6892a604bacf97c4d9c75421,
+        type: 2}
+      propertyPath: crossBtn
+      value: Cross_P2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114062427266157418, guid: 02a4851d6892a604bacf97c4d9c75421,
+        type: 2}
+      propertyPath: squareBtn
+      value: Square_P2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114062427266157418, guid: 02a4851d6892a604bacf97c4d9c75421,
+        type: 2}
+      propertyPath: rBumper
+      value: rBumper_P2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114062427266157418, guid: 02a4851d6892a604bacf97c4d9c75421,
+        type: 2}
+      propertyPath: lbumper
+      value: lBumper_P2
+      objectReference: {fileID: 0}
+    - target: {fileID: 82427105275258500, guid: 02a4851d6892a604bacf97c4d9c75421,
+        type: 2}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 02a4851d6892a604bacf97c4d9c75421, type: 2}
   m_IsPrefabParent: 0
@@ -537,6 +627,11 @@ Prefab:
       propertyPath: gameController
       value: 
       objectReference: {fileID: 1630802795}
+    - target: {fileID: 82427105275258500, guid: 02a4851d6892a604bacf97c4d9c75421,
+        type: 2}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 02a4851d6892a604bacf97c4d9c75421, type: 2}
   m_IsPrefabParent: 0
@@ -1017,6 +1112,51 @@ Prefab:
       propertyPath: gameController
       value: 
       objectReference: {fileID: 1630802795}
+    - target: {fileID: 114062427266157418, guid: 02a4851d6892a604bacf97c4d9c75421,
+        type: 2}
+      propertyPath: horizontalJoyCtrl
+      value: HorizontalJoy_P3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114062427266157418, guid: 02a4851d6892a604bacf97c4d9c75421,
+        type: 2}
+      propertyPath: verticalJoyCtrl
+      value: VerticalJoy_P3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114062427266157418, guid: 02a4851d6892a604bacf97c4d9c75421,
+        type: 2}
+      propertyPath: triangleBtn
+      value: Triangle_P3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114062427266157418, guid: 02a4851d6892a604bacf97c4d9c75421,
+        type: 2}
+      propertyPath: circleBtn
+      value: Circle_P3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114062427266157418, guid: 02a4851d6892a604bacf97c4d9c75421,
+        type: 2}
+      propertyPath: crossBtn
+      value: Cross_P3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114062427266157418, guid: 02a4851d6892a604bacf97c4d9c75421,
+        type: 2}
+      propertyPath: squareBtn
+      value: Square_P3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114062427266157418, guid: 02a4851d6892a604bacf97c4d9c75421,
+        type: 2}
+      propertyPath: rBumper
+      value: rBumper_P3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114062427266157418, guid: 02a4851d6892a604bacf97c4d9c75421,
+        type: 2}
+      propertyPath: lbumper
+      value: lBumper_P3
+      objectReference: {fileID: 0}
+    - target: {fileID: 82427105275258500, guid: 02a4851d6892a604bacf97c4d9c75421,
+        type: 2}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 02a4851d6892a604bacf97c4d9c75421, type: 2}
   m_IsPrefabParent: 0
