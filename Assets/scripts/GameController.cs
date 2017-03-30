@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
-    private float ROUND_TIME = 20f;
+    private float ROUND_TIME = 10f;
 
     private float timeLeft;
 
@@ -145,6 +145,7 @@ public class GameController : MonoBehaviour {
     {
 		stoptimer = true;
 		timeLeft = ROUND_TIME;
+        //StartCoroutine(FreezePlayers());
 		//RESET POINTS 
 		yield return new WaitForSeconds(5);
         if (!tie)
@@ -153,7 +154,8 @@ public class GameController : MonoBehaviour {
         }
 		Winner.enabled = false;
 		UISideSwitcher.enabled = true;
-		yield return new WaitForSeconds (3);
+        //StartCoroutine(FreezePlayers());
+        yield return new WaitForSeconds (3);
 
 		baby1.transform.position = originPos[0];
 		baby2.transform.position = originPos[1];
@@ -166,11 +168,51 @@ public class GameController : MonoBehaviour {
 
     }
 
-	IEnumerator AssignTeams()
+    IEnumerator FreezePlayers()
+    {
+        
+        Rigidbody baby1rig = baby1.GetComponent<Rigidbody>();
+        Rigidbody baby2rig = baby2.GetComponent<Rigidbody>();
+        Rigidbody baby3rig = baby3.GetComponent<Rigidbody>();
+        Rigidbody baby4rig = baby4.GetComponent<Rigidbody>();
+
+        baby1rig.constraints = RigidbodyConstraints.FreezeAll;
+        baby2rig.constraints = RigidbodyConstraints.FreezeAll;
+        baby3rig.constraints = RigidbodyConstraints.FreezeAll;
+        baby4rig.constraints = RigidbodyConstraints.FreezeAll;
+        yield return new WaitForSeconds(3f);
+        baby1rig.constraints = RigidbodyConstraints.None;
+        baby2rig.constraints = RigidbodyConstraints.None;
+        baby3rig.constraints = RigidbodyConstraints.None;
+        baby4rig.constraints = RigidbodyConstraints.None;
+
+        baby1rig.constraints = RigidbodyConstraints.FreezePositionY;
+        baby1rig.constraints = RigidbodyConstraints.FreezeRotationZ;
+        baby1rig.constraints = RigidbodyConstraints.FreezeRotationX;
+
+        baby2rig.constraints = RigidbodyConstraints.FreezePositionY;
+        baby2rig.constraints = RigidbodyConstraints.FreezeRotationZ;
+        baby2rig.constraints = RigidbodyConstraints.FreezeRotationX;
+
+        baby3rig.constraints = RigidbodyConstraints.FreezePositionY;
+        baby3rig.constraints = RigidbodyConstraints.FreezeRotationZ;
+        baby3rig.constraints = RigidbodyConstraints.FreezeRotationX;
+
+        baby4rig.constraints = RigidbodyConstraints.FreezePositionY;
+        baby4rig.constraints = RigidbodyConstraints.FreezeRotationZ;
+        baby4rig.constraints = RigidbodyConstraints.FreezeRotationX;
+
+
+
+
+    }
+
+    IEnumerator AssignTeams()
 	{
 		stoptimer = true;
 		timeLeft = ROUND_TIME;
-		UISideSwitcher.GetComponentInChildren<Text> ().text = "Assigning teams";
+        //StartCoroutine(FreezePlayers());
+        UISideSwitcher.GetComponentInChildren<Text> ().text = "Assigning teams";
 		UISideSwitcher.enabled = true;
 		yield return new WaitForSeconds (3);
 		UISideSwitcher.enabled = false;
@@ -220,6 +262,7 @@ public class GameController : MonoBehaviour {
     {
         stoptimer = true;
         timeLeft = ROUND_TIME;
+        //StartCoroutine(FreezePlayers());
 
         if (bluepoints > redpoints)
         {

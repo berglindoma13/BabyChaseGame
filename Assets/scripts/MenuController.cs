@@ -35,7 +35,7 @@ public class MenuController : MonoBehaviour {
 			Application.Quit ();
 		}
 		if (Input.GetKeyDown (KeyCode.Space)) {
-			SceneManager.LoadScene ("EnvironmentScene");
+			SceneManager.LoadScene ("BerglindScene");
 		}
 	}
 }
