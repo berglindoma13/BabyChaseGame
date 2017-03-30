@@ -91,15 +91,15 @@ public class GameController : MonoBehaviour {
         RedPoints.text = redpoints.ToString();
 
         //RESET GAME
-        if (Input.GetKey(KeyCode.R))
+		if (Input.GetButtonDown("Start"))
         {
 			SceneManager.LoadScene ("BerglindScene");
         }
 
         //QUIT GAME
-        if (Input.GetKey(KeyCode.Escape))
+		if (Input.GetButtonDown("Select"))
         {
-            QuitGame(); 
+			SceneManager.LoadScene ("MainMenu"); 
         }
 
         if (!stoptimer)
@@ -358,18 +358,8 @@ public class GameController : MonoBehaviour {
         {
             TieDefender = 1;
         }
-        UISideSwitcher.GetComponentInChildren<Text>().text = "Maybe switching,\n maybe not,\n who knows!";
+        UISideSwitcher.GetComponentInChildren<Text>().text = "Randomizing \n who holds toy";
         StartCoroutine(GameReset(true));
-    }
-
-    void QuitGame()
-    {
-		if (SceneManager.GetActiveScene ().name.Equals ("BerglindScene")) {
-			SceneManager.LoadScene ("MainMenu");
-		} else {
-			Application.Quit ();
-		}
-        
     }
 
     void changeTags()

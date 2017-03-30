@@ -31,10 +31,11 @@ public class MenuController : MonoBehaviour {
     }
 
 	void Update () {
-		if (Input.GetKeyDown (KeyCode.Escape)) {
+
+		if (Input.GetButtonDown("Select")) {
 			Application.Quit ();
 		}
-		if (Input.GetKeyDown (KeyCode.Space)) {
+		if (Input.GetButtonDown("Start")) {
 			SceneManager.LoadScene ("BerglindScene");
 		}
 	}
