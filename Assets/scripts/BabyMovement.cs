@@ -9,7 +9,7 @@ public class BabyMovement : MonoBehaviour {
 
     public Transform baby;
     public Transform torso;
-    private float SPEED;
+    public float SPEED;
 	private float Stamina = 100;
     public Rigidbody rb;
     public Vector3 velocity;
@@ -96,10 +96,6 @@ public class BabyMovement : MonoBehaviour {
         }*/
         checkTag ();
 
-        if(tag == "team1TOY" || tag == "Team2TOY")
-        {
-            SPEED = SPEED * 0.8f;
-        }
 		//Debug.Log (Input.GetButton(crossBtn));
 		//Debug.Log(currentState);
 
@@ -131,7 +127,7 @@ public class BabyMovement : MonoBehaviour {
 
 			if (Input.GetButtonDown (squareBtn)) {
 				//		Debug.Log ("logging keypresses");
-				startCrying ();
+				//startCrying ();
 			}
 
 			checkForDisplayIcon ();
@@ -162,7 +158,7 @@ public class BabyMovement : MonoBehaviour {
 		case PlayerState.grabbing:
 			//cant move? idno
 			//Debug.Log("am grabbing");
-			if (Input.GetButton (circleBtn)) {
+			if (Input.GetButton (circleBtn) && cryingToyCarrierFound()) {
 				if (grabTime > 3f && !grabbing) {
 					gameController.AttackingTeamWon();
                     grabbing = true;
@@ -235,13 +231,19 @@ public class BabyMovement : MonoBehaviour {
 	}
 
 	float speed(){
+		float tempSpeed = SPEED;
+		if(tag == "Team1TOY" || tag == "Team2TOY")
+		{
+			tempSpeed = tempSpeed * 0.8f;
+		}
+
 		if (Input.GetButton (rBumper) && hasStamina()) {
 			depleteStamina ();	
 			//Debug.Log ("sprinting");
-			return SPEED * 1.5f;
+			return tempSpeed * 1.5f;
 		} 
 		else {
-			return SPEED;
+			return tempSpeed;
 		}
 	}
 	void depleteStamina(){
@@ -331,8 +333,20 @@ public class BabyMovement : MonoBehaviour {
 			//Debug.Log ("grabbing is false");
 		}
 		//if is holding a button down and channeling
+	}
 
-
+	public void resetBaby(){
+		currentState = PlayerState.normal;
+		anim.SetBool ("GrabToy", false);
+		anim.SetBool ("Walking", false);
+		anim.SetBool ("Grabbing", false);
+		anim.SetBool ("Crying", false);
+		comforted = false;
+		grabbing = false;
+		cryingTime = 6f;
+		grabTime = 0f;
+		Stamina = 100;
+		cry.Stop ();
 	}
 
 }

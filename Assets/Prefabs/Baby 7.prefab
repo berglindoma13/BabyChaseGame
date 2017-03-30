@@ -365,7 +365,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1120157254733690}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: -28, y: 3.04, z: -31.5}
+  m_LocalPosition: {x: -17.6, y: 3.04, z: -3.3}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 4769480150897566}
@@ -406,8 +406,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1802713257118616}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1.28}
-  m_LocalScale: {x: 1, y: 1, z: 1.447531}
+  m_LocalPosition: {x: 0, y: 0, z: 0.75}
+  m_LocalScale: {x: 1, y: 1, z: 0.5}
   m_Children: []
   m_Father: {fileID: 4769480150897566}
   m_RootOrder: 6
@@ -914,7 +914,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: ef95e72c82e9a1045a94d0e9c29d2f0c, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -1095,6 +1095,7 @@ MonoBehaviour:
   gameController: {fileID: 0}
   baby: {fileID: 0}
   torso: {fileID: 0}
+  SPEED: 0
   rb: {fileID: 0}
   velocity: {x: 0, y: 0, z: 0}
   cry: {fileID: 82427105275258500}
@@ -1113,6 +1114,7 @@ MonoBehaviour:
   pushing: 0
   anim: {fileID: 0}
   grabTime: 0
+  grabbing: 0
   findRadiusSize: 2
   currentState: 0
 --- !u!114 &114123477800733948

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
-    private float ROUND_TIME = 10f;
+    private float ROUND_TIME = 50f;
 
     private float timeLeft;
 
@@ -144,10 +144,11 @@ public class GameController : MonoBehaviour {
     IEnumerator GameReset(bool tie)
     {
 		stoptimer = true;
+		Time.timeScale = 0f;
 		timeLeft = ROUND_TIME;
         //StartCoroutine(FreezePlayers());
 		//RESET POINTS 
-		yield return new WaitForSeconds(5);
+		yield return new WaitForSecondsRealtime(5);
         if (!tie)
         {
             changeTags();
@@ -155,14 +156,21 @@ public class GameController : MonoBehaviour {
 		Winner.enabled = false;
 		UISideSwitcher.enabled = true;
         //StartCoroutine(FreezePlayers());
-        yield return new WaitForSeconds (3);
+		yield return new WaitForSecondsRealtime (3);
 
 		baby1.transform.position = originPos[0];
 		baby2.transform.position = originPos[1];
 		baby3.transform.position = originPos[2];
 		baby4.transform.position = originPos[3];
 
+		baby1.GetComponent<BabyMovement> ().resetBaby ();
+		baby2.GetComponent<BabyMovement> ().resetBaby ();
+		baby3.GetComponent<BabyMovement> ().resetBaby ();
+		baby4.GetComponent<BabyMovement> ().resetBaby ();
+
+
 		UISideSwitcher.enabled = false;
+		Time.timeScale = 1f;
 		stoptimer = false;
         
 
@@ -210,13 +218,15 @@ public class GameController : MonoBehaviour {
     IEnumerator AssignTeams()
 	{
 		stoptimer = true;
+		Time.timeScale = 0f;
 		timeLeft = ROUND_TIME;
         //StartCoroutine(FreezePlayers());
         UISideSwitcher.GetComponentInChildren<Text> ().text = "Assigning teams";
 		UISideSwitcher.enabled = true;
-		yield return new WaitForSeconds (3);
+		yield return new WaitForSecondsRealtime (3);
 		UISideSwitcher.enabled = false;
 		UISideSwitcher.GetComponentInChildren<Text> ().text = "Switching sides";
+		Time.timeScale = 1f;
 		stoptimer = false;
 
 
@@ -261,6 +271,7 @@ public class GameController : MonoBehaviour {
     void EndOfGameRoutine()
     {
         stoptimer = true;
+		Time.timeScale = 0f;
         timeLeft = ROUND_TIME;
         //StartCoroutine(FreezePlayers());
 
@@ -283,6 +294,7 @@ public class GameController : MonoBehaviour {
 
     IEnumerator routeToMenu(bool blue)
     {
+		Time.timeScale = 1f;
         if (blue)
         {
             UISideSwitcher.GetComponentInChildren<Text>().text = "Blue Team \n has won the game!\n Congratulations!!";

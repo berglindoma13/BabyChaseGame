@@ -666,20 +666,6 @@ Prefab:
     - target: {fileID: 1120157254733690, guid: 02a4851d6892a604bacf97c4d9c75421, type: 2}
       propertyPath: m_Name
       value: Baby 1
-    - target: {fileID: 82427105275258500, guid: 02a4851d6892a604bacf97c4d9c75421,
-        type: 2}
-      propertyPath: m_PlayOnAwake
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 136736098516211064, guid: 02a4851d6892a604bacf97c4d9c75421,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 65523831390794904, guid: 02a4851d6892a604bacf97c4d9c75421,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 02a4851d6892a604bacf97c4d9c75421, type: 2}

@@ -47,7 +47,9 @@ public class CameraController : MonoBehaviour {
                 maxZ = Players[i].transform.position.z;
             }
         }
-
+		if (minZ > 7) {
+			minZ = 7;
+		}
         transform.position = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, minZ - 15);
 
         //BOX ((minX, minZ),(minX,maxZ),(maxX,maxZ),(maxX,minZ))
