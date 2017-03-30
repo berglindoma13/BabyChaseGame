@@ -45,6 +45,7 @@ public class BabyMovement : MonoBehaviour {
     public Animator anim;
 	private GameObject toy;
 
+	bool canCry = true;
     private float cryingTime = 6f;
 	public float grabTime = 0f;
     public bool grabbing = false;
@@ -193,7 +194,7 @@ public class BabyMovement : MonoBehaviour {
 		if (this == otherBaby) {
 			return;
 		}
-        else if (currentState != PlayerState.crying)
+        else if (currentState != PlayerState.crying && canCry)
         {
             startCrying();
         }
@@ -271,6 +272,7 @@ public class BabyMovement : MonoBehaviour {
     }
 
 	void startCrying(){
+		canCry = false;
 		currentState = PlayerState.crying;
 
 		//in case he was interrupted in grabbing
@@ -292,6 +294,11 @@ public class BabyMovement : MonoBehaviour {
         anim.SetBool ("Crying", false);
         comforted = false;
 		cry.Stop ();
+		StartCoroutine ("cryCooldown");
+	}
+	IEnumerator cryCooldown(){
+		yield return new WaitForSeconds(1f);
+		canCry = true;
 	}
 
 	bool cryingToyCarrierFound(){
@@ -343,6 +350,7 @@ public class BabyMovement : MonoBehaviour {
 		anim.SetBool ("Crying", false);
 		comforted = false;
 		grabbing = false;
+		canCry = true;
 		cryingTime = 6f;
 		grabTime = 0f;
 		Stamina = 100;
