@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
-    private float ROUND_TIME = 50f;
+    private float ROUND_TIME = 5f;
 
     private float timeLeft;
 
@@ -17,7 +17,9 @@ public class GameController : MonoBehaviour {
     public GameObject baby3;
     public GameObject baby4;
 
-    public Text Winner;
+    public Text BlueWinner;
+	public Text RedWinner;
+    public Text TieText;
     public Text Timer;
 
     public Text RedPoints;
@@ -66,7 +68,9 @@ public class GameController : MonoBehaviour {
 
 		StartCoroutine (AssignTeams ());
 
-        Winner.enabled = false;
+        BlueWinner.enabled = false;
+        RedWinner.enabled = false;
+        TieText.enabled = false;
         
 
 	}
@@ -109,30 +113,30 @@ public class GameController : MonoBehaviour {
             {
                 StartCoroutine(GameReset(false));
                 roundNumber += 1;
-                Winner.text = "Congratulations Blue Team";
-                Winner.enabled = true;
+                BlueWinner.text = "Congratulations \n Blue Team";
+                BlueWinner.enabled = true;
                 bluepoints += 1;
             }
             else if(roundNumber == 2)
             {
                 redpoints += 1;
-                Winner.text = "Congratulations Red Team";
-                Winner.enabled = true;
+                RedWinner.text = "Congratulations \n Red Team";
+                RedWinner.enabled = true;
                 EndOfGameRoutine();
             }
             else if(roundNumber == 3)
             {
                 if(TieDefender == 0)
                 {
-                    Winner.text = "Congratulations Blue Team";
-                    Winner.enabled = true;
+                    BlueWinner.text = "Congratulations \n Blue Team";
+                    BlueWinner.enabled = true;
                     bluepoints += 1;
                     EndOfGameRoutine();
                 }
                 else if(TieDefender == 1)
                 {
-                    Winner.text = "Congratulations Red Team";
-                    Winner.enabled = true;
+                    RedWinner.text = "Congratulations \n Red Team";
+                    RedWinner.enabled = true;
                     redpoints += 1;
                     EndOfGameRoutine();
                 }
@@ -153,7 +157,9 @@ public class GameController : MonoBehaviour {
         {
             changeTags();
         }
-		Winner.enabled = false;
+		BlueWinner.enabled = false;
+		RedWinner.enabled = false;
+        TieText.enabled = false;
 		UISideSwitcher.enabled = true;
         //StartCoroutine(FreezePlayers());
 		yield return new WaitForSecondsRealtime (3);
@@ -236,8 +242,8 @@ public class GameController : MonoBehaviour {
     {
         if (roundNumber == 1)
         {
-            Winner.text = "Congratulations Red Team";
-            Winner.enabled = true;
+            RedWinner.text = "Congratulations \n Red Team";
+            RedWinner.enabled = true;
             StartCoroutine(GameReset(false));
             roundNumber += 1;
             redpoints += 1;
@@ -245,23 +251,23 @@ public class GameController : MonoBehaviour {
         else if (roundNumber == 2)
         {
             bluepoints += 1;
-            Winner.text = "Congratulations Blue Team";
-            Winner.enabled = true;
+			BlueWinner.text = "Congratulations \n Blue Team";
+            BlueWinner.enabled = true;
             EndOfGameRoutine();
         }
         else if(roundNumber == 3)
         {
             if (TieDefender == 0)
             {
-                Winner.text = "Congratulations Red Team";
-                Winner.enabled = true;
+                RedWinner.text = "Congratulations \n Red Team";
+                RedWinner.enabled = true;
                 redpoints += 1;
                 EndOfGameRoutine();
             }
             else if (TieDefender == 1)
             {
-                Winner.text = "Congratulations Blue Team";
-                Winner.enabled = true;
+                BlueWinner.text = "Congratulations \n Blue Team";
+                BlueWinner.enabled = true;
                 bluepoints += 1;
                 EndOfGameRoutine();
             }
@@ -285,8 +291,10 @@ public class GameController : MonoBehaviour {
         }
         if (bluepoints == redpoints)
         {
-            Winner.text = "Both teams won one game, so it's a TIE! \n Get ready for a tiebreaker";
-            Winner.enabled = true;
+            RedWinner.enabled = false;
+            BlueWinner.enabled = false;
+            TieText.text = "Both teams won one game,\n so it's a TIE! \n Get ready for a tiebreaker";
+			TieText.enabled = true;
             TieBraker();
             
         }
