@@ -143,6 +143,10 @@ public class BabyMovement : MonoBehaviour {
 
 			break;
 		case PlayerState.crying:
+
+
+
+
             //FreezePlayer();
             if (comforted)
             {
@@ -266,6 +270,11 @@ public class BabyMovement : MonoBehaviour {
 
 	void startCrying(){
 		currentState = PlayerState.crying;
+
+		//in case he was interrupted in grabbing
+		anim.SetBool ("Grabbing", false);
+		grabTime = 0f;
+
 		anim.SetBool ("Walking", false);
 		anim.SetBool ("Crying", true);
 		cry.time = 2;
